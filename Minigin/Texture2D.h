@@ -8,15 +8,14 @@ namespace dae
 	/**
 	 * Simple RAII wrapper for an SDL_Texture
 	 */
-	class Texture2D final : public BaseComponent
+	class Texture2D final 
 	{
 	public:
 		SDL_Texture* GetSDLTexture() const;
 		explicit Texture2D(SDL_Texture* texture);
 		virtual ~Texture2D();
 
-		void Update(float deltatime) override { deltatime; };
-		void Render() const override {};
+		void Render() const {};
 
 		Texture2D(const Texture2D &) = delete;
 		Texture2D(Texture2D &&) = delete;

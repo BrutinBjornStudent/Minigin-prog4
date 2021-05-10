@@ -12,21 +12,10 @@ dae::TextObject::~TextObject()
 {
 }
 
-//dae::TextObject::TextObject(TextObject&& other) noexcept
-//	:m_Color{other.m_Color}
-//	, m_Font{ other.m_Font }
-//	, m_NeedsUpdate{other.m_NeedsUpdate}
-//	, m_Text{other.m_Text}
-//	, m_Texture{other.m_Texture}
-//	, m_Transform{other.m_Transform}
-//{
-//}
 
 
-
-void dae::TextObject::Update(const float deltatime)
+void dae::TextObject::Update(const float)
 {
-	deltatime;
 	if (m_NeedsUpdate)
 	{
 

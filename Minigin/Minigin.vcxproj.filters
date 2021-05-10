@@ -150,8 +150,17 @@
     <ClInclude Include="TextureObject.h">
       <Filter>Source Files\GameObjects\TextureObject</Filter>
     </ClInclude>
-    <ClInclude Include="LivesBar.h">
-      <Filter>Source Files\GameObjects</Filter>
+    <ClInclude Include="ObjectConstructors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AllComponents.h">
+      <Filter>Source Files\Compoments</Filter>
+    </ClInclude>
+    <ClInclude Include="TextComponent.h">
+      <Filter>Source Files\Compoments\Graphical</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponent.h">
+      <Filter>Source Files\Compoments\Graphical</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -251,8 +260,14 @@
     <ClCompile Include="TextureObject.cpp">
       <Filter>Source Files\GameObjects\TextureObject</Filter>
     </ClCompile>
-    <ClCompile Include="LivesBar.cpp">
-      <Filter>Source Files\GameObjects</Filter>
+    <ClCompile Include="ObjectConstructors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextComponent.cpp">
+      <Filter>Source Files\Compoments\Graphical</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderComponent.cpp">
+      <Filter>Source Files\Compoments\Graphical</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -5,12 +5,13 @@
 #include "Texture2D.h"
 #include <vector>
 
+#include "RenderComponent.h"
 
 
 namespace dae
 {
 	
-	class GameObject : public BaseComponent
+	class GameObject
 	{
 	public:
 		GameObject() { std::cout << "Gd contstruct" << std::endl; };
@@ -24,9 +25,12 @@ namespace dae
 		virtual void Update( const float Deltatime) ;
 		virtual void Render() const;
 
-		void SetTexture(const std::string& filename);
-		void SetPosition(float x, float y);
+		//void SetTexture(const std::string& filename);
+		//void SetPosition(float x, float y);
+		
+		void SetRenderComponent(RenderComponent* rendComp);
 
+		
 		template <typename T>
 		T* GetComponent();
 		void AddComponent(BaseComponent * myComponent);
@@ -34,6 +38,8 @@ namespace dae
 	protected:
 		Transform m_Transform;
 		Texture2D* m_pTexture = nullptr;
+
+		RenderComponent* m_pRenderComponent = nullptr;
 		std::vector<BaseComponent*> m_pComponents;
 	};
 
@@ -50,6 +56,7 @@ namespace dae
 		return nullptr;
 	}
 
+	
 
 
 }

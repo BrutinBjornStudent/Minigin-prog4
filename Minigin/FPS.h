@@ -17,7 +17,7 @@ public:
 
 	void start();
 	void Update();
-	void Update(const float delta) override { delta; };
+	void Update(const float ) override {};
 	void Render() const override;
 
 

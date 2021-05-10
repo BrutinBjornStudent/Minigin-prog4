@@ -5,12 +5,15 @@
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "Renderer.h"
+#include "RenderComponent.h"
 #include "ResourceManager.h"
+
+#include "ObjectConstructors.h"
 #pragma warning(push)
 #pragma warning(disable:26812)
 #pragma warning(disable:26819)
-#include "LivesBar.h"
 #include "SDL.h"
+#include "TextComponent.h"
 #pragma warning(pop)
 
 
@@ -80,45 +83,25 @@ void dae::Minigin::LoadGame()
 {
 	auto scene = SceneManager::GetInstance().CreateScene("Demo");
 
-	auto go = std::make_shared<GameObject>();
-	//go->AddComponent(new Texture2D(R));
-	//Texture2D* background = ResourceManager::GetInstance().LoadTexture("background.jpg");
-	//go->AddComponent(background);
-	go->SetTexture("background.jpg");
-	scene->Add(go);
+	
+	auto background = objectConstructors::RenderObject("background.jpg");
+	scene->Add(background);
+	
+	auto logo = objectConstructors::RenderObject("logo.png", 216, 180);
+	scene->Add(logo);
 
-	//go = std::make_shared<GameObject>();
-	go->SetTexture("logo.png");
-	go->SetPosition(216, 180);
-	scene->Add(go);
+	auto to = objectConstructors::TextObject("lingua.otf", 36, "Programming 4 Assignment",80,20);
+	scene->Add(to);
 
-	//auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
-	//auto to = std::make_shared<TextObject>("Programming 4 Assignment", font);
-	//to->SetPosition(80, 20);
-	//scene->Add(to);
 
 	auto font2 = ResourceManager::GetInstance().LoadFont("lingua.otf", 12);
 	m_FPSText = std::make_shared<TextObject>("FPS time", font2);
-
 	m_FPSText->SetPosition(10, 10);
 	m_FPSText->SetColor(SDL_Color{ 255, 255, 0, 255 });
-
 	scene->Add(m_FPSText);
 
-	m_Score = std::make_shared<TextObject>("Score: ", font2);
+	
 
-	m_Score->SetPosition(50, 10);
-
-	scene->Add(m_Score);
-
-
-	std::shared_ptr<LivesBar> lives = std::make_shared<LivesBar>(3);
-	lives->SetTexture("HeartSymbol.png");
-	lives->SetPosition(10, 10);
-
-
-	m_qbert->GetSubject()->AddObserver(lives.get());
-	scene->Add(lives);
 }
 
 void dae::Minigin::Update()
@@ -179,12 +162,12 @@ void dae::Minigin::Run()
 				printTimer -= 1.f;
 				std::cout << m_pTimer->GetFPS() << std::endl;
 
-//				m_FPSText->SetText("FPS: " + std::to_string(m_pTimer->GetFPS()));
+				m_FPSText->SetText("FPS: " + std::to_string(m_pTimer->GetFPS()));
 	
 			}
 
-			auto sleepTime = duration_cast<duration<float>>(currentTime + milliseconds(MsPerFrame) - high_resolution_clock::now());
-			this_thread::sleep_for(sleepTime);
+	/*		auto sleepTime = duration_cast<duration<float>>(currentTime + milliseconds(MsPerFrame) - high_resolution_clock::now());
+			this_thread::sleep_for(sleepTime);*/
 		}
 	}
 
