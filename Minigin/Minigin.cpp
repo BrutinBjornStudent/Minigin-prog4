@@ -72,11 +72,17 @@ void dae::Minigin::LoadGame()
 	Locator::RegisterSoundSystem(new SDLSoundSystem());
 
 
-	auto& t1 = Locator::GetSoundSystem();
+	//auto& t1 = Locator::GetSoundSystem();
 
 
-	t1.loadSound(1, "Level Music 1.mp3");
-	t1.play(1,1);
+	//t1.loadSound(1, "Level Music 1.mp3");
+	//t1.play(1,1,"level Music 1.mp3");
+	//
+	//t1.loadSound(2, "Level Music 2.mp3");
+	//t1.play(2, 1, "level Music 2.mp3");
+
+
+	
 
 	auto background = objectConstructors::RenderObject("background.jpg");
 	scene->Add(background);
