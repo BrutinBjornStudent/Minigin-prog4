@@ -24,7 +24,6 @@ struct Action
 namespace input
 {
 
-
 	
 class InputManager final : public dae::Singleton<InputManager>
 	{

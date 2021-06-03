@@ -5,20 +5,27 @@
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "Renderer.h"
-#include "RenderComponent.h"
+
 #include "ResourceManager.h"
+#include "QBertComponent.h"
+#include "Locator.h"
 
 #include "ObjectConstructors.h"
 #pragma warning(push)
 #pragma warning(disable:26812)
 #pragma warning(disable:26819)
+#include "HealthBarComponent.h"
 #include "SDL.h"
+#include "SoundSystem.h"
+
 #include "TextComponent.h"
 #pragma warning(pop)
 
 
 using namespace std;
 using namespace std::chrono;
+
+
 
 void dae::Minigin::Initialize()
 {
@@ -51,29 +58,7 @@ void dae::Minigin::Initialize()
 	m_pInputManager = new input::InputManager();
 
 	
-
-	m_qbert = new QBert;
-	m_qbert->GetSubject()->AddObserver(&m_qbertobserver);
 	
-	//InputManager
-	Action newAction = Action();
-	newAction.pCommand = new DieCommand(m_qbert);
-	newAction.Button = input::XBoxController::ControllerButton::ButtonA;
-	newAction.type = InputType::down;
-	m_pInputManager->AddAction(newAction);
-
-	newAction = Action();
-	newAction.pCommand = new FireCommand(m_qbert);
-	newAction.Button = input::XBoxController::ControllerButton::ButtonB;
-	newAction.type = InputType::Pressed;
-	
-	m_pInputManager->AddAction(newAction);
-	
-	newAction = Action();
-	newAction.pCommand = new JumpCommand(m_qbert);
-	newAction.Button = input::XBoxController::ControllerButton::ButtonX;
-	newAction.type = InputType::Up;
-	m_pInputManager->AddAction(newAction);
 }
 
 /**
@@ -83,7 +68,16 @@ void dae::Minigin::LoadGame()
 {
 	auto scene = SceneManager::GetInstance().CreateScene("Demo");
 
-	
+
+	Locator::RegisterSoundSystem(new SDLSoundSystem());
+
+
+	auto& t1 = Locator::GetSoundSystem();
+
+
+	t1.loadSound(1, "Level Music 1.mp3");
+	t1.play(1,1);
+
 	auto background = objectConstructors::RenderObject("background.jpg");
 	scene->Add(background);
 	
@@ -92,17 +86,66 @@ void dae::Minigin::LoadGame()
 
 	auto to = objectConstructors::TextObject("lingua.otf", 36, "Programming 4 Assignment",80,20);
 	scene->Add(to);
+	// end background
 
+	m_qbert = objectConstructors::Qbert(3);
+	scene->Add(m_qbert);
+	// base qbert
+;
+	m_pFps = objectConstructors::TextObject("lingua.otf", 12, "fps:", 10, 50);
+	m_pFps->GetComponent<TextComponent>()->SetColor(SDL_Color{ 255, 255, 0, 255 });
+	scene->Add(m_pFps);
 
-	auto font2 = ResourceManager::GetInstance().LoadFont("lingua.otf", 12);
-	m_FPSText = std::make_shared<TextObject>("FPS time", font2);
-	m_FPSText->SetPosition(10, 10);
-	m_FPSText->SetColor(SDL_Color{ 255, 255, 0, 255 });
-	scene->Add(m_FPSText);
+	m_phealthBar = objectConstructors::LivesBar("HeartSymbol.png", 10, 60, m_qbert->GetComponent<HealthComponent>());
+	m_phealthBar->GetComponent<HealthBarComponent>()->SetSize(glm::vec2(10, 10));
+	scene->Add(m_phealthBar);
+
+	m_pScore = objectConstructors::Score("lingua.otf", 12, "score:", 10, 70);
+	scene->Add(m_pScore);
+	// end GUI
 
 	
+	m_qbertobserver = QbertObserver(m_qbert->GetComponent<HealthComponent>());
+	
+	auto* qbertcomp = m_qbert->GetComponent<QBertComponent>();	
+	qbertcomp->GetSubject()->AddObserver(&m_qbertobserver);
+	// add healthObserver
 
+	m_scoreObserver = ScoreObserver(m_pScore->GetComponent<ScoreComponent>());
+	qbertcomp->GetSubject()->AddObserver(&m_scoreObserver);
+	// add score observer
+
+	
+	//InputManager
+	Action newAction = Action();
+	newAction.pCommand = new DieCommand(qbertcomp);
+	newAction.Button = input::XBoxController::ControllerButton::ButtonA;
+	newAction.type = InputType::down;
+	m_pInputManager->AddAction(newAction);
+
+	newAction = Action();
+	newAction.pCommand = new FireCommand(qbertcomp);
+	newAction.Button = input::XBoxController::ControllerButton::ButtonB;
+	newAction.type = InputType::Pressed;
+	m_pInputManager->AddAction(newAction);
+
+	newAction = Action();
+	newAction.pCommand = new JumpCommand(qbertcomp);
+	newAction.Button = input::XBoxController::ControllerButton::ButtonX;
+	newAction.type = InputType::Up;
+	m_pInputManager->AddAction(newAction);
+
+	newAction = Action();
+	newAction.pCommand = new FartCommand(qbertcomp);
+	newAction.Button = input::XBoxController::ControllerButton::ButtonY;
+	newAction.type = InputType::down;
+	m_pInputManager->AddAction(newAction);
+	
+	//end input
+
+	
 }
+
 
 void dae::Minigin::Update()
 {
@@ -122,8 +165,9 @@ void dae::Minigin::Render()
 void dae::Minigin::Cleanup()
 {
 	delete m_pTimer;
-	delete m_qbert;
 	delete m_pInputManager;
+
+	Locator::CloseSoundSystem();
 	
 	Renderer::GetInstance().Destroy();
 	SDL_DestroyWindow(m_pWindow);
@@ -154,20 +198,17 @@ void dae::Minigin::Run()
 			doContinue = input.ProcessInput();
 			Update();
 			renderer.Render();
-			Render();
 			
 			printTimer += m_pTimer->GetDeltaTime();
 			if (printTimer > 1.f)
 			{
 				printTimer -= 1.f;
 				std::cout << m_pTimer->GetFPS() << std::endl;
-
-				m_FPSText->SetText("FPS: " + std::to_string(m_pTimer->GetFPS()));
-	
+				m_pFps->GetComponent<TextComponent>()->SetText("FPS: " + std::to_string(m_pTimer->GetFPS()));
+				
 			}
 
-	/*		auto sleepTime = duration_cast<duration<float>>(currentTime + milliseconds(MsPerFrame) - high_resolution_clock::now());
-			this_thread::sleep_for(sleepTime);*/
+
 		}
 	}
 

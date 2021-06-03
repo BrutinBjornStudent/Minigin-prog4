@@ -9,10 +9,6 @@
 
 dae::GameObject::~GameObject()
 {
-	if (m_pTexture != nullptr)
-	{
-		delete m_pTexture;
-	}
 
 	for (uint32_t i = 0; i < m_pComponents.size(); i++)
 	{
@@ -40,9 +36,7 @@ void dae::GameObject::Render() const
 
 void dae::GameObject::SetRenderComponent(RenderComponent* rendComp)
 {
-	m_pRenderComponent = rendComp;
-	AddComponent(rendComp);
-	
+	AddComponent(rendComp);	
 }
 
 //void dae::GameObject::SetTexture(const std::string& filename)

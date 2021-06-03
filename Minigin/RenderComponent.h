@@ -3,6 +3,7 @@
 #include "Renderer.h"
 #include "Transform.h"
 #include "Texture2D.h"
+#include "glm/vec2.hpp"
 
 class RenderComponent : public BaseComponent
 {
@@ -25,13 +26,14 @@ public:
 	};
 	
 	//virtual void Update(const float) {};
-	void setPosition(float x, float y);
+	void SetPosition(float x, float y);
 	void SetTexture(const std::string& filename);
 	void SetTexture(dae::Texture2D* texture2D);
 
 protected:
 	dae::Texture2D* m_pTexture = nullptr;
 	dae::Transform m_transform;
+	glm::vec2 m_Size;
 
 };
 

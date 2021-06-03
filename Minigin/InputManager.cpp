@@ -66,9 +66,11 @@ void input::InputManager::AddAction(const Action& ac)
 
 void input::InputManager::Update()
 {
-	
-	m_pController->Update();
-	ProcessInput();
+	if (m_pController)
+	{
+		m_pController->Update();		
+		ProcessInput();
+	}
 }
 
 bool input::InputManager::ProcessInput()

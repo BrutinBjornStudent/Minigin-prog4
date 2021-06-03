@@ -17,5 +17,6 @@ namespace dae
 
 	private:
 		glm::vec3 m_Position;
+		
 	};
 }

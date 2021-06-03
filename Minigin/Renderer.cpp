@@ -51,7 +51,6 @@ void dae::Renderer::Render()
 	if (m_ShowDemo)
 		ImGui::ShowDemoWindow(&m_ShowDemo);
 
-
 	ImGui::Button("singlePlayer");
 	ImGui::SameLine();
 	ImGui::Button("Co-op");
@@ -59,7 +58,6 @@ void dae::Renderer::Render()
 	ImGui::Button("versus");
 
 	
-
 	
 	ImGui::Render();
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());

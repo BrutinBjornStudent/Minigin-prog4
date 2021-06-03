@@ -8,7 +8,7 @@
 
 dae::TextComponent::TextComponent(const std::string& text, const std::shared_ptr<Font>& font,
                                   RenderComponent* RendComp):
-	m_pRenderComponent(RendComp),
+	nm_pRenderComponent(RendComp),
 	m_NeedsUpdate(true),
 	m_Text(text),
 	m_Font(font),
@@ -32,10 +32,9 @@ void dae::TextComponent::Update(float)
 		}
 		
 		SDL_FreeSurface(surf);
-		m_pRenderComponent->SetTexture(new Texture2D(texture));
+		nm_pRenderComponent->SetTexture(new Texture2D(texture));
 		m_NeedsUpdate = false;
 	}
-
 }
 
 void dae::TextComponent::Render() const
@@ -46,9 +45,11 @@ void dae::TextComponent::Render() const
 void dae::TextComponent::SetText(const std::string& text)
 {
 	m_Text = text;
+	m_NeedsUpdate = true;
 }
 
-void dae::TextComponent::SetColor(const SDL_Color color)
+void dae::TextComponent::SetColor(const SDL_Color& color)
 {
 	m_color = color;
+	m_NeedsUpdate = true;
 }

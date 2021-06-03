@@ -11,7 +11,7 @@
 namespace dae
 {
 	
-	class GameObject
+	class GameObject 
 	{
 	public:
 		GameObject() { std::cout << "Gd contstruct" << std::endl; };
@@ -25,9 +25,7 @@ namespace dae
 		virtual void Update( const float Deltatime) ;
 		virtual void Render() const;
 
-		//void SetTexture(const std::string& filename);
-		//void SetPosition(float x, float y);
-		
+
 		void SetRenderComponent(RenderComponent* rendComp);
 
 		
@@ -36,10 +34,7 @@ namespace dae
 		void AddComponent(BaseComponent * myComponent);
 
 	protected:
-		Transform m_Transform;
-		Texture2D* m_pTexture = nullptr;
 
-		RenderComponent* m_pRenderComponent = nullptr;
 		std::vector<BaseComponent*> m_pComponents;
 	};
 

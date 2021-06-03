@@ -21,11 +21,11 @@ namespace dae
 		void Render() const override;
 
 		void SetText(const std::string& text);
-		void SetColor(const SDL_Color color);
+		void SetColor(const SDL_Color& color);
 	
 	protected:
 		bool m_NeedsUpdate;
-		RenderComponent* m_pRenderComponent;
+		RenderComponent* nm_pRenderComponent;
 		std::string m_Text;
 		std::shared_ptr<Font> m_Font;
 		SDL_Color m_color;

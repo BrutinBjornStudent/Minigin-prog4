@@ -9,7 +9,7 @@
 class Subject 
 {
 public:
-	Subject();
+	Subject() = default;
 	
 	void AddObserver(Observer* newObserver)
 	{
@@ -23,11 +23,11 @@ public:
 
 	}
 
-	void Notify(const dae::GameObject& object, Event event)
+	void Notify(const Event event)
 	{
 		for (int i = 0; i < m_numberObservers; i++)
 		{
-			m_observers[i]->onNotify(object,event);
+			m_observers[i]->onNotify(event);
 		}
 	}
 

@@ -46,6 +46,12 @@
     <Filter Include="Source Files\GameObjects\TextureObject">
       <UniqueIdentifier>{cecb4481-34fe-43ed-a416-831588056f96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Compoments\QBert">
+      <UniqueIdentifier>{545b92fc-bec2-4231-8e60-73bef211b261}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Services">
+      <UniqueIdentifier>{61280409-0250-4bbb-af7f-874c97a449f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MiniginPCH.h">
@@ -108,12 +114,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Source Files\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="QBert.h">
-      <Filter>Source Files\GameObjects\Qbert</Filter>
-    </ClInclude>
-    <ClInclude Include="TextObject.h">
-      <Filter>Source Files\GameObjects\TextObject</Filter>
-    </ClInclude>
     <ClInclude Include="Command.h">
       <Filter>Source Files\Managers\Input Manager</Filter>
     </ClInclude>
@@ -147,12 +147,6 @@
     <ClInclude Include="Font.h">
       <Filter>Source Files\Compoments\Graphical</Filter>
     </ClInclude>
-    <ClInclude Include="TextureObject.h">
-      <Filter>Source Files\GameObjects\TextureObject</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectConstructors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AllComponents.h">
       <Filter>Source Files\Compoments</Filter>
     </ClInclude>
@@ -161,6 +155,33 @@
     </ClInclude>
     <ClInclude Include="RenderComponent.h">
       <Filter>Source Files\Compoments\Graphical</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectConstructors.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="healthComponent.h">
+      <Filter>Source Files\Compoments\QBert</Filter>
+    </ClInclude>
+    <ClInclude Include="QBertComponent.h">
+      <Filter>Source Files\Compoments\QBert</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthBarComponent.h">
+      <Filter>Source Files\Compoments\Graphical</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreComponent.h">
+      <Filter>Source Files\Compoments\QBert</Filter>
+    </ClInclude>
+    <ClInclude Include="Locator.h">
+      <Filter>Source Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundSystem.h">
+      <Filter>Source Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource1.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -218,15 +239,6 @@
     <ClCompile Include="Component.cpp">
       <Filter>Source Files\Compoments</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="QBert.cpp">
-      <Filter>Source Files\GameObjects\Qbert</Filter>
-    </ClCompile>
-    <ClCompile Include="TextObject.cpp">
-      <Filter>Source Files\GameObjects\TextObject</Filter>
-    </ClCompile>
     <ClCompile Include="Command.cpp">
       <Filter>Source Files\Managers\Input Manager</Filter>
     </ClCompile>
@@ -257,22 +269,35 @@
     <ClCompile Include="Font.cpp">
       <Filter>Source Files\Compoments\Graphical</Filter>
     </ClCompile>
-    <ClCompile Include="TextureObject.cpp">
-      <Filter>Source Files\GameObjects\TextureObject</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectConstructors.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TextComponent.cpp">
       <Filter>Source Files\Compoments\Graphical</Filter>
     </ClCompile>
     <ClCompile Include="RenderComponent.cpp">
       <Filter>Source Files\Compoments\Graphical</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Minigin.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectConstructors.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="healthComponent.cpp">
+      <Filter>Source Files\Compoments\QBert</Filter>
+    </ClCompile>
+    <ClCompile Include="QBertComponent.cpp">
+      <Filter>Source Files\Compoments\QBert</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthBarComponent.cpp">
+      <Filter>Source Files\Compoments\Graphical</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreComponent.cpp">
+      <Filter>Source Files\Compoments\QBert</Filter>
+    </ClCompile>
+    <ClCompile Include="Locator.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundSystem.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

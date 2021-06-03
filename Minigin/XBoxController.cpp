@@ -8,7 +8,7 @@ namespace input
 	class XBoxControllerImp
 	{
 	public:
-		XBoxControllerImp();
+		XBoxControllerImp() = default;
 	
 		void Update();
 		bool IsDown(XBoxController::ControllerButton button) const;
@@ -21,10 +21,6 @@ namespace input
 	};
 
 
-	XBoxControllerImp::XBoxControllerImp()
-	{
-		
-	}
 
 	void XBoxControllerImp::Update()
 	{
@@ -64,7 +60,7 @@ namespace input
 
 	void XBoxController::Update()
 	{
-		if (m_pImpl)
+		if (m_pImpl != nullptr)
 		m_pImpl->Update();
 	}
 

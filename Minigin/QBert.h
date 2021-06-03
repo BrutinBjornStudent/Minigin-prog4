@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "Subject.h"
 
-class QBert final : public dae::GameObject
+class QBert final
 {
 
 public:

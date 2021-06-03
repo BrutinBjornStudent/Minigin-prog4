@@ -29,7 +29,7 @@ void QBert::Jump()
 void QBert::Die()
 {
 	std::cout << "Qbert should dies" << std::endl;
-	m_ActorChanged->Notify(*this,Event::player_Died);
+//	m_ActorChanged->Notify(*this,Event::player_Died);
 
 }
 

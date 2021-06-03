@@ -1,36 +1,45 @@
 #pragma once
 
-#include "QBert.h"
+#include "QBertComponent.h"
 
 class Command
 {
 protected:
-	QBert* GetActor()const { return actor; };
+	QBertComponent* GetActor()const { return actor; };
 public:
-	explicit Command(QBert* actor);
+	explicit Command(QBertComponent* actor);
 	virtual ~Command() = default;
 	virtual void Execute() = 0;
 private:
-	QBert* actor;
+	QBertComponent* actor;
 };
 
 class DieCommand  final: public Command
 {
 public:
-	DieCommand(QBert* actor):Command(actor) {};
+	DieCommand(QBertComponent* actor):Command(actor) {};
 	void Execute() override { GetActor()->Die(); };
 };
 
 class JumpCommand final : public Command
 {
 public:
-	JumpCommand(QBert* actor):Command(actor) {};
+	JumpCommand(QBertComponent* actor):Command(actor) {};
 	void Execute() override { GetActor()->Jump(); };
 };
 
 class FireCommand final : public Command
 {
 public:
-	FireCommand(QBert* actor):Command(actor) {};
+	FireCommand(QBertComponent* actor):Command(actor) {};
 	void Execute() override { GetActor()->Fire(); };
 };
+
+class FartCommand final : public Command
+{
+public:
+	FartCommand(QBertComponent* actor) :Command(actor) {};
+	void Execute() override { GetActor()->Fart(); };
+};
+
+
