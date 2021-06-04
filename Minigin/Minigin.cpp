@@ -94,9 +94,9 @@ void dae::Minigin::LoadGame()
 	scene->Add(m_qbert);
 	// base qbert
 ;
-	m_pFps = objectConstructors::TextObject("lingua.otf", 12, "fps:", 10, 50);
-	m_pFps->GetComponent<TextComponent>()->SetColor(SDL_Color{ 255, 255, 0, 255 });
-	scene->Add(m_pFps);
+	//m_pFps = objectConstructors::TextObject("lingua.otf", 12, "fps:", 10, 50);
+	//m_pFps->GetComponent<TextComponent>()->SetColor(SDL_Color{ 255, 255, 0, 255 });
+	//scene->Add(m_pFps);
 
 	m_phealthBar = objectConstructors::LivesBar("HeartSymbol.png", 10, 60, m_qbert->GetComponent<HealthComponent>());
 	m_phealthBar->GetComponent<HealthBarComponent>()->SetSize(glm::vec2(10, 10));
@@ -206,7 +206,7 @@ void dae::Minigin::Run()
 			{
 				printTimer -= 1.f;
 				std::cout << m_pTimer->GetFPS() << std::endl;
-				m_pFps->GetComponent<TextComponent>()->SetText("FPS: " + std::to_string(m_pTimer->GetFPS()));
+				//m_pFps->GetComponent<TextComponent>()->SetText("FPS: " + std::to_string(m_pTimer->GetFPS()));
 				
 			}
 

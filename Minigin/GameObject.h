@@ -4,7 +4,7 @@
 #include "Component.h"
 #include "Texture2D.h"
 #include <vector>
-
+#include <iostream>
 #include "RenderComponent.h"
 
 

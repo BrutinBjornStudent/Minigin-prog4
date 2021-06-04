@@ -1,14 +1,17 @@
 // QBertGame.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
+
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
 #include <iostream>
-#define WIN32_lEAN_AND_MEAN
-#include <windows.h>
 
 #include "Minigin.h"
 #include "QbertEngine.h"
 
+
 int main()
+
 {
 	QbertEngine engine;
     std::cout << "Hello qbert!\n";
