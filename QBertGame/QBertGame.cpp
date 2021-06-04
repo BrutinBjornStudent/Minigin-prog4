@@ -2,11 +2,18 @@
 //
 
 #include <iostream>
+#define WIN32_lEAN_AND_MEAN
+#include <windows.h>
+
 #include "Minigin.h"
+#include "QbertEngine.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	QbertEngine engine;
+    std::cout << "Hello qbert!\n";
+	engine.Run();
+	
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

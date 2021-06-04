@@ -57,8 +57,6 @@ void dae::Minigin::Initialize()
 
 	m_pInputManager = new input::InputManager();
 
-	
-	
 }
 
 /**
@@ -69,7 +67,7 @@ void dae::Minigin::LoadGame()
 	auto scene = SceneManager::GetInstance().CreateScene("Demo");
 
 
-	Locator::RegisterSoundSystem(new SDLSoundSystem());
+	//Locator::RegisterSoundSystem(new SDLSoundSystem());
 
 
 	//auto& t1 = Locator::GetSoundSystem();
@@ -81,8 +79,6 @@ void dae::Minigin::LoadGame()
 	//t1.loadSound(2, "Level Music 2.mp3");
 	//t1.play(2, 1, "level Music 2.mp3");
 
-
-	
 
 	auto background = objectConstructors::RenderObject("background.jpg");
 	scene->Add(background);
@@ -173,7 +169,7 @@ void dae::Minigin::Cleanup()
 	delete m_pTimer;
 	delete m_pInputManager;
 
-	Locator::CloseSoundSystem();
+	//Locator::CloseSoundSystem();
 	
 	Renderer::GetInstance().Destroy();
 	SDL_DestroyWindow(m_pWindow);
@@ -190,6 +186,7 @@ void dae::Minigin::Run()
 	float printTimer = 0.f;
 
 	LoadGame();
+	
 	{
 		//auto& Scene = SceneManager::GetInstance();
 		auto& renderer = Renderer::GetInstance();
@@ -198,7 +195,6 @@ void dae::Minigin::Run()
 		bool doContinue = true;
 		while (doContinue)
 		{
-			const auto currentTime = high_resolution_clock::now();
 
 
 			doContinue = input.ProcessInput();

@@ -15,7 +15,7 @@ namespace dae
 	{
 	public:
 		void Initialize();
-		void LoadGame();
+		virtual void LoadGame();
 		void Update();
 		void Render();
 		void Cleanup();
