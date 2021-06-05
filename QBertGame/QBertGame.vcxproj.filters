@@ -30,12 +30,18 @@
     <ClCompile Include="CellComponent.cpp">
       <Filter>game files\Engine\QbertComponents</Filter>
     </ClCompile>
+    <ClCompile Include="BoardComponent.cpp">
+      <Filter>game files\Engine\QbertComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QbertEngine.h">
       <Filter>game files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="CellComponent.h">
+      <Filter>game files\Engine\QbertComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardComponent.h">
       <Filter>game files\Engine\QbertComponents</Filter>
     </ClInclude>
   </ItemGroup>

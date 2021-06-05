@@ -43,6 +43,7 @@ void dae::Renderer::Render()
 {
 	SDL_RenderClear(m_Renderer);
 
+	
 	SceneManager::GetInstance().Render();
 
 	ImGui_ImplOpenGL2_NewFrame();
@@ -57,8 +58,7 @@ void dae::Renderer::Render()
 	ImGui::SameLine();
 	ImGui::Button("versus");
 
-	
-	
+
 	ImGui::Render();
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 	
@@ -96,4 +96,14 @@ void dae::Renderer::RenderTexture(const Texture2D& texture, const float x, const
 	dst.w = static_cast<int>(width);
 	dst.h = static_cast<int>(height);
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
+}
+ void dae::Renderer::RenderTexture(const Texture2D& texture, float x, float y, float width, float height,
+                                   const SDL_Rect& srcRect) const
+{
+	 SDL_Rect dst;
+	 dst.x = static_cast<int>(x);
+	 dst.y = static_cast<int>(y);
+	 dst.w = static_cast<int>(width);
+	 dst.h = static_cast<int>(height);
+	 SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &dst);
 }

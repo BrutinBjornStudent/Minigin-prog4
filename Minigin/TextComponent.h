@@ -8,14 +8,14 @@ namespace dae
 {
 	class Font;
 	
-	class TextComponent: public BaseComponent
+	class TextComponent final: public BaseComponent
 	{
 	public:
 		TextComponent(
 			const std::string& text, 
 			const std::shared_ptr<Font>& font,
 			RenderComponent* RendComp);
-		//~TextComponent() = default;
+		~TextComponent() = default;
 		
 		void Update(float deltaTime) override;
 		void Render() const override;

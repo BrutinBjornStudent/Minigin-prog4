@@ -160,8 +160,11 @@ void dae::Minigin::Update()
 
 void dae::Minigin::Render()
 {
-	auto& sceneManager = SceneManager::GetInstance();
-	sceneManager.Render();
+	//auto& sceneManager = SceneManager::GetInstance();
+	auto& renderer = Renderer::GetInstance();
+	renderer.Render();
+	//sceneManager.Render();
+
 }
 
 void dae::Minigin::Cleanup()
@@ -189,7 +192,7 @@ void dae::Minigin::Run()
 	
 	{
 		//auto& Scene = SceneManager::GetInstance();
-		auto& renderer = Renderer::GetInstance();
+	
 		auto& input = input::InputManager::GetInstance();
 
 		bool doContinue = true;
@@ -199,7 +202,7 @@ void dae::Minigin::Run()
 
 			doContinue = input.ProcessInput();
 			Update();
-			renderer.Render();
+			Render();
 			
 			printTimer += m_pTimer->GetDeltaTime();
 			if (printTimer > 1.f)

@@ -4,6 +4,11 @@
 
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
+#if _DEBUG
+// ReSharper disable once CppUnusedIncludeDirective
+#include <vld.h>
+#endif
+
 #include <iostream>
 
 #include "Minigin.h"

@@ -61,7 +61,14 @@ std::shared_ptr<dae::GameObject> objectConstructors::Qbert(int lives)
 	QBertComponent* qbertcomp = new QBertComponent();
 	newObject->AddComponent(qbertcomp);
 	// end qbert
+
 	
+	RenderComponent* renderComp = new RenderComponent();
+	//renderComp->SetPosition(30, 30);
+	//renderComp->SetTexture("sprites.png");
+	//renderComp->SetSize(20, 20);
+	//renderComp->SetSourceRect({ 0,0,16,16 });
+	newObject->AddComponent(renderComp);
 	return newObject;
 	
 }

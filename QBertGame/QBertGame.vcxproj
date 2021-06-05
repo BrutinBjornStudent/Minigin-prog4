@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BoardComponent.cpp" />
     <ClCompile Include="CellComponent.cpp" />
     <ClCompile Include="QbertEngine.cpp" />
     <ClCompile Include="QbertGame.cpp" />
@@ -165,6 +166,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoardComponent.h" />
     <ClInclude Include="CellComponent.h" />
     <ClInclude Include="QbertEngine.h" />
   </ItemGroup>
