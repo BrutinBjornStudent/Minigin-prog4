@@ -10,7 +10,7 @@
 
 CellComponent::CellComponent(const glm::vec3& pos, const glm::ivec2& boardPos, RenderComponent* rendercomp, float rad)
 	:m_radius(rad)
-	, m_coordinate(boardPos)
+	, m_hexCoordinate(boardPos)
 	, nm_pRenderComponent(rendercomp)
 
 {
@@ -31,4 +31,9 @@ glm::vec2 CellComponent::getSpritePos()
 
 	spritepos.y -= m_radius / 2;
 	return spritepos;
+}
+
+glm::vec2 CellComponent::GetPosition()
+{
+	return m_Transform.GetPosition();
 }

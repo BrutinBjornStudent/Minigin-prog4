@@ -23,7 +23,7 @@ class BoardComponent :
     public BaseComponent
 {
 public:
-	BoardComponent( dae::Scene& currentScene, const glm::vec3& center, const std::vector<glm::ivec2>& cellPosition, std::string texturepath,
+	BoardComponent( dae::Scene& currentScene, const glm::vec3& center, const std::vector<glm::ivec2>& cellHexPosition, std::string texturepath,
 	               float radius);
 	BoardComponent(std::string path) {};
 
@@ -32,6 +32,8 @@ public:
 	void Update(const float ) override {};
 	void Render() const override;
 	
+	std::shared_ptr<dae::GameObject> GetCellFromPos(int x, int y);
+	std::shared_ptr<dae::GameObject> GetCellFromPos(glm::ivec2 pos);
 	
 
 private:

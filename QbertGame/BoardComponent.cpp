@@ -3,22 +3,23 @@
 
 
 
-BoardComponent::BoardComponent( dae::Scene& currentScene, const glm::vec3& center, const std::vector<glm::ivec2>& cellPosition, std::string texturepath,
+
+BoardComponent::BoardComponent( dae::Scene& currentScene, const glm::vec3& center, const std::vector<glm::ivec2>& cellHexPosition, std::string texturepath,
 	float radius)
 {
 	int width = static_cast<int>(sqrt(3) * radius);
 	int height = static_cast<int>(radius * 2);
 	
-	for (int i = 0; i <cellPosition.size();i++)
+	for (int i = 0; i <cellHexPosition.size();i++)
 	{
 		glm::vec3 pos = center;
 
 
-		pos.x = center.x + (cellPosition[i].x * width) + (cellPosition[i].y * width/2);
-		pos.y = center.y - (cellPosition[i].y * ( height *3 / 4 ));
+		pos.x = center.x + (cellHexPosition[i].x * width) + (cellHexPosition[i].y * width/2);
+		pos.y = center.y - (cellHexPosition[i].y * (height *3 / 4 ));
 		
 		
-		glm::ivec2 copy = cellPosition[i];
+		//glm::ivec2 copy = cellHexPosition[i];
 
 
 		auto texture = new RenderComponent();
@@ -28,14 +29,14 @@ BoardComponent::BoardComponent( dae::Scene& currentScene, const glm::vec3& cente
 		texture->SetTexture(texturepath);
 
 		
-		auto cell = new CellComponent(pos, cellPosition[i], texture,radius);
+		auto cell = new CellComponent(pos, cellHexPosition[i], texture,radius);
 		auto gameobj =  std::make_shared<dae::GameObject>();
 
 		
 		gameobj->AddComponent(texture);
 		gameobj->AddComponent(cell);
 		
-		m_cells.push_back(cellPos{ copy,gameobj});
+		m_cells.push_back(cellPos{ cellHexPosition[i],gameobj});
 		currentScene.Add(gameobj);
 
 		
@@ -54,4 +55,23 @@ void BoardComponent::Render() const
 	{
 		m_cells[i].cell->Render();
 	}
+}
+
+std::shared_ptr<dae::GameObject> BoardComponent::GetCellFromPos(int x, int y)
+{
+
+	for (std::vector<cellPos>::iterator it = m_cells.begin(); it != m_cells.end();it++)
+	{
+		if (it->position.x == x && it->position.y == y)
+		{
+			return it->cell;
+		}
+	}
+	
+	return m_cells.begin()->cell;
+}
+
+std::shared_ptr<dae::GameObject> BoardComponent::GetCellFromPos(glm::ivec2 pos)
+{
+	return GetCellFromPos(pos.x, pos.y);
 }

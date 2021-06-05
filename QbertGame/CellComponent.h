@@ -19,10 +19,11 @@ public:
 	void Render() const override;
 
 	glm::vec2 getSpritePos();
+	glm::vec2 GetPosition();
 
 private:
 	float m_radius;
-	glm::ivec2 m_coordinate;
+	glm::ivec2 m_hexCoordinate;
 
 	dae::Transform m_Transform;
 
