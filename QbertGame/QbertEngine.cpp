@@ -6,7 +6,9 @@
 #include "GameObject.h"
 #include "HealthBarComponent.h"
 #include "ObjectConstructors.h"
+#include "QBertComponent.h"
 #include "SpriteComponent.h"
+#include "QbertCommand.h"
 
 void QbertEngine::LoadGame()
 {
@@ -21,6 +23,8 @@ void QbertEngine::LoadGame()
 	//scene->Add(obj);
 
 
+
+	
 	auto boardObj = std::make_shared<dae::GameObject>();
 	
 	std::vector<glm::ivec2> cellposition;
@@ -40,15 +44,17 @@ void QbertEngine::LoadGame()
 	scene->Add(boardObj);
 
 	
-	auto Qbert = objectConstructors::Qbert(3);// qbert is 16 on 16 big on sprite sheet
+	auto Qbert = objectConstructors::BasicActor(3);// qbert is 16 on 16 big on sprite sheet
+
+
+	auto QbertLogic = new QBertComponent({ 0,1 }, board, Qbert->GetComponent<RenderComponent>());
+	Qbert->AddComponent(QbertLogic);
+
 	Qbert->GetComponent<RenderComponent>()->SetTexture("sprites.png");
 	Qbert->GetComponent<RenderComponent>()->SetSize(30, 30);
 	Qbert->GetComponent<RenderComponent>()->SetOffset(-20,-40);
-	
 
 
-
-	
 	auto SpriteManager = new SpriteComponent(Qbert->GetComponent<RenderComponent>(), SDL_Rect{ 0,0,16,16 }, 8, 1);
 	SpriteManager->SetXSprite(6);
 	SpriteManager->setYSprite(1);
@@ -60,9 +66,39 @@ void QbertEngine::LoadGame()
 
 	Healthbar->GetComponent<HealthBarComponent>()->SetSize({20,20});
 	scene->Add(Healthbar);
+
+
+	Action newAction = Action();
+
 	
-	glm::vec2 newpos = boardObj->GetComponent<BoardComponent>()->GetCellFromPos(0, 0)->GetComponent<CellComponent>()->GetPosition();
-	Qbert->GetComponent<RenderComponent>()->SetPosition(newpos.x,newpos.y);
+
+	auto& inputManager = input::InputManager::GetInstance();
+	
+	newAction.pCommand = new QBertCommand(QbertLogic,0,1);
+	newAction.Button = input::XBoxController::ControllerButton::ButtonUp;
+	newAction.type = InputType::Up;
+	inputManager.AddAction(newAction);
+
+	newAction = Action();
+	newAction.pCommand = new QBertCommand(QbertLogic, 0, -1);
+	newAction.Button = input::XBoxController::ControllerButton::ButtonDown;
+	newAction.type = InputType::Up;
+	inputManager.AddAction(newAction);
+
+	newAction = Action();
+	newAction.pCommand = new QBertCommand(QbertLogic, 1, -1);
+	newAction.Button = input::XBoxController::ControllerButton::ButtonRight;
+	newAction.type = InputType::Up;
+	inputManager.AddAction(newAction);
+
+	newAction = Action();
+	newAction.pCommand = new QBertCommand(QbertLogic, -1, 1);
+	newAction.Button = input::XBoxController::ControllerButton::ButtonLeft;
+	newAction.type = InputType::Up;
+	inputManager.AddAction(newAction);
+
+	//glm::vec2 newpos = boardObj->GetComponent<BoardComponent>()->GetCellFromPos(0, 0)->GetComponent<CellComponent>()->GetPosition();
+	//Qbert->GetComponent<RenderComponent>()->SetPosition(newpos.x,newpos.y);
 
 
 }

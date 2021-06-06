@@ -11,7 +11,7 @@
 namespace dae
 {
 	
-	class GameObject 
+	class GameObject final
 	{
 	public:
 		GameObject() { std::cout << "Gd contstruct" << std::endl; };

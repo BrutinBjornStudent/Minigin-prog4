@@ -24,14 +24,7 @@ void CellComponent::Render() const
 {
 }
 
-glm::vec2 CellComponent::getSpritePos()
-{
-	glm::vec2 spritepos;
-	spritepos = m_Transform.GetPosition();
 
-	spritepos.y -= m_radius / 2;
-	return spritepos;
-}
 
 glm::vec2 CellComponent::GetPosition()
 {

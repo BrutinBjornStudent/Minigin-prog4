@@ -1,5 +1,7 @@
 #pragma once
 
+
+//https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_gamepad
 namespace input
 {
 	class XBoxControllerImp;
@@ -13,8 +15,8 @@ namespace input
 		
 		enum class ControllerButton
 		{
-			ButtonUp = 0x0000,
-			ButtonDown = 0x0001,
+			ButtonUp = 0x0001,
+			ButtonDown = 0x0002,
 			ButtonLeft = 0x0004,
 			ButtonRight = 0x0008,
 

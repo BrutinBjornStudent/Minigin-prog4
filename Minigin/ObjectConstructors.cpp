@@ -49,7 +49,7 @@ std::shared_ptr<dae::GameObject> objectConstructors::LivesBar(const std::string&
 	return newObject;
 }
 
-std::shared_ptr<dae::GameObject> objectConstructors::Qbert(int lives)
+std::shared_ptr<dae::GameObject> objectConstructors::BasicActor(int lives)
 {
 	auto newObject = std::make_shared<dae::GameObject>();
 

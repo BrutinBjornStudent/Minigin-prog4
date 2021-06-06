@@ -60,7 +60,7 @@ void BoardComponent::Render() const
 std::shared_ptr<dae::GameObject> BoardComponent::GetCellFromPos(int x, int y)
 {
 
-	for (std::vector<cellPos>::iterator it = m_cells.begin(); it != m_cells.end();it++)
+	for (std::vector<cellPos>::iterator it = m_cells.begin(); it != m_cells.end(); ++it)
 	{
 		if (it->position.x == x && it->position.y == y)
 		{
@@ -68,7 +68,7 @@ std::shared_ptr<dae::GameObject> BoardComponent::GetCellFromPos(int x, int y)
 		}
 	}
 	
-	return m_cells.begin()->cell;
+	return nullptr;
 }
 
 std::shared_ptr<dae::GameObject> BoardComponent::GetCellFromPos(glm::ivec2 pos)

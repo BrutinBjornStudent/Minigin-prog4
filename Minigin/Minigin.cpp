@@ -55,7 +55,7 @@ void dae::Minigin::Initialize()
 	m_pTimer = new FPSTimer();
 	m_pTimer->start();
 
-	m_pInputManager = new input::InputManager();
+	m_pInputManager =  &input::InputManager::GetInstance() ;
 
 }
 
@@ -90,7 +90,7 @@ void dae::Minigin::LoadGame()
 	scene->Add(to);
 	// end background
 
-	m_qbert = objectConstructors::Qbert(3);
+	m_qbert = objectConstructors::BasicActor(3);
 	scene->Add(m_qbert);
 	// base qbert
 ;
@@ -193,7 +193,7 @@ void dae::Minigin::Render()
 void dae::Minigin::Cleanup()
 {
 	delete m_pTimer;
-	delete m_pInputManager;
+	//delete m_pInputManager;
 
 	//Locator::CloseSoundSystem();
 	
@@ -232,7 +232,7 @@ void dae::Minigin::Run()
 			{
 				printTimer -= 1.f;
 				std::cout << m_pTimer->GetFPS() << std::endl;
-				m_pFps->GetComponent<TextComponent>()->SetText("FPS: " + std::to_string(m_pTimer->GetFPS()));
+		//		m_pFps->GetComponent<TextComponent>()->SetText("FPS: " + std::to_string(m_pTimer->GetFPS()));
 				
 			}
 

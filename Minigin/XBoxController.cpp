@@ -3,6 +3,8 @@
 #include <XInput.h>
 
 
+// learn to google bjorn >_<...
+// https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_gamepad
 namespace input
 {
 	class XBoxControllerImp

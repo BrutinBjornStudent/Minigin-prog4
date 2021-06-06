@@ -16,7 +16,7 @@ namespace objectConstructors
 	std::shared_ptr<dae::GameObject> LivesBar(const std::string& TexturePath,
 		float Xpos, float Ypos, HealthComponent* healthComp);
 	
-	std::shared_ptr<dae::GameObject> Qbert(int lives);
+	std::shared_ptr<dae::GameObject> BasicActor(int lives);
 
 	std::shared_ptr<dae::GameObject> Score(const std::string& file, unsigned int size,
 		const std::string& text, float Xpos, float Ypos);

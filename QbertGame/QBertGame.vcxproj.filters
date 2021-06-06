@@ -36,6 +36,9 @@
     <ClCompile Include="BoardComponent.cpp">
       <Filter>game files\Engine\QbertComponents</Filter>
     </ClCompile>
+    <ClCompile Include="QBertComponent.cpp">
+      <Filter>game files\Engine\QbertComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QbertEngine.h">
@@ -45,6 +48,12 @@
       <Filter>game files\Engine\QbertComponents</Filter>
     </ClInclude>
     <ClInclude Include="BoardComponent.h">
+      <Filter>game files\Engine\QbertComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="QbertCommand.h">
+      <Filter>game files\Engine\QbertComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="QBertComponent.h">
       <Filter>game files\Engine\QbertComponents</Filter>
     </ClInclude>
   </ItemGroup>

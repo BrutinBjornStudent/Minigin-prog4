@@ -4,63 +4,70 @@
 
 class Command
 {
-protected:
-	ActorComponent* GetActor()const { return actor; };
+
 public:
-	explicit Command(ActorComponent* actor);
+	explicit Command() = default;
 	virtual ~Command() = default;
 	virtual void Execute() = 0;
-private:
-	ActorComponent* actor;
+
 };
 
 class DieCommand  final: public Command
 {
 public:
-	DieCommand(ActorComponent* actor):Command(actor) {};
-	void Execute() override { GetActor()->Die(); };
+	DieCommand(ActorComponent* actor):m_actor(actor) {};
+	void Execute() override { m_actor->Die(); };
+private:
+	ActorComponent* m_actor;
 };
 
 class JumpCommand final : public Command
 {
 public:
-	JumpCommand(ActorComponent* actor):Command(actor) {};
-	void Execute() override { GetActor()->Jump(); };
+	JumpCommand(ActorComponent* actor):m_actor(actor) {};
+	void Execute() override { m_actor->Jump(); };
+private:
+	ActorComponent* m_actor;
 };
 
 class FireCommand final : public Command
 {
 public:
-	FireCommand(ActorComponent* actor):Command(actor) {};
-	void Execute() override { GetActor()->Fire(); };
+	FireCommand(ActorComponent* actor):m_actor(actor) {};
+	void Execute() override { m_actor->Fire(); };
+private:
+	ActorComponent* m_actor;
 };
 
 class FartCommand final : public Command
 {
 public:
-	FartCommand(ActorComponent* actor) :Command(actor) {};
-	void Execute() override { GetActor()->Fart(); };
+	FartCommand(ActorComponent* actor) :m_actor(actor) {};
+	void Execute() override { m_actor->Fart(); };
+private:
+	ActorComponent* m_actor;
+	
 };
 
 class MoveUnitCommand final : public Command
 {
 public:
 	MoveUnitCommand(ActorComponent* qbert, float x, float y)
-		:Command(qbert),m_x(x),m_y(y){}
+		:m_actor(qbert),m_x(x),m_y(y){}
 	
 	void Execute() override
 	{
-		m_xBefore = GetActor()->GetPosition().x;
-		m_yBefore = GetActor()->GetPosition().y;
-		GetActor()->MoveTo(m_x, m_y);
+		m_xBefore = m_actor->GetPosition().x;
+		m_yBefore = m_actor->GetPosition().y;
+		m_actor->MoveTo(m_x, m_y);
 		
 	};
 	
-	void Undo() { GetActor()->MoveTo(m_xBefore, m_yBefore); };
+	void Undo() { m_actor->MoveTo(m_xBefore, m_yBefore); };
 	
 
 private:
-
+	ActorComponent* m_actor;
 	float m_x, m_y;
 	float m_xBefore, m_yBefore;
 	

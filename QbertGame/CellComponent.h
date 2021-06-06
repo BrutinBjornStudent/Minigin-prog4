@@ -2,7 +2,6 @@
 #include <Component.h>
 #include <SDL_pixels.h>
 #include <string>
-#include <glm/detail/type_vec2.hpp>
 
 
 #include "Transform.h"

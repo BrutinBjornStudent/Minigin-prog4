@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="BoardComponent.cpp" />
     <ClCompile Include="CellComponent.cpp" />
+    <ClCompile Include="QBertComponent.cpp" />
     <ClCompile Include="QbertEngine.cpp" />
     <ClCompile Include="QbertGame.cpp" />
   </ItemGroup>
@@ -172,6 +173,8 @@
   <ItemGroup>
     <ClInclude Include="BoardComponent.h" />
     <ClInclude Include="CellComponent.h" />
+    <ClInclude Include="QbertCommand.h" />
+    <ClInclude Include="QBertComponent.h" />
     <ClInclude Include="QbertEngine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
