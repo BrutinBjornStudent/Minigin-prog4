@@ -46,14 +46,14 @@
     <Filter Include="Source Files\GameObjects\TextureObject">
       <UniqueIdentifier>{cecb4481-34fe-43ed-a416-831588056f96}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Compoments\QBert">
-      <UniqueIdentifier>{545b92fc-bec2-4231-8e60-73bef211b261}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Services">
       <UniqueIdentifier>{61280409-0250-4bbb-af7f-874c97a449f4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\states">
       <UniqueIdentifier>{4c1b127c-79e1-492e-9ead-ec01f1c8f4bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Compoments\ActorComp">
+      <UniqueIdentifier>{545b92fc-bec2-4231-8e60-73bef211b261}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -163,16 +163,16 @@
       <Filter>Source Files\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="healthComponent.h">
-      <Filter>Source Files\Compoments\QBert</Filter>
+      <Filter>Source Files\Compoments\ActorComp</Filter>
     </ClInclude>
     <ClInclude Include="ActorComponent.h">
-      <Filter>Source Files\Compoments\QBert</Filter>
+      <Filter>Source Files\Compoments\ActorComp</Filter>
     </ClInclude>
     <ClInclude Include="HealthBarComponent.h">
       <Filter>Source Files\Compoments\Graphical</Filter>
     </ClInclude>
     <ClInclude Include="ScoreComponent.h">
-      <Filter>Source Files\Compoments\QBert</Filter>
+      <Filter>Source Files\Compoments\ActorComp</Filter>
     </ClInclude>
     <ClInclude Include="Locator.h">
       <Filter>Source Files\Services</Filter>
@@ -291,16 +291,16 @@
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="healthComponent.cpp">
-      <Filter>Source Files\Compoments\QBert</Filter>
+      <Filter>Source Files\Compoments\ActorComp</Filter>
     </ClCompile>
     <ClCompile Include="ActorComponent.cpp">
-      <Filter>Source Files\Compoments\QBert</Filter>
+      <Filter>Source Files\Compoments\ActorComp</Filter>
     </ClCompile>
     <ClCompile Include="HealthBarComponent.cpp">
       <Filter>Source Files\Compoments\Graphical</Filter>
     </ClCompile>
     <ClCompile Include="ScoreComponent.cpp">
-      <Filter>Source Files\Compoments\QBert</Filter>
+      <Filter>Source Files\Compoments\ActorComp</Filter>
     </ClCompile>
     <ClCompile Include="Locator.cpp">
       <Filter>Source Files\Services</Filter>

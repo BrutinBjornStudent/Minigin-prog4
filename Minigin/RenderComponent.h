@@ -24,8 +24,9 @@ public:
 		{
 			const glm::vec3& pos = m_transform.GetPosition()+ glm ::vec3(m_offset,0);
 
-
-			if (!m_pSrcRect)
+			if (!m_IsSizeSet)
+				dae::Renderer::GetInstance().RenderTexture(*m_pTexture, pos.x, pos.y);			
+			else if (!m_pSrcRect)
 				dae::Renderer::GetInstance().RenderTexture(*m_pTexture, pos.x, pos.y, m_Size.x, m_Size.y);
 			else
 				dae::Renderer::GetInstance().RenderTexture(*m_pTexture, pos.x, pos.y, m_Size.x, m_Size.y,*m_pSrcRect);
@@ -44,7 +45,9 @@ protected:
 	dae::Texture2D* m_pTexture = nullptr;
 	SDL_Rect* m_pSrcRect = nullptr;
 	dae::Transform m_transform;
-	glm::vec2 m_Size{1,1};
+
+	bool m_IsSizeSet;
+	glm::vec2 m_Size{0,0};
 	glm::vec2 m_offset{ 0,0 };
 
 };

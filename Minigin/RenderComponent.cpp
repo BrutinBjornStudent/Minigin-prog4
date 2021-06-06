@@ -10,6 +10,14 @@ void RenderComponent::SetPosition(float x, float y)
 
 void RenderComponent::SetSize(float x, float y)
 {
+	if (x >1.f && y > 1.f)
+	{
+		m_IsSizeSet = true;
+	}
+	else
+	{
+		m_IsSizeSet = false;
+	}
 	m_Size.x = x;
 	m_Size.y = y;
 }
