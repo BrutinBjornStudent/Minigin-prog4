@@ -1,11 +1,18 @@
+
 #include "MiniginPCH.h"
 #include "Renderer.h"
+#pragma warning (disable :4189)
 #include <SDL.h>
+
 #include "SceneManager.h"
 #include "Texture2D.h"
-#include "imgui.h"
-#include <backends/imgui_impl_sdl.h>
+//#pragma warning(push)
 #include <backends/imgui_impl_opengl2.h>
+#include <backends/imgui_impl_sdl.h>
+
+#include "imgui.h"
+//#pragma warning(pop)
+
 int GetOpenGLDriverIndex()
 {
 	auto openglIndex = -1;
