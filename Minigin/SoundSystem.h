@@ -5,8 +5,9 @@
 #include <SDL_mixer.h>
 #include <map>
 #include <mutex>
-#include <stack>
 #include <thread>
+
+
 
 
 struct PlaySound
@@ -166,6 +167,7 @@ private:
 
 	void PlaySoundEffect(int effectId, float volume)
 	{
+		
 		float clampvolume = std::clamp(volume, 0.f, 1.f);
 
 		Mix_VolumeChunk(m_soundEffects[effectId], static_cast<int>(clampvolume * MIX_MAX_VOLUME));

@@ -4,7 +4,9 @@
 #include "BoardComponent.h"
 #include "SceneManager.h"
 #include "GameObject.h"
+
 #include "HealthBarComponent.h"
+#include "Locator.h"
 #include "ObjectConstructors.h"
 #include "QBertComponent.h"
 #include "SpriteComponent.h"
@@ -23,6 +25,14 @@ void QbertEngine::LoadGame()
 	//scene->Add(obj);
 
 
+	Locator::RegisterSoundSystem(new SDLSoundSystem());
+	
+	auto& t1 = Locator::GetSoundSystem();
+	t1.loadSound(1, "Level Music 1.mp3");
+	t1.play(1,1,"level Music 1.mp3");
+	
+	t1.loadSound(2, "Level Music 2.mp3");
+	t1.play(2, 1, "level Music 2.mp3");
 
 	
 	auto boardObj = std::make_shared<dae::GameObject>();
