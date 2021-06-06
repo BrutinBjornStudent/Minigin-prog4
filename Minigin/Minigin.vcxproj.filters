@@ -52,6 +52,9 @@
     <Filter Include="Source Files\Services">
       <UniqueIdentifier>{61280409-0250-4bbb-af7f-874c97a449f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\states">
+      <UniqueIdentifier>{4c1b127c-79e1-492e-9ead-ec01f1c8f4bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MiniginPCH.h">
@@ -162,7 +165,7 @@
     <ClInclude Include="healthComponent.h">
       <Filter>Source Files\Compoments\QBert</Filter>
     </ClInclude>
-    <ClInclude Include="QBertComponent.h">
+    <ClInclude Include="ActorComponent.h">
       <Filter>Source Files\Compoments\QBert</Filter>
     </ClInclude>
     <ClInclude Include="HealthBarComponent.h">
@@ -185,6 +188,9 @@
     </ClInclude>
     <ClInclude Include="SpriteComponent.h">
       <Filter>Source Files\Compoments\Graphical</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>Source Files\states</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -287,7 +293,7 @@
     <ClCompile Include="healthComponent.cpp">
       <Filter>Source Files\Compoments\QBert</Filter>
     </ClCompile>
-    <ClCompile Include="QBertComponent.cpp">
+    <ClCompile Include="ActorComponent.cpp">
       <Filter>Source Files\Compoments\QBert</Filter>
     </ClCompile>
     <ClCompile Include="HealthBarComponent.cpp">
@@ -304,6 +310,9 @@
     </ClCompile>
     <ClCompile Include="SpriteComponent.cpp">
       <Filter>Source Files\Compoments\Graphical</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Source Files\states</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

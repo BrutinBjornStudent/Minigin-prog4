@@ -7,7 +7,7 @@
 #include "Renderer.h"
 
 #include "ResourceManager.h"
-#include "QBertComponent.h"
+#include "ActorComponent.h"
 #include "Locator.h"
 
 #include "ObjectConstructors.h"
@@ -109,7 +109,7 @@ void dae::Minigin::LoadGame()
 	
 	m_qbertobserver = QbertObserver(m_qbert->GetComponent<HealthComponent>());
 	
-	auto* qbertcomp = m_qbert->GetComponent<QBertComponent>();	
+	auto* qbertcomp = m_qbert->GetComponent<ActorComponent>();	
 	qbertcomp->GetSubject()->AddObserver(&m_qbertobserver);
 	// add healthObserver
 
@@ -145,6 +145,29 @@ void dae::Minigin::LoadGame()
 	
 	//end input
 
+	newAction = Action();
+	newAction.pCommand = new MoveUnitCommand(qbertcomp,0.f,-1.f);
+	newAction.Button = input::XBoxController::ControllerButton::ButtonUp;
+	newAction.type = InputType::down;
+	m_pInputManager->AddAction(newAction);
+
+	newAction = Action();
+	newAction.pCommand = new MoveUnitCommand(qbertcomp, 0.f, 1.f);
+	newAction.Button = input::XBoxController::ControllerButton::ButtonDown;
+	newAction.type = InputType::down;
+	m_pInputManager->AddAction(newAction);
+	
+	newAction = Action();
+	newAction.pCommand = new MoveUnitCommand(qbertcomp, 1.f, 0.f);
+	newAction.Button = input::XBoxController::ControllerButton::ButtonRight;
+	newAction.type = InputType::down;
+	m_pInputManager->AddAction(newAction);
+
+	newAction = Action();
+	newAction.pCommand = new MoveUnitCommand(qbertcomp, -1.f, 0.f);
+	newAction.Button = input::XBoxController::ControllerButton::ButtonLeft;
+	newAction.type = InputType::down;
+	m_pInputManager->AddAction(newAction);
 	
 }
 

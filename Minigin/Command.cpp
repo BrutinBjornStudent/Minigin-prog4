@@ -1,7 +1,7 @@
 #include "MiniginPCH.h"
 #include "Command.h"
 
-Command::Command(QBertComponent* actor)
+Command::Command(ActorComponent* actor)
 	:actor(actor)
 {
 	

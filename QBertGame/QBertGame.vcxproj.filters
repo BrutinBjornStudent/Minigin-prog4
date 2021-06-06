@@ -19,6 +19,9 @@
     <Filter Include="game files\Engine\QbertComponents">
       <UniqueIdentifier>{2b0466ff-5f2e-4cd5-b026-c0469d0ae4cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="game files\Engine\MovementCommand">
+      <UniqueIdentifier>{098df45c-18b5-4a98-bfa2-0880daa6fe95}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="QbertGame.cpp">

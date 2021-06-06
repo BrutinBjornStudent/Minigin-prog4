@@ -4,7 +4,7 @@
 #include "HealthBarComponent.h"
 #include "ResourceManager.h"
 #include "TextComponent.h"
-#include "QBertComponent.h"
+#include "ActorComponent.h"
 #include "ScoreComponent.h"
 
 std::shared_ptr<dae::GameObject> objectConstructors::TextObject(const std::string& file, unsigned int size,
@@ -58,17 +58,14 @@ std::shared_ptr<dae::GameObject> objectConstructors::Qbert(int lives)
 	newObject->AddComponent(livesComp);
 	
 	// new qbert
-	QBertComponent* qbertcomp = new QBertComponent();
+	ActorComponent* qbertcomp = new ActorComponent();
 	newObject->AddComponent(qbertcomp);
 	// end qbert
 
-	
+	//render
 	RenderComponent* renderComp = new RenderComponent();
-	//renderComp->SetPosition(30, 30);
-	//renderComp->SetTexture("sprites.png");
-	//renderComp->SetSize(20, 20);
-	//renderComp->SetSourceRect({ 0,0,16,16 });
 	newObject->AddComponent(renderComp);
+	// end render
 	return newObject;
 	
 }
