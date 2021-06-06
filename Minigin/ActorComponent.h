@@ -23,7 +23,7 @@ public:
 	void Duck() const;
 	void Fart() const;
 	virtual void MoveTo(float x, float y);
-	glm::vec3 GetPosition() { return m_transform.GetPosition(); };
+	glm::vec3 GetPosition() const { return m_transform.GetPosition(); };
 
 private:
 	Subject* m_actorChanged = nullptr;

@@ -10,7 +10,7 @@ BoardComponent::BoardComponent( dae::Scene& currentScene, const glm::vec3& cente
 	int width = static_cast<int>(sqrt(3) * radius);
 	int height = static_cast<int>(radius * 2);
 	
-	for (int i = 0; i <cellHexPosition.size();i++)
+	for (uint32_t i = 0; i < cellHexPosition.size();i++)
 	{
 		glm::vec3 pos = center;
 
@@ -51,7 +51,7 @@ BoardComponent::~BoardComponent()
 
 void BoardComponent::Render() const
 {
-	for (int i = 0; i < m_cells.size(); i++)
+	for (uint32_t i = 0; i < m_cells.size(); i++)
 	{
 		m_cells[i].cell->Render();
 	}
