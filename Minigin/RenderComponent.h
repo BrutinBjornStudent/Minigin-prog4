@@ -33,13 +33,14 @@ public:
 		}
 	};
 	
-	//virtual void Update(const float) {};
-	void SetPosition(float x, float y);
+	void SetPosition(float x, float y, float z = 0);
+	void SetPosition(glm::vec3 pos);
 	void SetSize(float x, float y);
 	void SetOffset(int x, int y);
 	void SetTexture(const std::string& filename);
 	void SetTexture(dae::Texture2D* texture2D);
 	void SetSourceRect(SDL_Rect rect);
+
 
 protected:
 	dae::Texture2D* m_pTexture = nullptr;
@@ -47,6 +48,7 @@ protected:
 	dae::Transform m_transform;
 
 	bool m_IsSizeSet;
+	bool m_IsBoundToOtherComp = false;
 	glm::vec2 m_Size{0,0};
 	glm::vec2 m_offset{ 0,0 };
 

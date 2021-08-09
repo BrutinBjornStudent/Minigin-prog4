@@ -192,6 +192,9 @@
     <ClInclude Include="PlayerState.h">
       <Filter>Source Files\states</Filter>
     </ClInclude>
+    <ClInclude Include="RectComponent.h">
+      <Filter>Source Files\Compoments\Graphical</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MiniginPCH.cpp">
@@ -313,6 +316,9 @@
     </ClCompile>
     <ClCompile Include="PlayerState.cpp">
       <Filter>Source Files\states</Filter>
+    </ClCompile>
+    <ClCompile Include="RectComponent.cpp">
+      <Filter>Source Files\Compoments\Graphical</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

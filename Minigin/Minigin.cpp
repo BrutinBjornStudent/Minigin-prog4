@@ -121,25 +121,25 @@ void dae::Minigin::LoadGame()
 	//InputManager
 	Action newAction = Action();
 	newAction.pCommand = new DieCommand(qbertcomp);
-	newAction.Button = input::XBoxController::ControllerButton::ButtonA;
+	newAction.XButton = input::XBoxController::ControllerButton::ButtonA;
 	newAction.type = InputType::down;
 	m_pInputManager->AddAction(newAction);
 
 	newAction = Action();
 	newAction.pCommand = new FireCommand(qbertcomp);
-	newAction.Button = input::XBoxController::ControllerButton::ButtonB;
-	newAction.type = InputType::Pressed;
+	newAction.XButton = input::XBoxController::ControllerButton::ButtonB;
+	newAction.type = InputType::IsPressed;
 	m_pInputManager->AddAction(newAction);
 
 	newAction = Action();
 	newAction.pCommand = new JumpCommand(qbertcomp);
-	newAction.Button = input::XBoxController::ControllerButton::ButtonX;
+	newAction.XButton = input::XBoxController::ControllerButton::ButtonX;
 	newAction.type = InputType::Up;
 	m_pInputManager->AddAction(newAction);
 
 	newAction = Action();
 	newAction.pCommand = new FartCommand(qbertcomp);
-	newAction.Button = input::XBoxController::ControllerButton::ButtonY;
+	newAction.XButton = input::XBoxController::ControllerButton::ButtonY;
 	newAction.type = InputType::down;
 	m_pInputManager->AddAction(newAction);
 	
@@ -147,25 +147,25 @@ void dae::Minigin::LoadGame()
 
 	newAction = Action();
 	newAction.pCommand = new MoveUnitCommand(qbertcomp,0.f,-1.f);
-	newAction.Button = input::XBoxController::ControllerButton::ButtonUp;
+	newAction.XButton = input::XBoxController::ControllerButton::ButtonUp;
 	newAction.type = InputType::down;
 	m_pInputManager->AddAction(newAction);
 
 	newAction = Action();
 	newAction.pCommand = new MoveUnitCommand(qbertcomp, 0.f, 1.f);
-	newAction.Button = input::XBoxController::ControllerButton::ButtonDown;
+	newAction.XButton = input::XBoxController::ControllerButton::ButtonDown;
 	newAction.type = InputType::down;
 	m_pInputManager->AddAction(newAction);
 	
 	newAction = Action();
 	newAction.pCommand = new MoveUnitCommand(qbertcomp, 1.f, 0.f);
-	newAction.Button = input::XBoxController::ControllerButton::ButtonRight;
+	newAction.XButton = input::XBoxController::ControllerButton::ButtonRight;
 	newAction.type = InputType::down;
 	m_pInputManager->AddAction(newAction);
 
 	newAction = Action();
 	newAction.pCommand = new MoveUnitCommand(qbertcomp, -1.f, 0.f);
-	newAction.Button = input::XBoxController::ControllerButton::ButtonLeft;
+	newAction.XButton = input::XBoxController::ControllerButton::ButtonLeft;
 	newAction.type = InputType::down;
 	m_pInputManager->AddAction(newAction);
 	
@@ -174,10 +174,13 @@ void dae::Minigin::LoadGame()
 
 void dae::Minigin::Update()
 {
+	// core components 
 	m_pTimer->Update();
+	m_pInputManager->Update();
+
+	// game components
 	auto& sceneManager = SceneManager::GetInstance();
 	sceneManager.Update(m_pTimer->GetDeltaTime());
-	m_pInputManager->Update();
 
 }
 
@@ -206,11 +209,9 @@ void dae::Minigin::Cleanup()
 void dae::Minigin::Run()
 {
 	Initialize();
-
 	// tell the resource manager where he can find the game data
 	ResourceManager::GetInstance().Init("../Data/");
 	float printTimer = 0.f;
-
 	LoadGame();
 	
 	{

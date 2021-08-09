@@ -3,21 +3,22 @@
 #include "ResourceManager.h"
 
 
-void RenderComponent::SetPosition(float x, float y)
+void RenderComponent::SetPosition(float x, float y, float z)
 {
-	m_transform.SetPosition(x, y, 0.0f);
+	m_transform.SetPosition(x, y, z);
 }
+
+void RenderComponent::SetPosition(glm::vec3 pos)
+{
+	SetPosition(pos.x, pos.y,pos.z);
+}
+
 
 void RenderComponent::SetSize(float x, float y)
 {
-	if (x >1.f && y > 1.f)
-	{
-		m_IsSizeSet = true;
-	}
-	else
-	{
-		m_IsSizeSet = false;
-	}
+
+	m_IsSizeSet = true;
+
 	m_Size.x = x;
 	m_Size.y = y;
 }

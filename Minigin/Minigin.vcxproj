@@ -245,6 +245,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x64\*.dll" "$(OutputPath)" /R
     <ClInclude Include="Observer.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="ActorComponent.h" />
+    <ClInclude Include="RectComponent.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="resource1.h" />
@@ -332,6 +333,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x64\*.dll" "$(OutputPath)" /R
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="ActorComponent.cpp" />
+    <ClCompile Include="RectComponent.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />

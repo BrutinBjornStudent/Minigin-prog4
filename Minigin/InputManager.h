@@ -3,6 +3,8 @@
 #include <XInput.h>
 #include "Singleton.h"
 #include <map>
+#include <SDL_keycode.h>
+
 #include "Command.h"
 #include "XBoxController.h"
 
@@ -10,12 +12,13 @@
 
 enum class InputType
 {
-	down, Up, Pressed
+	down, Up, IsPressed
 };
 
 struct Action
 {
-	input::XBoxController::ControllerButton Button;
+	input::XBoxController::ControllerButton XButton;
+	SDL_Keycode key = 0;
 	Command* pCommand = nullptr;
 	InputType type = InputType::down;
 };

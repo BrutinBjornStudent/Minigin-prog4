@@ -75,49 +75,80 @@ void input::InputManager::Update()
 
 bool input::InputManager::ProcessInput()
 {
-	SDL_Event e;
 
 
 	//keyboard...
-	while (SDL_PollEvent(&e)) {
+	//while (SDL_PollEvent(&e)) {
+	//	if (e.type == SDL_QUIT) {
+	//		return false;
+	//	}
+	//	if (e.type == SDL_KEYDOWN) {
+	//		std::cout << "key pressed" << std::endl;
+	//		if(e.key.keysym.sym == SDLK_w)
+	//		{
+	//			std::cout << "w pressed" << std::endl;
+	//		}
+	//	
+	//	}
+	//	if (e.type == SDL_MOUSEBUTTONDOWN) {
+	//		std::cout << "mouse pressed" << std::endl;
+	//	}
+	//	if (e.type == SDL_KEYUP)
+	//	{
+	//		std::cout << "Key up" << std::endl;
+	//	}
+	//}
+
+	const Uint8* keystate = SDL_GetKeyboardState(nullptr);
+	SDL_Event e;
+
+	while (SDL_PollEvent(&e))
+	{
 		if (e.type == SDL_QUIT) {
 			return false;
 		}
-		if (e.type == SDL_KEYDOWN) {
-			std::cout << "key pressed" << std::endl;
-			if(e.key.keysym.sym == SDLK_w)
+		for (std::list<Action>::iterator iter = m_Actions.begin(); iter != m_Actions.end() ;++iter)
+		{
+			if (e.type == SDL_KEYDOWN && iter->type == InputType::IsPressed && e.key.keysym.sym == iter->key)
 			{
-				std::cout << "w pressed" << std::endl;
+				iter->pCommand->Execute();
 			}
-		
-		}
-		if (e.type == SDL_MOUSEBUTTONDOWN) {
-			std::cout << "mouse pressed" << std::endl;
-		}
-		if (e.type == SDL_KEYUP)
-		{
-			std::cout << "Key up" << std::endl;
+			if (e.type == SDL_KEYUP && iter->type == InputType::Up && e.key.keysym.sym == iter->key)
+			{
+				iter->pCommand->Execute();
+			}
+			if (keystate[iter->key] && iter->type == InputType::down)
+			{
+				iter->pCommand->Execute();
+			}
+
 		}
 	}
 
+	
 	//XBoxController....
-	for (std::list<Action>::iterator iter = m_Actions.begin(); iter != m_Actions.end(); ++iter)
+
+	if (m_pController)
 	{
-		if (m_pController->IsDown(iter->Button) && iter->type == InputType::down)
+		for (std::list<Action>::iterator iter = m_Actions.begin(); iter != m_Actions.end(); ++iter)
 		{
-			iter->pCommand->Execute();
+			
+			if (m_pController->IsDown(iter->XButton) && iter->type == InputType::down)
+			{
+				iter->pCommand->Execute();
+			}
+			if (m_pController->IsPressed(iter->XButton) && iter->type == InputType::IsPressed)
+			{
+				iter->pCommand->Execute();
+			}
+			if (m_pController->IsUp(iter->XButton) && iter->type == InputType::Up)
+			{
+				iter->pCommand->Execute();
+			}
 		}
-
-		if (m_pController->IsPressed(iter->Button) && iter->type == InputType::Pressed)
-		{
-			iter->pCommand->Execute();
-		}
-
-		if (m_pController->IsUp(iter->Button) && iter->type == InputType::Up)
-		{
-			iter->pCommand->Execute();
-		}
+		
 	}
+	
 	
 	return true;
 	

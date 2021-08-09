@@ -8,8 +8,7 @@
 #include "ScoreComponent.h"
 
 std::shared_ptr<dae::GameObject> objectConstructors::TextObject(const std::string& file, unsigned int size,
-                                                                const std::string& text
-                                                                , float Xpos, float Ypos )
+                                                                const std::string& text, float Xpos, float Ypos )
 {
 	auto textObject = std::make_shared<dae::GameObject>();
 	RenderComponent* textRenderComp = new RenderComponent;
@@ -70,9 +69,7 @@ std::shared_ptr<dae::GameObject> objectConstructors::BasicActor(int lives)
 	
 }
 
-std::shared_ptr<dae::GameObject> objectConstructors::Score(const std::string& file, unsigned int size,
-	const std::string& text
-	, float Xpos, float Ypos)
+std::shared_ptr<dae::GameObject> objectConstructors::Score(const std::string& file, unsigned int size, const std::string& text, float Xpos, float Ypos)
 {
 
 	auto newObject = TextObject(file, size, text, Xpos, Ypos);

@@ -3,7 +3,7 @@
 #include "glm/geometric.hpp"
 
 ActorComponent::ActorComponent()
-
+	:m_velocity(0, 0)
 {
 	m_actorChanged = new Subject();
 }
@@ -17,17 +17,27 @@ ActorComponent::~ActorComponent()
 // example of changing position
 void ActorComponent::Update(float delta)
 {
-	glm::vec3 positon = m_transform.GetPosition();
+	glm::vec2 position = m_transform.GetPosition();
+	//std::cout << position.x << ":" << position.y << ":actor pos" << std::endl;
 
+	//
+	if (m_velocity.length() == 0)
+	{
+		glm::vec2 normalVec = glm::normalize(m_velocity);
+		position += m_speed * normalVec * delta;
+		
+	}
+	//
+	m_transform.SetPosition(position.x,position.y);
 
-
-	glm::vec3 normalVec = glm::normalize(m_velocity);
-	positon += normalVec * delta;
 	
-	m_transform.SetPosition(positon);
+	if (nm_pBoundRenderComp != nullptr)
+	{
+		nm_pBoundRenderComp->SetPosition(m_transform.GetPosition());
+	}
 
 	//reset volocity
-	m_velocity = {0,0,0};
+	m_velocity = {0,0};
 }
 
 void ActorComponent::Jump() const
@@ -66,7 +76,19 @@ void ActorComponent::Fart() const
 
 void ActorComponent::MoveTo(float x, float y)
 {
+	
 	m_velocity.x += x;
 	m_velocity.y += y;
+	
+}
+
+void ActorComponent::Translate(float x, float y)
+{
+	m_transform.SetPosition(x, y);
+}
+
+void ActorComponent::bindRenderCompToTransform(RenderComponent* toBind)
+{
+	nm_pBoundRenderComp = toBind;
 	
 }

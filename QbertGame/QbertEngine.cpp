@@ -85,25 +85,25 @@ void QbertEngine::LoadGame()
 	auto& inputManager = input::InputManager::GetInstance();
 	
 	newAction.pCommand = new QBertCommand(QbertLogic,0,1);
-	newAction.Button = input::XBoxController::ControllerButton::ButtonUp;
+	newAction.XButton = input::XBoxController::ControllerButton::ButtonUp;
 	newAction.type = InputType::Up;
 	inputManager.AddAction(newAction);
 
 	newAction = Action();
 	newAction.pCommand = new QBertCommand(QbertLogic, 0, -1);
-	newAction.Button = input::XBoxController::ControllerButton::ButtonDown;
+	newAction.XButton = input::XBoxController::ControllerButton::ButtonDown;
 	newAction.type = InputType::Up;
 	inputManager.AddAction(newAction);
 
 	newAction = Action();
 	newAction.pCommand = new QBertCommand(QbertLogic, 1, -1);
-	newAction.Button = input::XBoxController::ControllerButton::ButtonRight;
+	newAction.XButton = input::XBoxController::ControllerButton::ButtonRight;
 	newAction.type = InputType::Up;
 	inputManager.AddAction(newAction);
 
 	newAction = Action();
 	newAction.pCommand = new QBertCommand(QbertLogic, -1, 1);
-	newAction.Button = input::XBoxController::ControllerButton::ButtonLeft;
+	newAction.XButton = input::XBoxController::ControllerButton::ButtonLeft;
 	newAction.type = InputType::Up;
 	inputManager.AddAction(newAction);
 

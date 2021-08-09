@@ -17,20 +17,33 @@ public:
 	void Update( float delta) override;
 	void Render() const override {};
 
+
+	//ations
 	void Jump() const;
 	void Die() const;
 	void Fire() const;
 	void Duck() const;
 	void Fart() const;
-	virtual void MoveTo(float x, float y);
+	
+	void MoveTo(float x, float y);
+	void Translate(float x, float y);
+	
+	void bindRenderCompToTransform(RenderComponent* toBind);
+	
+	
 	glm::vec3 GetPosition() const { return m_transform.GetPosition(); };
 
 private:
 	Subject* m_actorChanged = nullptr;
+	RenderComponent* nm_pBoundRenderComp = nullptr;
 
 	dae::Transform m_transform;
-	glm::vec3 m_velocity;
+	glm::vec2 m_velocity;
+
+	float m_speed = 10.f;
 	
 	
 };
+
+
 

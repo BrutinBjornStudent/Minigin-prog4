@@ -2,6 +2,7 @@
 #include "MiniginPCH.h"
 #include "Renderer.h"
 #pragma warning (disable :4189)
+#pragma warning(disable :4201)
 #include <SDL.h>
 
 #include "SceneManager.h"
@@ -9,6 +10,8 @@
 //#pragma warning(push)
 #include <backends/imgui_impl_opengl2.h>
 #include <backends/imgui_impl_sdl.h>
+#include <glm/detail/type_vec2.hpp>
+
 
 #include "imgui.h"
 //#pragma warning(pop)
@@ -48,11 +51,12 @@ void dae::Renderer::Init(SDL_Window * window)
 
 void dae::Renderer::Render()
 {
-	SDL_RenderClear(m_Renderer);
 
+	SDL_RenderClear(m_Renderer);
 	
 	SceneManager::GetInstance().Render();
 
+	
 	ImGui_ImplOpenGL2_NewFrame();
 	ImGui_ImplSDL2_NewFrame(m_pWindow);
 	ImGui::NewFrame();
@@ -64,8 +68,6 @@ void dae::Renderer::Render()
 	ImGui::Button("Co-op");
 	ImGui::SameLine();
 	ImGui::Button("versus");
-
-
 	ImGui::Render();
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 	
@@ -113,4 +115,18 @@ void dae::Renderer::RenderTexture(const Texture2D& texture, const float x, const
 	 dst.w = static_cast<int>(width);
 	 dst.h = static_cast<int>(height);
 	 SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &dst);
+}
+
+void dae::Renderer::RenderRect(const struct SDL_Rect* rectangle) const
+{
+	SDL_RenderDrawRect(m_Renderer, rectangle);
+
+}
+
+glm::ivec2 dae::Renderer::GetWindowSize() const
+{
+	glm::ivec2 value;
+
+	SDL_GetRendererOutputSize(m_Renderer, &value.x, &value.y);
+	return value;
 }
