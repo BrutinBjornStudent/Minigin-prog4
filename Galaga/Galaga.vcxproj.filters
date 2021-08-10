@@ -19,6 +19,15 @@
     <Filter Include="game files\Engine\MovementCommand">
       <UniqueIdentifier>{098df45c-18b5-4a98-bfa2-0880daa6fe95}</UniqueIdentifier>
     </Filter>
+    <Filter Include="game files\Engine\Constructor">
+      <UniqueIdentifier>{c40cc253-d55c-46c1-8dd4-49d111b52f8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game files\Engine\Observer">
+      <UniqueIdentifier>{89e5e39a-c5bc-4d59-8048-57ffdc4ef245}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game files\Engine\Components">
+      <UniqueIdentifier>{3c844085-f70f-4dd2-b375-b980743984f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GalagaGame.cpp">
@@ -27,10 +36,34 @@
     <ClCompile Include="GalagaEngine.cpp">
       <Filter>game files\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="GalagaObserver.cpp">
+      <Filter>game files\Engine\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="GalagaConstructor.cpp">
+      <Filter>game files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletComponent.cpp">
+      <Filter>game files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="BeeComponent.cpp">
+      <Filter>game files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GalagaEngine.h">
       <Filter>game files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GalagaObserver.h">
+      <Filter>game files\Engine\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletComponent.h">
+      <Filter>game files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GalagaConstructor.h">
+      <Filter>game files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BeeComponent.h">
+      <Filter>core files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

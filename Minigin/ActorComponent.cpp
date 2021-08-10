@@ -21,13 +21,14 @@ void ActorComponent::Update(float delta)
 	//std::cout << position.x << ":" << position.y << ":actor pos" << std::endl;
 
 	//
-	if (m_velocity.length() == 0)
+
+	
+	if (glm::length(m_velocity) > 0)
 	{
 		glm::vec2 normalVec = glm::normalize(m_velocity);
 		position += m_speed * normalVec * delta;
 		
 	}
-	//
 	m_transform.SetPosition(position.x,position.y);
 
 	
@@ -87,8 +88,13 @@ void ActorComponent::Translate(float x, float y)
 	m_transform.SetPosition(x, y);
 }
 
-void ActorComponent::bindRenderCompToTransform(RenderComponent* toBind)
+void ActorComponent::BindRenderComponent(RenderComponent* toBind)
 {
 	nm_pBoundRenderComp = toBind;
 	
+}
+
+void ActorComponent::BindHitBoxComponent(ActorHitBoxComponent* toBind)
+{
+	nm_pBoundHitBox = toBind;
 }

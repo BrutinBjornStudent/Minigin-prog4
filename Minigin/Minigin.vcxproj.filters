@@ -22,29 +22,17 @@
     <Filter Include="Source Files\Compoments">
       <UniqueIdentifier>{28deb332-3457-4e50-a09c-2ec8b629e77f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameObjects">
-      <UniqueIdentifier>{3f2adee4-3165-4e20-96c5-6c59ec7eebaa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Managers\Input Manager">
       <UniqueIdentifier>{4f62170b-588b-4af2-b568-32029086d2ab}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Compoments\Timer">
       <UniqueIdentifier>{72713e7e-b441-4ee0-9ed0-696c6f210984}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameObjects\Qbert">
-      <UniqueIdentifier>{14f973cf-fbe9-41fe-b968-966d3a31ecb8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameObjects\TextObject">
-      <UniqueIdentifier>{87dbf017-d910-429b-a2e8-30b0855a792f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\ObserverPattern">
       <UniqueIdentifier>{d2bafd57-b872-43c3-bc41-e6782d38183b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Compoments\Graphical">
       <UniqueIdentifier>{b9cf7762-a378-404f-8858-4c5cf33ca23b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameObjects\TextureObject">
-      <UniqueIdentifier>{cecb4481-34fe-43ed-a416-831588056f96}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Services">
       <UniqueIdentifier>{61280409-0250-4bbb-af7f-874c97a449f4}</UniqueIdentifier>
@@ -54,6 +42,9 @@
     </Filter>
     <Filter Include="Source Files\Compoments\ActorComp">
       <UniqueIdentifier>{545b92fc-bec2-4231-8e60-73bef211b261}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject">
+      <UniqueIdentifier>{3f2adee4-3165-4e20-96c5-6c59ec7eebaa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -115,7 +106,7 @@
       <Filter>Source Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Source Files\GameObjects</Filter>
+      <Filter>Source Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Command.h">
       <Filter>Source Files\Managers\Input Manager</Filter>
@@ -138,9 +129,6 @@
     <ClInclude Include="Subject.h">
       <Filter>Source Files\ObserverPattern</Filter>
     </ClInclude>
-    <ClInclude Include="FPSRender.h">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Source Files\Compoments</Filter>
     </ClInclude>
@@ -160,7 +148,7 @@
       <Filter>Source Files\Compoments\Graphical</Filter>
     </ClInclude>
     <ClInclude Include="ObjectConstructors.h">
-      <Filter>Source Files\GameObjects</Filter>
+      <Filter>Source Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="healthComponent.h">
       <Filter>Source Files\Compoments\ActorComp</Filter>
@@ -194,6 +182,15 @@
     </ClInclude>
     <ClInclude Include="RectComponent.h">
       <Filter>Source Files\Compoments\Graphical</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorHitBoxComponent.h">
+      <Filter>Source Files\Compoments\ActorComp</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileHitBoxComponent.h">
+      <Filter>Source Files\Compoments\ActorComp</Filter>
+    </ClInclude>
+    <ClInclude Include="structs.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -269,9 +266,6 @@
     <ClCompile Include="Subject.cpp">
       <Filter>Source Files\ObserverPattern</Filter>
     </ClCompile>
-    <ClCompile Include="FPSRender.cpp">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Source Files\Compoments</Filter>
     </ClCompile>
@@ -288,10 +282,10 @@
       <Filter>Source Files\Compoments\Graphical</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files\GameObjects</Filter>
+      <Filter>Source Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="ObjectConstructors.cpp">
-      <Filter>Source Files\GameObjects</Filter>
+      <Filter>Source Files\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="healthComponent.cpp">
       <Filter>Source Files\Compoments\ActorComp</Filter>
@@ -319,6 +313,12 @@
     </ClCompile>
     <ClCompile Include="RectComponent.cpp">
       <Filter>Source Files\Compoments\Graphical</Filter>
+    </ClCompile>
+    <ClCompile Include="ActorHitBoxComponent.cpp">
+      <Filter>Source Files\Compoments\ActorComp</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileHitBoxComponent.cpp">
+      <Filter>Source Files\Compoments\ActorComp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

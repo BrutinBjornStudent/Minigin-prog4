@@ -4,6 +4,7 @@
 #include "HealthBarComponent.h"
 #include "Locator.h"
 #include "ObjectConstructors.h"
+#include "GalagaConstructor.h"
 #include "AllComponents.h"
 
 
@@ -37,12 +38,13 @@ void GalagaEngine::LoadGame()
 	Stats->AddComponent(rect);
 	scene->Add(Stats);
 	//score
+	
 	auto score = objectConstructors::Score("lingua.otf", 12, "score:", 10, 70);
 	scene->Add(score);
 
 
 	
-//	SDL_SetRenderDrawColor(dae::Renderer::GetInstance().GetSDLRenderer(),255, 0, 0, 255);
+	//SDL_SetRenderDrawColor(dae::Renderer::GetInstance().GetSDLRenderer(),255, 0, 0, 255);
 
 
 	
@@ -55,16 +57,26 @@ void GalagaEngine::LoadGame()
 	
 	auto PlayerActor = playerCharacter->GetComponent<ActorComponent>();
 	PlayerActor->Translate(float(size.x / 3), float(size.y) - 40 );
-	PlayerActor->bindRenderCompToTransform(playerCharacter->GetComponent<RenderComponent>());
+	PlayerActor->BindRenderComponent(playerCharacter->GetComponent<RenderComponent>());
 
 	
-
 	auto Healthbar = objectConstructors::LivesBar("Galaga/Player1_default.png", float(size.x/3 * 2 +20.f), float(size.y / 2 + 20.f), playerCharacter->GetComponent<HealthComponent>());
-
 	Healthbar->GetComponent<HealthBarComponent>()->SetSize({ 20,20 });
+	Healthbar->GetComponent<HealthBarComponent>()->SetPosition(float(size.x / 3 * 2), float(size.y) + 40);
 	scene->Add(Healthbar);
 
+	LoadInputs();
 
+	//TestEnemy
+	auto TestEnemy = objectConstructors::BeeEnemy("Galaga/bee.png", glm::vec2(size.x / 3.f, 20.f));
+	scene->Add(TestEnemy);
+	
+}
+
+
+void GalagaEngine::LoadInputs()
+{
+	auto PlayerActor = playerCharacter->GetComponent<ActorComponent>();
 	// input Action
 	auto& inputManager = input::InputManager::GetInstance();
 
@@ -72,19 +84,22 @@ void GalagaEngine::LoadGame()
 
 	ShootAction.pCommand = new FireCommand(PlayerActor);
 	ShootAction.type = InputType::IsPressed;
-	ShootAction.key = SDLK_z;
+	ShootAction.key = SDL_SCANCODE_Z;
 	inputManager.AddAction(ShootAction);
 
 	Action MoveRight = Action();
-
-	MoveRight.pCommand = new MoveUnitCommand(PlayerActor,1.f,0.f );
+	MoveRight.pCommand = new MoveUnitCommand(PlayerActor,10.f,0.f );
 	MoveRight.type = InputType::IsPressed;
-	MoveRight.key = SDLK_RIGHT;
+	MoveRight.key = SDL_SCANCODE_RIGHT;
 	inputManager.AddAction(MoveRight);
 
-	
-	
+	Action MoveLeft = Action();
+	MoveLeft.pCommand = new MoveUnitCommand(PlayerActor, -10.f, 0.f);
+	MoveLeft.type = InputType::IsPressed;
+	MoveLeft.key = SDL_SCANCODE_LEFT;
+	inputManager.AddAction(MoveLeft);
 }
+
 
 void GalagaEngine::Update()
 {	

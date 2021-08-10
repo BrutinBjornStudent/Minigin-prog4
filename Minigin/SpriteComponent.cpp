@@ -22,8 +22,6 @@ void SpriteComponent::Update(const float)
 
 		m_source = SDL_Rect{ m_currentX * m_spritewidth, m_currentY * m_spriteheight,m_spritewidth,m_spriteheight };
 		nm_pRenderComp->SetSourceRect(m_source);
-
-		
 		
 	}
 }

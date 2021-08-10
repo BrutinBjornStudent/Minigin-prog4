@@ -1,7 +1,7 @@
 #include "MiniginPCH.h"
 #include "RenderComponent.h"
 #include "ResourceManager.h"
-
+#include "SDL.h"
 
 void RenderComponent::SetPosition(float x, float y, float z)
 {

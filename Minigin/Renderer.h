@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL_pixels.h>
 #include <glm/detail/type_vec.hpp>
 
 #include "Singleton.h"
@@ -21,11 +22,13 @@ namespace dae
 
 
 		
-		void RenderTexture(const Texture2D& texture, float x, float y) const;
-		void RenderTexture(const Texture2D& texture, float x, float y, float width, float height) const;
-		void RenderTexture(const Texture2D& texture, float x, float y, float width, float height, const SDL_Rect& srcRect) const;
+		void RenderTexture(const Texture2D& texture, float x, float y, const double angle = 0) const;
+		void RenderTexture(const Texture2D& texture, float x, float y, float width, float height ,const double angle = 0) const;
+		void RenderTexture(const Texture2D& texture, float x, float y, float width, float height, const SDL_Rect& srcRect, const double angle = 0) const;
 
+		
 		void RenderRect(const SDL_Rect* rectangle) const;
+		void RenderRect(const SDL_Rect* rectangle, const SDL_Color color) const;
 
 		glm::ivec2 GetWindowSize() const;
 		SDL_Renderer* GetSDLRenderer() const { return m_Renderer; }

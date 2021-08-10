@@ -9,7 +9,7 @@ class SpriteComponent :
 {
 public:
 
-	SpriteComponent(RenderComponent* renderRef,SDL_Rect source, int xsprites, int yprites);
+	SpriteComponent(RenderComponent* renderRef,SDL_Rect Startsource, int xsprites, int yprites);
 	void Update(const float deltatime) override;
 
 	void Render() const override {};

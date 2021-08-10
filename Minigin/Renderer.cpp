@@ -88,40 +88,52 @@ void dae::Renderer::Destroy()
 	}
 }
 
-void dae::Renderer::RenderTexture(const Texture2D& texture, const float x, const float y) const
+void dae::Renderer::RenderTexture(const Texture2D& texture, const float x, const float y, const double angle) const
 {
 	SDL_Rect dst;
 	dst.x = static_cast<int>(x);
 	dst.y = static_cast<int>(y);
 	SDL_QueryTexture(texture.GetSDLTexture(), nullptr, nullptr, &dst.w, &dst.h);
-	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
+	SDL_RenderCopyEx(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst, angle, nullptr, SDL_FLIP_NONE);
 }
 
-void dae::Renderer::RenderTexture(const Texture2D& texture, const float x, const float y, const float width, const float height) const
+void dae::Renderer::RenderTexture(const Texture2D& texture, const float x, const float y, const float width, const float height,const double angle) const
 {
 	SDL_Rect dst;
 	dst.x = static_cast<int>(x);
 	dst.y = static_cast<int>(y);
 	dst.w = static_cast<int>(width);
 	dst.h = static_cast<int>(height);
-	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
+	SDL_RenderCopyEx(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst, angle, nullptr, SDL_FLIP_NONE);
 }
- void dae::Renderer::RenderTexture(const Texture2D& texture, float x, float y, float width, float height,
-                                   const SDL_Rect& srcRect) const
+
+
+void dae::Renderer::RenderTexture(const Texture2D& texture, float x, float y, float width, float height,
+	const struct SDL_Rect& srcRect, const double angle) const
 {
-	 SDL_Rect dst;
-	 dst.x = static_cast<int>(x);
-	 dst.y = static_cast<int>(y);
-	 dst.w = static_cast<int>(width);
-	 dst.h = static_cast<int>(height);
-	 SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &dst);
+	SDL_Rect dst;
+	dst.x = static_cast<int>(x);
+	dst.y = static_cast<int>(y);
+	dst.w = static_cast<int>(width);
+	dst.h = static_cast<int>(height);
+	SDL_RenderCopyEx(GetSDLRenderer(), texture.GetSDLTexture(), &srcRect, &dst, angle,nullptr,SDL_FLIP_NONE);
 }
+
 
 void dae::Renderer::RenderRect(const struct SDL_Rect* rectangle) const
 {
+	SDL_SetRenderDrawColor(m_Renderer,100, 100, 100, 255);
 	SDL_RenderDrawRect(m_Renderer, rectangle);
 
 }
+void dae::Renderer::RenderRect(const struct SDL_Rect* rectangle, const SDL_Color color) const
+{
+	SDL_SetRenderDrawColor(m_Renderer, color.r, color.g, color.b, color.a);
+	SDL_RenderDrawRect(m_Renderer, rectangle);
+
+}
+
+
 
 glm::ivec2 dae::Renderer::GetWindowSize() const
 {

@@ -18,7 +18,7 @@ enum class InputType
 struct Action
 {
 	input::XBoxController::ControllerButton XButton;
-	SDL_Keycode key = 0;
+	SDL_Scancode key = SDL_SCANCODE_UNKNOWN;
 	Command* pCommand = nullptr;
 	InputType type = InputType::down;
 };

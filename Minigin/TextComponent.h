@@ -1,9 +1,8 @@
 ﻿#pragma once
 
 #include <SDL_pixels.h>
-
-#include "RenderComponent.h"
-
+#include "AllComponents.h"
+#include <memory>
 namespace dae
 {
 	class Font;

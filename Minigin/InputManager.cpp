@@ -68,7 +68,7 @@ void input::InputManager::Update()
 {
 	if (m_pController)
 	{
-		m_pController->Update();		
+		m_pController->Update();
 		ProcessInput();
 	}
 }
@@ -77,47 +77,25 @@ bool input::InputManager::ProcessInput()
 {
 
 
-	//keyboard...
-	//while (SDL_PollEvent(&e)) {
-	//	if (e.type == SDL_QUIT) {
-	//		return false;
-	//	}
-	//	if (e.type == SDL_KEYDOWN) {
-	//		std::cout << "key pressed" << std::endl;
-	//		if(e.key.keysym.sym == SDLK_w)
-	//		{
-	//			std::cout << "w pressed" << std::endl;
-	//		}
-	//	
-	//	}
-	//	if (e.type == SDL_MOUSEBUTTONDOWN) {
-	//		std::cout << "mouse pressed" << std::endl;
-	//	}
-	//	if (e.type == SDL_KEYUP)
-	//	{
-	//		std::cout << "Key up" << std::endl;
-	//	}
-	//}
-
-	const Uint8* keystate = SDL_GetKeyboardState(nullptr);
+	const Uint8* keyState = SDL_GetKeyboardState(NULL);
 	SDL_Event e;
 
-	while (SDL_PollEvent(&e))
+	while (SDL_PollEvent(&e) && keyState)
 	{
 		if (e.type == SDL_QUIT) {
 			return false;
 		}
 		for (std::list<Action>::iterator iter = m_Actions.begin(); iter != m_Actions.end() ;++iter)
 		{
-			if (e.type == SDL_KEYDOWN && iter->type == InputType::IsPressed && e.key.keysym.sym == iter->key)
+			if (e.type == SDL_KEYDOWN && iter->type == InputType::IsPressed && e.key.keysym.scancode == iter->key)
 			{
 				iter->pCommand->Execute();
 			}
-			if (e.type == SDL_KEYUP && iter->type == InputType::Up && e.key.keysym.sym == iter->key)
+			if (e.type == SDL_KEYUP && iter->type == InputType::Up && e.key.keysym.scancode == iter->key)
 			{
 				iter->pCommand->Execute();
 			}
-			if (keystate[iter->key] && iter->type == InputType::down)
+			if (keyState[ iter->key])
 			{
 				iter->pCommand->Execute();
 			}
@@ -148,7 +126,7 @@ bool input::InputManager::ProcessInput()
 		}
 		
 	}
-	
+
 	
 	return true;
 	

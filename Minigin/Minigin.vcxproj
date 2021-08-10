@@ -231,10 +231,10 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x64\*.dll" "$(OutputPath)" /R
     <ClInclude Include="Event.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FPS.h" />
-    <ClInclude Include="FPSRender.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="HealthBarComponent.h" />
     <ClInclude Include="healthComponent.h" />
+    <ClInclude Include="ActorHitBoxComponent.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="KeyBoardController.h" />
     <ClInclude Include="Locator.h" />
@@ -245,6 +245,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x64\*.dll" "$(OutputPath)" /R
     <ClInclude Include="Observer.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="ActorComponent.h" />
+    <ClInclude Include="ProjectileHitBoxComponent.h" />
     <ClInclude Include="RectComponent.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="resource.h" />
@@ -258,6 +259,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x64\*.dll" "$(OutputPath)" /R
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SoundSystem.h" />
     <ClInclude Include="SpriteComponent.h" />
+    <ClInclude Include="structs.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="TextComponent.h" />
     <ClInclude Include="Texture2D.h" />
@@ -312,10 +314,10 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x64\*.dll" "$(OutputPath)" /R
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FPS.cpp" />
-    <ClCompile Include="FPSRender.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="HealthBarComponent.cpp" />
     <ClCompile Include="healthComponent.cpp" />
+    <ClCompile Include="ActorHitBoxComponent.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="KeyBoardController.cpp" />
     <ClCompile Include="Locator.cpp" />
@@ -333,6 +335,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x64\*.dll" "$(OutputPath)" /R
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="ActorComponent.cpp" />
+    <ClCompile Include="ProjectileHitBoxComponent.cpp" />
     <ClCompile Include="RectComponent.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />

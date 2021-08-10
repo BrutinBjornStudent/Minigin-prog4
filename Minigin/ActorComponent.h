@@ -3,11 +3,11 @@
 #include "Subject.h"
 
 
+class ActorHitBoxComponent;
 
 class ActorComponent :
     public BaseComponent
 {
-
 public:
 	ActorComponent();
 	~ActorComponent();
@@ -28,19 +28,19 @@ public:
 	void MoveTo(float x, float y);
 	void Translate(float x, float y);
 	
-	void bindRenderCompToTransform(RenderComponent* toBind);
-	
+	void BindRenderComponent(RenderComponent* toBind);
+	void BindHitBoxComponent(ActorHitBoxComponent* toBind);
 	
 	glm::vec3 GetPosition() const { return m_transform.GetPosition(); };
 
 private:
 	Subject* m_actorChanged = nullptr;
 	RenderComponent* nm_pBoundRenderComp = nullptr;
-
+	ActorHitBoxComponent* nm_pBoundHitBox = nullptr;
 	dae::Transform m_transform;
 	glm::vec2 m_velocity;
 
-	float m_speed = 10.f;
+	float m_speed = 100.f;
 	
 	
 };

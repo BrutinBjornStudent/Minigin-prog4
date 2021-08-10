@@ -11,6 +11,8 @@ public:
 	void LoadGame() override;
 	void Update() override;
 private:
+
+	void LoadInputs();
 	std::shared_ptr<dae::GameObject> playerCharacter;
 };
 

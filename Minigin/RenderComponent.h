@@ -4,6 +4,7 @@
 #include "Transform.h"
 #include "Texture2D.h"
 #include "glm/vec2.hpp"
+#include "string"
 #include "SDL_rect.h"
 
 class RenderComponent : public BaseComponent
@@ -22,7 +23,7 @@ public:
 	{
 		if (m_pTexture)
 		{
-			const glm::vec3& pos = m_transform.GetPosition()+ glm ::vec3(m_offset,0);
+			const glm::vec3& pos = m_transform.GetPosition() + glm ::vec3(m_offset,0);
 
 			if (!m_IsSizeSet)
 				dae::Renderer::GetInstance().RenderTexture(*m_pTexture, pos.x, pos.y);			
@@ -37,10 +38,10 @@ public:
 	void SetPosition(glm::vec3 pos);
 	void SetSize(float x, float y);
 	void SetOffset(int x, int y);
+	void SetRotation(double rot) { m_Rotation = rot; };
 	void SetTexture(const std::string& filename);
 	void SetTexture(dae::Texture2D* texture2D);
 	void SetSourceRect(SDL_Rect rect);
-
 
 protected:
 	dae::Texture2D* m_pTexture = nullptr;
@@ -51,6 +52,7 @@ protected:
 	bool m_IsBoundToOtherComp = false;
 	glm::vec2 m_Size{0,0};
 	glm::vec2 m_offset{ 0,0 };
+	double m_Rotation = 0.0;
 
 };
 
