@@ -14,6 +14,7 @@ public:
 
 	void Render() const override {};
 	void SetXSprite(int x);
+	void NextSpriteX(int moveXAmount = 1);
 	void setYSprite(int y);
 
 private:

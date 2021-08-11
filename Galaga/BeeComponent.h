@@ -10,15 +10,14 @@ public:
 	void Update(const float deltatime) override ;
 
 	void LinkSpriteComp(SpriteComponent* SpriteManager) { nm_SpriteManager = SpriteManager; }
-	void LinkRenderComp(RenderComponent* RendererComp) { nm_pRenderer = RendererComp; }
 
 private:
+
+	SpriteComponent* nm_SpriteManager = nullptr;
 	
-	RenderComponent* nm_pRenderer;
-	SpriteComponent* nm_SpriteManager;
+	float m_NextSpriteTreshhold = 0.5f;
+	float m_SpriteElapsedTime = 0.0f;
 	
-	float m_NextSpriteTreshhold = 1.f;
-	float m_SpriteElapsedTime;
 
 	
 };

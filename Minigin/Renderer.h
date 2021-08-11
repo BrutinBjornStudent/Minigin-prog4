@@ -23,8 +23,8 @@ namespace dae
 
 		
 		void RenderTexture(const Texture2D& texture, float x, float y, const double angle = 0) const;
-		void RenderTexture(const Texture2D& texture, float x, float y, float width, float height ,const double angle = 0) const;
-		void RenderTexture(const Texture2D& texture, float x, float y, float width, float height, const SDL_Rect& srcRect, const double angle = 0) const;
+		void RenderTexture(const Texture2D& texture, float x, float y, int width, int height ,const double angle = 0) const;
+		void RenderTexture(const Texture2D& texture, float x, float y, int width, int height, const SDL_Rect& srcRect, const double angle = 0) const;
 
 		
 		void RenderRect(const SDL_Rect* rectangle) const;

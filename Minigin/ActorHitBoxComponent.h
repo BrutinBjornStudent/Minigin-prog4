@@ -16,7 +16,7 @@ public:
 
 private:
 	dae::Transform m_transform;
-	rect m_square;
+	Rect m_square;
 	
 	bool m_isBound;
 };

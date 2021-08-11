@@ -46,6 +46,9 @@
     <Filter Include="Source Files\GameObject">
       <UniqueIdentifier>{3f2adee4-3165-4e20-96c5-6c59ec7eebaa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Compoments\ActorComp\HitHurt">
+      <UniqueIdentifier>{1f25aa3c-b5f7-4db0-8f20-b29b27404354}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MiniginPCH.h">
@@ -192,6 +195,12 @@
     <ClInclude Include="structs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HitBoxComponent.h">
+      <Filter>Source Files\Compoments\ActorComp\HitHurt</Filter>
+    </ClInclude>
+    <ClInclude Include="HurtboxComponent.h">
+      <Filter>Source Files\Compoments\ActorComp\HitHurt</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MiniginPCH.cpp">
@@ -319,6 +328,12 @@
     </ClCompile>
     <ClCompile Include="ProjectileHitBoxComponent.cpp">
       <Filter>Source Files\Compoments\ActorComp</Filter>
+    </ClCompile>
+    <ClCompile Include="HitBoxComponent.cpp">
+      <Filter>Source Files\Compoments\ActorComp\HitHurt</Filter>
+    </ClCompile>
+    <ClCompile Include="HurtboxComponent.cpp">
+      <Filter>Source Files\Compoments\ActorComp\HitHurt</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

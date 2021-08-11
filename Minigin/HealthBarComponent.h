@@ -62,7 +62,7 @@ public:
 protected:
 	dae::Texture2D* m_pTexture = nullptr;
 	dae::Transform m_transform;
-	glm::vec2 m_Size;
+	glm::ivec2 m_Size;
 
 	HealthComponent* nm_pHealthComp;
 	Direction m_direction = Direction::horizontal;

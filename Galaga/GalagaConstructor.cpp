@@ -27,7 +27,7 @@ std::shared_ptr<dae::GameObject> objectConstructors::BeeEnemy(const std::string&
 	
 	auto texture = new RenderComponent();
 	texture->SetTexture(file);
-	//texture->SetSize(30, 30);
+	texture->SetSize(30, 30);
 	//texture->SetOffset(-5, -5);
 	SDL_Rect source;
 	source.x = 0;
@@ -35,15 +35,18 @@ std::shared_ptr<dae::GameObject> objectConstructors::BeeEnemy(const std::string&
 	source.h = 16;
 	source.w = 16;
 	texture->SetSourceRect(source);
-	texture->SetRotation(90.0);
+	texture->SetRotation(180.0);
+	
 	newBee->AddComponent(texture);
 
 
 	auto sprite = new SpriteComponent(texture, source, 2,1);
+	newBee->AddComponent(sprite);
 	
 	BeeComponent* beeComp = new BeeComponent();
+//	beeComp->LinkRenderComp(texture);
+	beeComp->LinkSpriteComp(sprite);
 	newBee->AddComponent(beeComp);
-
 	
 	ActorHitBoxComponent* hitbox = new ActorHitBoxComponent();
 	newBee->AddComponent(hitbox);

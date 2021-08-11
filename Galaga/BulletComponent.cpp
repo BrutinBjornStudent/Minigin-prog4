@@ -9,7 +9,7 @@ void BulletComponent::Update(const float deltatime)
 	m_transform.SetPosition(newpos);
 	if (nm_pBulletHitbox)
 	{
-		nm_pBulletHitbox;
+		
 	}
 
 	

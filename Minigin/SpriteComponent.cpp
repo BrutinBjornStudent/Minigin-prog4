@@ -22,6 +22,7 @@ void SpriteComponent::Update(const float)
 
 		m_source = SDL_Rect{ m_currentX * m_spritewidth, m_currentY * m_spriteheight,m_spritewidth,m_spriteheight };
 		nm_pRenderComp->SetSourceRect(m_source);
+	
 		
 	}
 }
@@ -31,6 +32,13 @@ void SpriteComponent::SetXSprite(int x)
 	m_needsUpdate = true;
 	
 	m_currentX = x % m_maxxSprites;
+}
+
+void SpriteComponent::NextSpriteX(int moveXAmount)
+{
+	m_needsUpdate;
+
+	m_currentX = (m_currentX + moveXAmount) % m_maxxSprites;
 }
 
 void SpriteComponent::setYSprite(int y)

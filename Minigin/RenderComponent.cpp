@@ -14,7 +14,7 @@ void RenderComponent::SetPosition(glm::vec3 pos)
 }
 
 
-void RenderComponent::SetSize(float x, float y)
+void RenderComponent::SetSize(int x, int y)
 {
 
 	m_IsSizeSet = true;
@@ -42,6 +42,7 @@ void RenderComponent::SetTexture(dae::Texture2D* texture2D)
 	if (m_pTexture)
 		delete m_pTexture;
 	m_pTexture = texture2D;
+	SDL_QueryTexture(m_pTexture->GetSDLTexture(), nullptr, nullptr, &m_Size.x, &m_Size.y);
 }
 
 void RenderComponent::SetSourceRect(SDL_Rect rect)

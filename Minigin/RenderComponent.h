@@ -26,17 +26,17 @@ public:
 			const glm::vec3& pos = m_transform.GetPosition() + glm ::vec3(m_offset,0);
 
 			if (!m_IsSizeSet)
-				dae::Renderer::GetInstance().RenderTexture(*m_pTexture, pos.x, pos.y);			
+				dae::Renderer::GetInstance().RenderTexture(*m_pTexture, pos.x, pos.y,m_Rotation);			
 			else if (!m_pSrcRect)
-				dae::Renderer::GetInstance().RenderTexture(*m_pTexture, pos.x, pos.y, m_Size.x, m_Size.y);
+				dae::Renderer::GetInstance().RenderTexture(*m_pTexture, pos.x, pos.y, m_Size.x, m_Size.y,m_Rotation);
 			else
-				dae::Renderer::GetInstance().RenderTexture(*m_pTexture, pos.x, pos.y, m_Size.x, m_Size.y,*m_pSrcRect);
+				dae::Renderer::GetInstance().RenderTexture(*m_pTexture, pos.x, pos.y, m_Size.x, m_Size.y,*m_pSrcRect,m_Rotation);
 		}
 	};
 	
 	void SetPosition(float x, float y, float z = 0);
 	void SetPosition(glm::vec3 pos);
-	void SetSize(float x, float y);
+	void SetSize(int x, int y);
 	void SetOffset(int x, int y);
 	void SetRotation(double rot) { m_Rotation = rot; };
 	void SetTexture(const std::string& filename);
@@ -50,7 +50,7 @@ protected:
 
 	bool m_IsSizeSet;
 	bool m_IsBoundToOtherComp = false;
-	glm::vec2 m_Size{0,0};
+	glm::ivec2 m_Size{0,0};
 	glm::vec2 m_offset{ 0,0 };
 	double m_Rotation = 0.0;
 

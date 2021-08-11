@@ -24,7 +24,7 @@ BoardComponent::BoardComponent( dae::Scene& currentScene, const glm::vec3& cente
 
 		auto texture = new RenderComponent();
 		texture->SetPosition(pos.x - radius, pos.y - radius);
-		texture->SetSize(float(width), float(height));
+		texture->SetSize((width), (height));
 		texture->SetSourceRect(SDL_Rect{ 0,160,32,32 });
 		texture->SetTexture(texturepath);
 

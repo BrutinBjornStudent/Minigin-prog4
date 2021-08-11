@@ -26,7 +26,7 @@ void GalagaEngine::LoadGame()
 	auto SpaceBackGround = objectConstructors::RenderObject("Galaga/SpaceBackground.png");
 	scene->Add(SpaceBackGround);
 	auto background = SpaceBackGround->GetComponent<RenderComponent>();
-	background->SetSize(float(size.x) / 3 * 2, float(size.y));
+	background->SetSize(size.x / 3 * 2, size.y);
 
 
 	//scoreBoard

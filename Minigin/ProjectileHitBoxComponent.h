@@ -17,6 +17,6 @@ public:
 	void SetPosition(glm::vec3 pos);
 private:
 	dae::Transform m_transform;
-	rect m_square;
+	Rect m_square;
 };
 
