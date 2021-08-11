@@ -20,8 +20,6 @@ namespace dae
 		void Render();
 		void Destroy();
 
-
-		
 		void RenderTexture(const Texture2D& texture, float x, float y, const double angle = 0) const;
 		void RenderTexture(const Texture2D& texture, float x, float y, int width, int height ,const double angle = 0) const;
 		void RenderTexture(const Texture2D& texture, float x, float y, int width, int height, const SDL_Rect& srcRect, const double angle = 0) const;

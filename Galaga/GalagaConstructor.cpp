@@ -5,30 +5,46 @@
 #include "ActorComponent.h"
 #include "AllComponents.h"
 #include "BeeComponent.h"
+#include "BulletComponent.h"
+#include "HitBoxComponent.h"
+#include "HitBoxManager.h"
+#include "HurtboxComponent.h"
 #include "ResourceManager.h"
 
 
-std::shared_ptr<dae::GameObject> objectConstructors::PlayerProjectile(const std::string& file)
+std::shared_ptr<dae::GameObject> objectConstructors::PlayerProjectile(const std::string& file,glm::ivec2 position)
 {
 	auto newObject = std::make_shared<dae::GameObject>();
 
 	auto texture = new RenderComponent();
 	texture->SetTexture(file);
-	texture->SetSize(10, 10);
-	texture->SetOffset(-5, -5);
+	texture->SetSize(30, 30);
+	texture->SetOffset(-15, -15);
+	texture->SetPosition(float(position.x),float(position.y),0);
+	newObject->AddComponent(texture);
 
-
+	auto HurtBox = new HurtboxComponent(position,glm::ivec2(30,30));
+	HurtBox->SetOffset(-15, -15);
+	HurtBox->SetSize(glm::ivec2(30,30));
+	newObject->AddComponent(HurtBox);
+	
+	BulletComponent* bulletLogic = new BulletComponent(position , glm::vec2(0.f,-10.f),texture,HurtBox);
+	newObject->AddComponent(bulletLogic);
+	
 	return newObject;
+
+
+	
 }
 
-std::shared_ptr<dae::GameObject> objectConstructors::BeeEnemy(const std::string& file, glm::vec2 position)
+std::shared_ptr<dae::GameObject> objectConstructors::BeeEnemy(const std::string& file, glm::ivec2 position)
 {
 	std::shared_ptr<dae::GameObject> newBee = std::make_shared<dae::GameObject>();
 	
 	auto texture = new RenderComponent();
 	texture->SetTexture(file);
 	texture->SetSize(30, 30);
-	//texture->SetOffset(-5, -5);
+
 	SDL_Rect source;
 	source.x = 0;
 	source.y = 0;
@@ -47,15 +63,16 @@ std::shared_ptr<dae::GameObject> objectConstructors::BeeEnemy(const std::string&
 //	beeComp->LinkRenderComp(texture);
 	beeComp->LinkSpriteComp(sprite);
 	newBee->AddComponent(beeComp);
+
 	
-	ActorHitBoxComponent* hitbox = new ActorHitBoxComponent();
+	HitBoxComponent* hitbox = new HitBoxComponent(Rect(position.x,position.y,30,30));
 	newBee->AddComponent(hitbox);
+	dae::HitBoxManager::GetInstance().addHitBox(hitbox);
 	
 	ActorComponent* actor = new ActorComponent();
 	newBee->AddComponent(actor);
-	actor->BindHitBoxComponent(hitbox);
 	actor->BindRenderComponent(texture);
-	actor->Translate(position.x,position.y);
+	actor->Translate(float(position.x),float(position.y));
 	
 	return newBee;
 	

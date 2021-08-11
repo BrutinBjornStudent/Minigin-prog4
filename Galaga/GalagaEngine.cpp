@@ -43,11 +43,7 @@ void GalagaEngine::LoadGame()
 	scene->Add(score);
 
 
-	
-	//SDL_SetRenderDrawColor(dae::Renderer::GetInstance().GetSDLRenderer(),255, 0, 0, 255);
 
-
-	
 	//player character
 	playerCharacter = objectConstructors::BasicActor(3);// qbert is 16 on 16 big on sprite sheet
 	playerCharacter->GetComponent<RenderComponent>()->SetTexture("Galaga/Player1_default.png");
@@ -65,11 +61,16 @@ void GalagaEngine::LoadGame()
 	Healthbar->GetComponent<HealthBarComponent>()->SetPosition(float(size.x / 3 * 2), float(size.y) + 40);
 	scene->Add(Healthbar);
 
-	LoadInputs();
 
 	//TestEnemy
 	auto TestEnemy = objectConstructors::BeeEnemy("Galaga/bee.png", glm::vec2(size.x / 3.f, 20.f));
 	scene->Add(TestEnemy);
+
+	// testProjectile
+	auto TestProjectile = objectConstructors::PlayerProjectile("Galaga/PlayerProjectile.png",
+		glm::ivec2(float(size.x / 3) + 10, float(size.y) - 40));
+	scene->Add(TestProjectile);
+	LoadInputs();
 	
 }
 

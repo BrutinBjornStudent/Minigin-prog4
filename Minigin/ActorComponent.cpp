@@ -88,13 +88,4 @@ void ActorComponent::Translate(float x, float y)
 	m_transform.SetPosition(x, y);
 }
 
-void ActorComponent::BindRenderComponent(RenderComponent* toBind)
-{
-	nm_pBoundRenderComp = toBind;
-	
-}
 
-void ActorComponent::BindHitBoxComponent(ActorHitBoxComponent* toBind)
-{
-	nm_pBoundHitBox = toBind;
-}

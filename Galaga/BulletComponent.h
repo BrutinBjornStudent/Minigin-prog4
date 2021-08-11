@@ -4,21 +4,25 @@
 
 #include "Transform.h"
 
+class HurtboxComponent;
+
+// Updates the position of the Texture/hurtbox.
 class BulletComponent :
     public BaseComponent
 {
 public:
-	BulletComponent(glm::vec2 position, glm::vec2 directon);
-
+	BulletComponent(glm::vec2 position, glm::vec2 directon, RenderComponent* renderRef, HurtboxComponent* hurtboxRef);
 	
 	void Render() const override {};
 	void Update(const float deltatime) override;
-	void SetHitBox(ProjectileHitBoxComponent* hitbox);
 	
 private:
+	RenderComponent* nm_pRenderComp;
+	HurtboxComponent* nm_pHurtboxComp;
+	
 	dae::Transform m_transform;
-	glm::vec3 m_Velocity;
-	ProjectileHitBoxComponent* nm_pBulletHitbox;
+	glm::vec2 m_Velocity;
+	
 	
 };
 

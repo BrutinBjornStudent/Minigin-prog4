@@ -201,6 +201,9 @@
     <ClInclude Include="HurtboxComponent.h">
       <Filter>Source Files\Compoments\ActorComp\HitHurt</Filter>
     </ClInclude>
+    <ClInclude Include="HitBoxManager.h">
+      <Filter>Source Files\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MiniginPCH.cpp">
@@ -334,6 +337,9 @@
     </ClCompile>
     <ClCompile Include="HurtboxComponent.cpp">
       <Filter>Source Files\Compoments\ActorComp\HitHurt</Filter>
+    </ClCompile>
+    <ClCompile Include="HitBoxManager.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

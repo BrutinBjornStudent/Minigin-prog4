@@ -43,6 +43,8 @@ void RenderComponent::SetTexture(dae::Texture2D* texture2D)
 		delete m_pTexture;
 	m_pTexture = texture2D;
 	SDL_QueryTexture(m_pTexture->GetSDLTexture(), nullptr, nullptr, &m_Size.x, &m_Size.y);
+
+	
 }
 
 void RenderComponent::SetSourceRect(SDL_Rect rect)

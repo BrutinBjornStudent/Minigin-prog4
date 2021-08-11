@@ -28,15 +28,14 @@ public:
 	void MoveTo(float x, float y);
 	void Translate(float x, float y);
 	
-	void BindRenderComponent(RenderComponent* toBind);
-	void BindHitBoxComponent(ActorHitBoxComponent* toBind);
+	void BindRenderComponent(RenderComponent* toBind) { nm_pBoundRenderComp = toBind; };
 	
 	glm::vec3 GetPosition() const { return m_transform.GetPosition(); };
 
 private:
 	Subject* m_actorChanged = nullptr;
 	RenderComponent* nm_pBoundRenderComp = nullptr;
-	ActorHitBoxComponent* nm_pBoundHitBox = nullptr;
+
 	dae::Transform m_transform;
 	glm::vec2 m_velocity;
 

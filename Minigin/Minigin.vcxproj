@@ -236,6 +236,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x64\*.dll" "$(OutputPath)" /R
     <ClInclude Include="healthComponent.h" />
     <ClInclude Include="ActorHitBoxComponent.h" />
     <ClInclude Include="HitBoxComponent.h" />
+    <ClInclude Include="HitBoxManager.h" />
     <ClInclude Include="HurtboxComponent.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="KeyBoardController.h" />
@@ -321,6 +322,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x64\*.dll" "$(OutputPath)" /R
     <ClCompile Include="healthComponent.cpp" />
     <ClCompile Include="ActorHitBoxComponent.cpp" />
     <ClCompile Include="HitBoxComponent.cpp" />
+    <ClCompile Include="HitBoxManager.cpp" />
     <ClCompile Include="HurtboxComponent.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="KeyBoardController.cpp" />

@@ -21,10 +21,16 @@ public:
 	
 	void Render() const override
 	{
+		SDL_Rect testRect;
+
 		if (m_pTexture)
 		{
 			const glm::vec3& pos = m_transform.GetPosition() + glm ::vec3(m_offset,0);
-
+			testRect.x = int(pos.x);
+			testRect.y = int(pos.y);
+			testRect.w = int(m_Size.x);
+			testRect.h = int(m_Size.y);
+			dae::Renderer::GetInstance().RenderRect(&testRect, SDL_Color{ 255,0,0,255 });
 			if (!m_IsSizeSet)
 				dae::Renderer::GetInstance().RenderTexture(*m_pTexture, pos.x, pos.y,m_Rotation);			
 			else if (!m_pSrcRect)
@@ -32,6 +38,7 @@ public:
 			else
 				dae::Renderer::GetInstance().RenderTexture(*m_pTexture, pos.x, pos.y, m_Size.x, m_Size.y,*m_pSrcRect,m_Rotation);
 		}
+		
 	};
 	
 	void SetPosition(float x, float y, float z = 0);
