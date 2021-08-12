@@ -1,6 +1,7 @@
 #include "MiniginPCH.h"
 #include "Scene.h"
 #include "GameObject.h"
+#include <algorithm>
 
 using namespace dae;
 
@@ -20,7 +21,20 @@ void Scene::Update(float deltatime)
 	for(auto& object : m_Objects)
 	{
 		object->Update(deltatime);
+
+		
 	}
+	for (int i = 0; i < m_Objects.size();++i)
+	{
+		if(m_Objects[i]->IsMarkedForDeletion())
+		{
+			m_Objects[i].swap(m_Objects.back());
+			m_Objects.pop_back();
+		}
+	}
+
+	
+	
 }
 
 void Scene::Render() const

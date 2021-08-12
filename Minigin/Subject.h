@@ -9,7 +9,8 @@
 class Subject 
 {
 public:
-	Subject() = default;
+	Subject():m_observers()
+	,m_numberObservers(0) {};
 	
 	void AddObserver(Observer* newObserver)
 	{
@@ -23,7 +24,7 @@ public:
 
 	}
 
-	void Notify(const Event event)
+	void Notify(const BaseComponent* event)
 	{
 		for (int i = 0; i < m_numberObservers; i++)
 		{
@@ -31,7 +32,7 @@ public:
 		}
 	}
 
-private:
+protected:
 	std::vector<Observer*> m_observers;
 	int m_numberObservers = 0;
 	

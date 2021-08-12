@@ -8,11 +8,11 @@ namespace dae
 	class HitBoxManager final : public Singleton<HitBoxManager>
 	{
 	public:
-		void Update();
-		void Render();
+		void Update() {};
+		void Render() {};
 		void addHitBox(HitBoxComponent* toAdd) { nm_pHitBoxes.push_back(toAdd); };
 		
-		const std::vector<HitBoxComponent*>& GetAllHitboxes() { return nm_pHitBoxes; }
+		const std::vector<HitBoxComponent*>& GetAllHitBoxes() { return nm_pHitBoxes; }
 	
 	private:
 		

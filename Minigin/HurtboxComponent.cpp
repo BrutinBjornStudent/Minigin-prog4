@@ -38,15 +38,20 @@ void HurtboxComponent::Update(const float )
 		m_rect.size.x = m_size.x - 2;
 		m_rect.size.y = m_size.y - 2;
 
-
-
 	}
-	auto &vectorRef = dae::HitBoxManager::GetInstance().GetAllHitboxes();
+	
+	m_hasHit = false;
+
+	auto &vectorRef = dae::HitBoxManager::GetInstance().GetAllHitBoxes();
 	for (int i = 0; i < vectorRef.size(); i++)
 	{
-		if(vectorRef[i]->IsSquareInThisHitBox(m_rect))
-		std::cout << "hurtbox is overlapping hitbox" << std::endl;
-		
+		if (vectorRef[i]->IsSquareInThisHitBox(m_rect))
+		{
+			std::cout << "hurtbox is overlapping hitbox" << std::endl;
+			m_hasHit = true;
+
+
+		}
 	}
 	
 
@@ -64,6 +69,13 @@ void HurtboxComponent::SetPosition(float x, float y, float z)
 	m_transform.SetPosition(x, y, z); 
 }
 
+void HurtboxComponent::SetSize(glm::ivec2 size)
+{
+	m_size.x = size.x;
+	m_size.y = size.y;
+	m_NeedsUpdate = true;
+}
+
 void HurtboxComponent::SetPosition(glm::vec3 pos)
 {
 	SetPosition(pos.x, pos.y, pos.z);
@@ -72,5 +84,9 @@ void HurtboxComponent::SetPosition(glm::vec3 pos)
 
 bool HurtboxComponent::IsOverlappingHitbox(HitBoxComponent* hitbox)
 {
-	return hitbox->IsSquareInThisHitBox(m_rect);
+
+	bool hit = hitbox->IsSquareInThisHitBox(m_rect);
+	if (hit)
+		m_hasHit = true;
+	return hit;
 }

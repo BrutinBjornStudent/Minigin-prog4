@@ -4,15 +4,19 @@
 #include <Windows.h>
 
 #include <Minigin.h>
+#include "GalagaObservers.h"
+
+
+
 class GalagaEngine :
     public dae::Minigin
 {
 public:
 	void LoadGame() override;
-	void Update() override;
-private:
 
-	void LoadInputs();
+private:
+	void LoadInputs() const;
 	std::shared_ptr<dae::GameObject> playerCharacter;
+	GalagaEnemyObserver m_EnemyObserver = 0;
 };
 

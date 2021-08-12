@@ -126,9 +126,6 @@
     <ClInclude Include="Observer.h">
       <Filter>Source Files\ObserverPattern</Filter>
     </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Source Files\ObserverPattern</Filter>
-    </ClInclude>
     <ClInclude Include="Subject.h">
       <Filter>Source Files\ObserverPattern</Filter>
     </ClInclude>
@@ -185,12 +182,6 @@
     </ClInclude>
     <ClInclude Include="RectComponent.h">
       <Filter>Source Files\Compoments\Graphical</Filter>
-    </ClInclude>
-    <ClInclude Include="ActorHitBoxComponent.h">
-      <Filter>Source Files\Compoments\ActorComp</Filter>
-    </ClInclude>
-    <ClInclude Include="ProjectileHitBoxComponent.h">
-      <Filter>Source Files\Compoments\ActorComp</Filter>
     </ClInclude>
     <ClInclude Include="structs.h">
       <Filter>Header Files</Filter>
@@ -272,9 +263,6 @@
     <ClCompile Include="Observer.cpp">
       <Filter>Source Files\ObserverPattern</Filter>
     </ClCompile>
-    <ClCompile Include="Event.cpp">
-      <Filter>Source Files\ObserverPattern</Filter>
-    </ClCompile>
     <ClCompile Include="Subject.cpp">
       <Filter>Source Files\ObserverPattern</Filter>
     </ClCompile>
@@ -325,12 +313,6 @@
     </ClCompile>
     <ClCompile Include="RectComponent.cpp">
       <Filter>Source Files\Compoments\Graphical</Filter>
-    </ClCompile>
-    <ClCompile Include="ActorHitBoxComponent.cpp">
-      <Filter>Source Files\Compoments\ActorComp</Filter>
-    </ClCompile>
-    <ClCompile Include="ProjectileHitBoxComponent.cpp">
-      <Filter>Source Files\Compoments\ActorComp</Filter>
     </ClCompile>
     <ClCompile Include="HitBoxComponent.cpp">
       <Filter>Source Files\Compoments\ActorComp\HitHurt</Filter>

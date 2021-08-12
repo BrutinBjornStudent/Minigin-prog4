@@ -61,6 +61,8 @@ std::shared_ptr<dae::GameObject> objectConstructors::BasicActor(int lives)
 	newObject->AddComponent(qbertcomp);
 	// end qbert
 
+
+	
 	//render
 	RenderComponent* renderComp = new RenderComponent();
 	newObject->AddComponent(renderComp);

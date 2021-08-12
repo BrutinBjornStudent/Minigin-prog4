@@ -124,12 +124,15 @@ void dae::Renderer::RenderRect(const struct SDL_Rect* rectangle) const
 {
 	SDL_SetRenderDrawColor(m_Renderer,100, 100, 100, 255);
 	SDL_RenderDrawRect(m_Renderer, rectangle);
+	SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
+	
 
 }
 void dae::Renderer::RenderRect(const struct SDL_Rect* rectangle, const SDL_Color color) const
 {
 	SDL_SetRenderDrawColor(m_Renderer, color.r, color.g, color.b, color.a);
 	SDL_RenderDrawRect(m_Renderer, rectangle);
+	SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
 
 }
 

@@ -16,7 +16,7 @@ public:
 	{
 		
 		m_score += score;
-		m_needsUpdate;
+		m_needsUpdate = true;
 	};
 	int GetScore()
 	{

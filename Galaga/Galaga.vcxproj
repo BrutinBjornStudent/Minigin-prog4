@@ -174,7 +174,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x86\*.dll" "$(OutputPath)" /R
     <ClCompile Include="GalagaConstructor.cpp" />
     <ClCompile Include="GalagaEngine.cpp" />
     <ClCompile Include="GalagaGame.cpp" />
-    <ClCompile Include="GalagaObserver.cpp" />
+    <ClCompile Include="GalagaObservers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Minigin\Minigin.vcxproj">
@@ -186,7 +186,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x86\*.dll" "$(OutputPath)" /R
     <ClInclude Include="BulletComponent.h" />
     <ClInclude Include="GalagaConstructor.h" />
     <ClInclude Include="GalagaEngine.h" />
-    <ClInclude Include="GalagaObserver.h" />
+    <ClInclude Include="GalagaObservers.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

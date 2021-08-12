@@ -182,6 +182,7 @@ void dae::Minigin::Update()
 	auto& sceneManager = SceneManager::GetInstance();
 	sceneManager.Update(m_pTimer->GetDeltaTime());
 
+	
 }
 
 void dae::Minigin::Render()
@@ -193,7 +194,7 @@ void dae::Minigin::Render()
 
 }
 
-void dae::Minigin::Cleanup()
+void dae::Minigin::PostCleanup() 
 {
 	delete m_pTimer;
 	//delete m_pInputManager;
@@ -223,7 +224,6 @@ void dae::Minigin::Run()
 		while (doContinue)
 		{
 
-
 			doContinue = input.ProcessInput();
 			Update();
 			Render();
@@ -241,5 +241,5 @@ void dae::Minigin::Run()
 		}
 	}
 
-	Cleanup();
+	PostCleanup();
 }

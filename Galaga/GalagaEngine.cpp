@@ -3,10 +3,11 @@
 
 #include "HealthBarComponent.h"
 #include "Locator.h"
-#include "ObjectConstructors.h"
-#include "GalagaConstructor.h"
-#include "AllComponents.h"
 
+#include "AllComponents.h"
+#include "CellComponent.h"
+#include "GalagaConstructor.h"
+#include "ObjectConstructors.h"
 
 
 void GalagaEngine::LoadGame()
@@ -16,12 +17,6 @@ void GalagaEngine::LoadGame()
 
 
 
-
-	//SDL_Color test = SDL_Color{100,100,0,255};
-	//auto cell = new CellComponent(glm::vec3(300, 200, 0), glm::ivec2(0, 0), test, 30);	
-	//obj->AddComponent(cell);
-	//scene->Add(obj);
-
 	//background
 	auto SpaceBackGround = objectConstructors::RenderObject("Galaga/SpaceBackground.png");
 	scene->Add(SpaceBackGround);
@@ -30,20 +25,26 @@ void GalagaEngine::LoadGame()
 
 
 	//scoreBoard
-	auto Stats = std::make_shared<dae::GameObject>();
-	auto* rect = new RectComponent();
+	auto ScoreBoard = std::make_shared<dae::GameObject>();
+	auto* StutusBoardBackground = new RectComponent();
 	
-	rect->SetPosition(size.x / 2, 0);
-	rect->SetSize(size.x / 2, 0);
-	Stats->AddComponent(rect);
-	scene->Add(Stats);
+	StutusBoardBackground->SetPosition(size.x / 2, 0);
+	StutusBoardBackground->SetSize(size.x / 2, 0);
+	ScoreBoard->AddComponent(StutusBoardBackground);
+	scene->Add(ScoreBoard);
+
+
+
 	//score
-	
 	auto score = objectConstructors::Score("lingua.otf", 12, "score:", 10, 70);
 	scene->Add(score);
 
+	auto scoreComp = score->GetComponent<ScoreComponent>();
+	m_EnemyObserver = GalagaEnemyObserver(scoreComp);
 
 
+
+	
 	//player character
 	playerCharacter = objectConstructors::BasicActor(3);// qbert is 16 on 16 big on sprite sheet
 	playerCharacter->GetComponent<RenderComponent>()->SetTexture("Galaga/Player1_default.png");
@@ -56,6 +57,7 @@ void GalagaEngine::LoadGame()
 	PlayerActor->BindRenderComponent(playerCharacter->GetComponent<RenderComponent>());
 
 	
+	
 	auto Healthbar = objectConstructors::LivesBar("Galaga/Player1_default.png", float(size.x/3 * 2 +20.f), float(size.y / 2 + 20.f), playerCharacter->GetComponent<HealthComponent>());
 	Healthbar->GetComponent<HealthBarComponent>()->SetSize({ 20,20 });
 	Healthbar->GetComponent<HealthBarComponent>()->SetPosition(float(size.x / 3 * 2), float(size.y) + 40);
@@ -65,6 +67,10 @@ void GalagaEngine::LoadGame()
 	//TestEnemy
 	auto TestEnemy = objectConstructors::BeeEnemy("Galaga/bee.png", glm::vec2(size.x / 3.f, 20.f));
 	scene->Add(TestEnemy);
+	auto BeeComp = TestEnemy->GetComponent<BeeComponent>();
+	BeeComp->GetSubject()->AddObserver(&m_EnemyObserver);
+
+	//
 
 	// testProjectile
 	auto TestProjectile = objectConstructors::PlayerProjectile("Galaga/PlayerProjectile.png",
@@ -75,7 +81,7 @@ void GalagaEngine::LoadGame()
 }
 
 
-void GalagaEngine::LoadInputs()
+void GalagaEngine::LoadInputs() const
 {
 	auto PlayerActor = playerCharacter->GetComponent<ActorComponent>();
 	// input Action
@@ -102,9 +108,8 @@ void GalagaEngine::LoadInputs()
 }
 
 
-void GalagaEngine::Update()
-{	
-	Minigin::Update();
 
-	
-}
+
+
+
+

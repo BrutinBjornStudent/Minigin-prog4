@@ -34,10 +34,6 @@ void dae::GameObject::Render() const
 	}
 }
 
-void dae::GameObject::SetRenderComponent(RenderComponent* rendComp)
-{
-	AddComponent(rendComp);	
-}
 
 //void dae::GameObject::SetTexture(const std::string& filename)
 //{

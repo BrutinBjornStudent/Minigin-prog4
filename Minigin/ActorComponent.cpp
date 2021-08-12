@@ -20,8 +20,6 @@ void ActorComponent::Update(float delta)
 	glm::vec2 position = m_transform.GetPosition();
 	//std::cout << position.x << ":" << position.y << ":actor pos" << std::endl;
 
-	//
-
 	
 	if (glm::length(m_velocity) > 0)
 	{
@@ -37,6 +35,11 @@ void ActorComponent::Update(float delta)
 		nm_pBoundRenderComp->SetPosition(m_transform.GetPosition());
 	}
 
+	if (nm_pHitboxComp != nullptr)
+	{
+		nm_pHitboxComp->SetPosition(m_transform.GetPosition());
+	}
+
 	//reset volocity
 	m_velocity = {0,0};
 }
@@ -49,8 +52,8 @@ void ActorComponent::Jump() const
 void ActorComponent::Die() const
 {
 	std::cout << "actor should dies" << std::endl;
-	if (m_actorChanged)
-		m_actorChanged->Notify( Event::player_Died);
+	//if (m_actorChanged)
+	//	m_actorChanged->Notify( Event::player_Died);
 }
 
 void ActorComponent::Fire() const
@@ -62,16 +65,16 @@ void ActorComponent::Duck() const
 {
 	std::cout << "actor ducks" << std::endl;
 
-	if (m_actorChanged)
-		m_actorChanged->Notify(Event::tile_color_change);
+	//if (m_actorChanged)
+	//	m_actorChanged->Notify(Event::tile_color_change);
 	
 }
 
 void ActorComponent::Fart() const
 {
 	std::cout << "actor stinks" << std::endl;
-	if (m_actorChanged)
-		m_actorChanged->Notify(Event::tile_color_change);
+	//if (m_actorChanged)
+	//	m_actorChanged->Notify(Event::tile_color_change);
 
 }
 

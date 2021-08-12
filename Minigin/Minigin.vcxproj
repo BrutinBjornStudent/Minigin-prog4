@@ -228,13 +228,11 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x64\*.dll" "$(OutputPath)" /R
     <ClInclude Include="AllComponents.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Component.h" />
-    <ClInclude Include="Event.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FPS.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="HealthBarComponent.h" />
     <ClInclude Include="healthComponent.h" />
-    <ClInclude Include="ActorHitBoxComponent.h" />
     <ClInclude Include="HitBoxComponent.h" />
     <ClInclude Include="HitBoxManager.h" />
     <ClInclude Include="HurtboxComponent.h" />
@@ -248,7 +246,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x64\*.dll" "$(OutputPath)" /R
     <ClInclude Include="Observer.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="ActorComponent.h" />
-    <ClInclude Include="ProjectileHitBoxComponent.h" />
     <ClInclude Include="RectComponent.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="resource.h" />
@@ -314,13 +311,11 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x64\*.dll" "$(OutputPath)" /R
     </ClCompile>
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Component.cpp" />
-    <ClCompile Include="Event.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="HealthBarComponent.cpp" />
     <ClCompile Include="healthComponent.cpp" />
-    <ClCompile Include="ActorHitBoxComponent.cpp" />
     <ClCompile Include="HitBoxComponent.cpp" />
     <ClCompile Include="HitBoxManager.cpp" />
     <ClCompile Include="HurtboxComponent.cpp" />
@@ -341,7 +336,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x64\*.dll" "$(OutputPath)" /R
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="ActorComponent.cpp" />
-    <ClCompile Include="ProjectileHitBoxComponent.cpp" />
     <ClCompile Include="RectComponent.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />

@@ -36,34 +36,34 @@
     <ClCompile Include="GalagaEngine.cpp">
       <Filter>game files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="GalagaObserver.cpp">
-      <Filter>game files\Engine\Observer</Filter>
-    </ClCompile>
-    <ClCompile Include="GalagaConstructor.cpp">
-      <Filter>game files\Engine\Components</Filter>
-    </ClCompile>
     <ClCompile Include="BulletComponent.cpp">
       <Filter>game files\Engine\Components</Filter>
     </ClCompile>
+    <ClCompile Include="GalagaConstructor.cpp">
+      <Filter>game files\Engine\Constructor</Filter>
+    </ClCompile>
     <ClCompile Include="BeeComponent.cpp">
-      <Filter>game files</Filter>
+      <Filter>game files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GalagaObservers.cpp">
+      <Filter>game files\Engine\Observer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GalagaEngine.h">
       <Filter>game files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="GalagaObserver.h">
-      <Filter>game files\Engine\Observer</Filter>
-    </ClInclude>
     <ClInclude Include="BulletComponent.h">
       <Filter>game files\Engine\Components</Filter>
     </ClInclude>
     <ClInclude Include="GalagaConstructor.h">
-      <Filter>game files\Engine\Components</Filter>
+      <Filter>game files\Engine\Constructor</Filter>
     </ClInclude>
     <ClInclude Include="BeeComponent.h">
-      <Filter>core files</Filter>
+      <Filter>game files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GalagaObservers.h">
+      <Filter>game files\Engine\Observer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

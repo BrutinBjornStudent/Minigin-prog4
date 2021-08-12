@@ -1,11 +1,10 @@
 #pragma once
 #include "Component.h"
+#include "HitBoxComponent.h"
 #include "Subject.h"
 
 
-class ActorHitBoxComponent;
-
-class ActorComponent :
+class ActorComponent final :
     public BaseComponent
 {
 public:
@@ -28,13 +27,15 @@ public:
 	void MoveTo(float x, float y);
 	void Translate(float x, float y);
 	
-	void BindRenderComponent(RenderComponent* toBind) { nm_pBoundRenderComp = toBind; };
+	void BindRenderComponent(RenderComponent* toBind) { nm_pBoundRenderComp = toBind; }
+	void BindHitBoxComponent(HitBoxComponent* toBind) { nm_pHitboxComp = toBind; }
 	
 	glm::vec3 GetPosition() const { return m_transform.GetPosition(); };
 
 private:
 	Subject* m_actorChanged = nullptr;
 	RenderComponent* nm_pBoundRenderComp = nullptr;
+	HitBoxComponent* nm_pHitboxComp = nullptr;
 
 	dae::Transform m_transform;
 	glm::vec2 m_velocity;

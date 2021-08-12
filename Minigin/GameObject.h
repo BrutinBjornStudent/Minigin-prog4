@@ -25,17 +25,17 @@ namespace dae
 		virtual void Update( const float Deltatime) ;
 		virtual void Render() const;
 
-
-		void SetRenderComponent(RenderComponent* rendComp);
-
+		bool IsMarkedForDeletion() { return m_MarkForDeletion; };
+		void MarkForDeletion(bool ShouldBeDeleted = true) { m_MarkForDeletion = ShouldBeDeleted; }
 		
 		template <typename T>
 		T* GetComponent();
 		void AddComponent(BaseComponent * myComponent);
-
 	protected:
 
 		std::vector<BaseComponent*> m_pComponents;
+		bool m_MarkForDeletion = false;
+		
 	};
 
 
