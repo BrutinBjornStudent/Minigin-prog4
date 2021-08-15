@@ -6,6 +6,7 @@
 
 #include "AllComponents.h"
 #include "CellComponent.h"
+#include "EnemySpawner.h"
 #include "GalagaConstructor.h"
 #include "ObjectConstructors.h"
 
@@ -65,10 +66,10 @@ void GalagaEngine::LoadGame()
 
 
 	//TestEnemy
-	auto TestEnemy = objectConstructors::BeeEnemy("Galaga/bee.png", glm::vec2(size.x / 3.f, 20.f));
-	scene->Add(TestEnemy);
-	auto BeeComp = TestEnemy->GetComponent<BeeComponent>();
-	BeeComp->GetSubject()->AddObserver(&m_EnemyObserver);
+	//auto TestEnemy = objectConstructors::BeeEnemy("Galaga/bee.png", glm::vec2(size.x / 3.f, 20.f));
+	//scene->Add(TestEnemy);
+	//auto BeeComp = TestEnemy->GetComponent<BeeComponent>();
+	//BeeComp->GetSubject()->AddObserver(&m_EnemyObserver);
 
 	//
 
@@ -76,6 +77,15 @@ void GalagaEngine::LoadGame()
 	auto TestProjectile = objectConstructors::PlayerProjectile("Galaga/PlayerProjectile.png",
 		glm::ivec2(float(size.x / 3) + 10, float(size.y) - 40));
 	scene->Add(TestProjectile);
+
+	auto EnemyManager = std::make_shared<dae::GameObject>();
+	EnemyManager->AddComponent(new EnemySpawner(glm::vec2(size.x / 3, 90), glm::vec2(30, 30),
+	                                            glm::vec2(size.x / 3 * 2, size.y), *scene));
+
+	scene->Add(EnemyManager);
+	
+	EnemyManager->GetComponent<EnemySpawner>()->SpawnEnemys();
+	
 	LoadInputs();
 	
 }

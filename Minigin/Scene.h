@@ -10,7 +10,7 @@ namespace dae
 		friend std::shared_ptr<Scene> SceneManager::CreateScene(const std::string& name);
 	public:
 		void Add(const std::shared_ptr<GameObject>& object);
-
+		void AddInRun(const std::shared_ptr<GameObject>& object);
 
 		
 		void Update(float deltatime);
@@ -27,6 +27,7 @@ namespace dae
 
 		std::string m_Name;
 		std::vector<std::shared_ptr<GameObject>> m_Objects{};
+		std::vector<std::shared_ptr<GameObject>> m_objectsInRun{};
 
 		static unsigned int m_IdCounter; 
 	};

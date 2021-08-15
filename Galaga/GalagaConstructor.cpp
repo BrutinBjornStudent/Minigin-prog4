@@ -5,6 +5,7 @@
 #include "ActorComponent.h"
 #include "AllComponents.h"
 #include "BeeComponent.h"
+#include "BezierMoveComponent.h"
 #include "BulletComponent.h"
 #include "HitBoxComponent.h"
 #include "HitBoxManager.h"
@@ -39,13 +40,13 @@ std::shared_ptr<dae::GameObject> objectConstructors::PlayerProjectile(const std:
 std::shared_ptr<dae::GameObject> objectConstructors::BeeEnemy(const std::string& file, glm::ivec2 position)
 {
 	auto newBee = std::make_shared<dae::GameObject>();
-	
+
+	//Texture
 	auto texture = new RenderComponent();
 	texture->SetTexture(file);
 	texture->SetSize(30, 30);
 	texture->SetOffset(-15, -15);
 	texture->SetRotation(180.0);
-
 	newBee->AddComponent(texture);
 
 
@@ -53,31 +54,40 @@ std::shared_ptr<dae::GameObject> objectConstructors::BeeEnemy(const std::string&
 	source.x = 0;
 	source.y = 0;
 	source.h = 16;
-	source.w = 16;
+	source.w = 16; //SpriteManager
 	auto sprite = new SpriteComponent(texture, source, 2,1);
 	newBee->AddComponent(sprite);
 
+
+	//Hitbox 
 	auto hitbox = new HitBoxComponent(position,glm::ivec2(30,30));
 	hitbox->SetSize(glm::vec2(30, 30));
 	hitbox->SetOffset(-15, -15);
 	dae::HitBoxManager::GetInstance().addHitBox(hitbox);
-
 	newBee->AddComponent(hitbox);
+
 	
-	
+	//ActorComponent
 	auto actor = new ActorComponent();
 	newBee->AddComponent(actor);
-
 	actor->BindRenderComponent(texture);
 	actor->BindHitBoxComponent(hitbox);
 	actor->Translate(float(position.x),float(position.y));
 	
-	
+	//BeeComponent
 	auto beeComp = new BeeComponent(*newBee);
 	newBee->AddComponent(beeComp);
-
-	beeComp->LinkSpriteComp(sprite);
+	beeComp->BindActorComp(actor);
+	beeComp->BindSpriteComp(sprite);
 	beeComp->BindHitBoxComponent(hitbox);
+	beeComp->BindSpriteComp(texture);
+
+	//BrazierComponent
+	auto Bazier = new BezierMoveComponent;
+	
+	newBee->AddComponent(Bazier);
+
+
 	
 	return newBee;
 	

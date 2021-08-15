@@ -48,6 +48,12 @@
     <ClCompile Include="GalagaObservers.cpp">
       <Filter>game files\Engine\Observer</Filter>
     </ClCompile>
+    <ClCompile Include="EnemySpawner.cpp">
+      <Filter>game files\Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="BezierMoveComponent.cpp">
+      <Filter>game files\Engine\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GalagaEngine.h">
@@ -64,6 +70,12 @@
     </ClInclude>
     <ClInclude Include="GalagaObservers.h">
       <Filter>game files\Engine\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpawner.h">
+      <Filter>game files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BezierMoveComponent.h">
+      <Filter>game files\Engine\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
