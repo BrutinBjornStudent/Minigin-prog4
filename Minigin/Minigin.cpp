@@ -15,6 +15,7 @@
 #pragma warning(disable:26812)
 #pragma warning(disable:26819)
 #include "HealthBarComponent.h"
+#include "JsonManager.h"
 #include "SDL.h"
 #include "SoundSystem.h"
 
@@ -212,6 +213,7 @@ void dae::Minigin::Run()
 	Initialize();
 	// tell the resource manager where he can find the game data
 	ResourceManager::GetInstance().Init("../Data/");
+	JsonManager::GetInstance().Init("../Data/");
 	float printTimer = 0.f;
 	LoadGame();
 	

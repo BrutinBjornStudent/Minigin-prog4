@@ -20,7 +20,7 @@ class EnemySpawner final:
 {
 public:
 	
-	EnemySpawner(glm::vec2 startCenterPos, glm::vec2 SizeOfEnemy, glm::vec2 WindowSize, dae::Scene& currentScene);
+	EnemySpawner(glm::vec2 startCenterPos, glm::vec2 SizeOfEnemy, glm::vec2 WindowSize, dae::Scene& currentScene, const std::string& file);
 
 	void Update(const float ) override;
 	void Render() const override {};
@@ -54,8 +54,8 @@ private:
 	int m_ToSpawn;
 	int m_CurrentWave = 0;
 	
-	float m_SpawnDelay;
-	float m_ELapsedSpawnDelay;
+	float m_SpawnDelay = 0.5f;
+	float m_ELapsedSpawnDelay = 0.f;
 
 	float m_NextWaveDelay = 2.f;
 	float m_ElapsedNextWave = 0.f;

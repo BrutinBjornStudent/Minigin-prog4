@@ -78,9 +78,11 @@ void GalagaEngine::LoadGame()
 		glm::ivec2(float(size.x / 3) + 10, float(size.y) - 40));
 	scene->Add(TestProjectile);
 
+
+	
 	auto EnemyManager = std::make_shared<dae::GameObject>();
 	EnemyManager->AddComponent(new EnemySpawner(glm::vec2(size.x / 3, 90), glm::vec2(30, 30),
-	                                            glm::vec2(size.x / 3 * 2, size.y), *scene));
+	                                            glm::vec2(size.x / 3 * 2, size.y), *scene,"Galaga/waves.json"));
 
 	scene->Add(EnemyManager);
 	
