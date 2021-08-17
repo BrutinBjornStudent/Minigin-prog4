@@ -86,9 +86,9 @@ std::shared_ptr<dae::GameObject> objectConstructors::BeeEnemy(const std::string&
 	beeComp->BindSpriteComp(texture);
 
 	//BrazierComponent
-	auto Bazier = new BezierMoveComponent;
+	//auto Bazier = new BezierMoveComponent;
 	
-	newBee->AddComponent(Bazier);
+	//newBee->AddComponent(Bazier);
 
 
 	

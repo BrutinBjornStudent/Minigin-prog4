@@ -20,17 +20,26 @@ public:
 
 	glm::vec2 GetPoint() const { return m_Point; }
 	glm::vec2 GetForward() const { return m_Forward; }
-	void SetPoints(std::vector<glm::vec2> points) { m_points = points; }
-	bool IsDone() { return m_running; }
-	
 
+	
+	void SetPoints(std::vector<glm::vec2> points) { m_points = points; }
+	void GenerateSegmentPoints(int segments);
+	
+	bool IsDone() { return m_running; }
 	void SetRun(bool running) { m_running = running; };
+
+
 private:
 	void CalculateBridges();
 	
 	std::vector<glm::vec2> m_points;
 	std::vector<glm::vec2> m_CurrentBridges;
 	std::vector<glm::vec2> m_NewBridges;
+
+	bool m_SegmentsMade;
+	std::vector<glm::vec2> m_SegmentPoints;
+	std::vector<glm::vec2> m_AverageSegmentPoints;
+	
 	glm::vec2 m_Point;
 	glm::vec2 m_Forward;
 	

@@ -76,7 +76,7 @@ void ActorComponent::Fart() const
 
 }
 
-void ActorComponent::MoveTo(float x, float y)
+void ActorComponent::SetVelocity(float x, float y)
 {
 	
 	m_velocity.x += x;

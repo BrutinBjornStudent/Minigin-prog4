@@ -20,34 +20,40 @@ class EnemySpawner final:
 {
 public:
 	
-	EnemySpawner(glm::vec2 startCenterPos, glm::vec2 SizeOfEnemy, glm::vec2 WindowSize, dae::Scene& currentScene, const std::string& file);
+	EnemySpawner(glm::vec2 startCenterPos, glm::vec2 SizeOfEnemy, glm::vec2 WindowSize, const std::string& file);
 
 	void Update(const float ) override;
 	void Render() const override {};
 
 	void SpawnEnemys();
-
-	void TestSpawn();
+	const std::vector<std::vector<glm::vec2>>& GetBazierPaths() { return m_BazierPaths; };
+	//void TestSpawn();
 
 private:
-	std::vector<dae::GameObject*> nm_pEnemys;
-	dae::Scene& nm_pCurrentScene;
+	glm::vec2 CalculateBridges(int currentSegment, int MaxSegments);
 	
+	std::vector<dae::GameObject*> nm_pEnemys;
 	std::vector<GridPos> m_Gridpositions;
-	std::vector<GridPos> m_FirstWave;
-	std::vector<GridPos> m_SecondWave;
-	std::vector<GridPos> m_thirdWave;
-	std::vector<GridPos> m_ForthWave;
-	std::vector<GridPos> m_FifthWave;
-
+	
 	std::vector<std::vector<GridPos>> m_Waves;
+	// keeps the Baziers to be used by the enemys.
 
+	
+	std::vector<std::vector<glm::vec2>> m_BaziersPoints;
+	std::vector<std::vector<glm::vec2>> m_BazierPaths;
+	
+	
 	glm::vec2 m_SizeOfEnemy;
 	glm::vec2 m_GameSize;
 	glm::vec2 m_startCenter;
 
+	//Bazier values
+	glm::vec2 m_Point;
+	std::vector<glm::vec2> m_SegmentPoints;
+	std::vector<glm::vec2> m_CurrentBridges;
+	std::vector<glm::vec2> m_NewBridges;
 
-
+	
 	
 	bool m_RunSpawnLoop;
 	int m_HasSpawnedCount;

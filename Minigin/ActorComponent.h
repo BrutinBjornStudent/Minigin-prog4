@@ -26,7 +26,7 @@ public:
 
 
 	
-	void MoveTo(float x, float y);
+	void SetVelocity(float x, float y);
 	void Translate(float x, float y);
 	
 	void BindRenderComponent(RenderComponent* toBind) { nm_pBoundRenderComp = toBind; }

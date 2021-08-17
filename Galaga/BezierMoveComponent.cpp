@@ -32,21 +32,34 @@ BezierMoveComponent::BezierMoveComponent(std::vector<glm::vec2>& points, float d
 {
 }
 
-void BezierMoveComponent::Update(const float deltatime)
+void BezierMoveComponent::Update(const float )
 {
-	if (m_running)
+	//if (m_running)
+	//{
+	//	m_ElapsedTime += deltatime;
+	//	m_CurrentBridges = m_points;
+	//	CalculateBridges();
+
+
+	//	if (m_ElapsedTime >= m_duration)
+	//	{
+	//		m_ElapsedTime = 0.f;
+	//		m_Done = true;
+	//		m_running = false;
+	//	}
+	//}
+}
+
+void BezierMoveComponent::GenerateSegmentPoints(int segments)
+{
+	m_SegmentPoints.clear();
+	m_SegmentsMade = true;
+	for (int i = 0; i < segments; i++)
 	{
-		m_ElapsedTime += deltatime;
-		m_CurrentBridges = m_points;
+		m_duration = 1.f;
+		m_ElapsedTime = float(i / segments);
 		CalculateBridges();
-
-
-		if (m_ElapsedTime >= m_duration)
-		{
-			m_ElapsedTime = 0.f;
-			m_Done = true;
-			m_running = false;
-		}
+		m_SegmentPoints.push_back(m_Point);
 	}
 }
 

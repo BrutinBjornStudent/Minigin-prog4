@@ -65,24 +65,10 @@ void GalagaEngine::LoadGame()
 	scene->Add(Healthbar);
 
 
-	//TestEnemy
-	//auto TestEnemy = objectConstructors::BeeEnemy("Galaga/bee.png", glm::vec2(size.x / 3.f, 20.f));
-	//scene->Add(TestEnemy);
-	//auto BeeComp = TestEnemy->GetComponent<BeeComponent>();
-	//BeeComp->GetSubject()->AddObserver(&m_EnemyObserver);
-
-	//
-
-	//// testProjectile
-	//auto TestProjectile = objectConstructors::Projectile("Galaga/PlayerProjectile.png",
-	//	glm::ivec2(float(size.x / 3) + 10, float(size.y) - 40));
-	//scene->Add(TestProjectile);
-
-
 	
 	auto EnemyManager = std::make_shared<dae::GameObject>();
 	EnemyManager->AddComponent(new EnemySpawner(glm::vec2(size.x / 3, 90), glm::vec2(30, 30),
-	                                            glm::vec2(size.x / 3 * 2, size.y), *scene,"Galaga/waves.json"));
+	                                            glm::vec2(size.x / 3 * 2, size.y), "Galaga/waves.json"));
 
 	scene->Add(EnemyManager);
 	
@@ -108,14 +94,14 @@ void GalagaEngine::LoadInputs() const
 	inputManager.AddAction(ShootAction);
 
 	Action MoveRight = Action();
-	MoveRight.pCommand = new MoveUnitCommand(PlayerActor,10.f,0.f );
-	MoveRight.type = InputType::IsPressed;
+	MoveRight.pCommand = new MoveUnitCommand(PlayerActor,100.f,0.f );
+	MoveRight.type = InputType::down;
 	MoveRight.key = SDL_SCANCODE_RIGHT;
 	inputManager.AddAction(MoveRight);
 
 	Action MoveLeft = Action();
-	MoveLeft.pCommand = new MoveUnitCommand(PlayerActor, -10.f, 0.f);
-	MoveLeft.type = InputType::IsPressed;
+	MoveLeft.pCommand = new MoveUnitCommand(PlayerActor, -100.f, 0.f);
+	MoveLeft.type = InputType::down;
 	MoveLeft.key = SDL_SCANCODE_LEFT;
 	inputManager.AddAction(MoveLeft);
 

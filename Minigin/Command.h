@@ -59,11 +59,11 @@ public:
 	{
 		m_xBefore = m_actor->GetPosition().x;
 		m_yBefore = m_actor->GetPosition().y;
-		m_actor->MoveTo(m_x, m_y);
+		m_actor->SetVelocity(m_x, m_y);
 		
 	};
 	
-	void Undo() { m_actor->MoveTo(m_xBefore, m_yBefore); };
+	void Undo() { m_actor->SetVelocity(m_xBefore, m_yBefore); };
 	
 
 private:

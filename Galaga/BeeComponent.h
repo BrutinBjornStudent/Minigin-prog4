@@ -37,18 +37,26 @@ public:
 	void BindSpriteComp(SpriteComponent* SpriteManager) { nm_SpriteManager = SpriteManager; }
 	void BindActorComp(ActorComponent* actorToLink) { nm_ActorComp = actorToLink; }
 	void BindHitBoxComponent(HitBoxComponent* HitBoxToLink) { nm_pHitbox = HitBoxToLink; };
-	void BindBezierComp(BezierMoveComponent* BezierToLink) { nm_pBazierMove = BezierToLink; }
+	void BindEnemySpawnerComp(EnemySpawner* SpawnerToLink) { nm_pEnemySpawner = SpawnerToLink; }
 	void BindSpriteComp(RenderComponent* RenderToLink) { nm_pRenderComp = RenderToLink; };
 	void SetState(BeeStates state) { m_BeeState = state; }
 	void SetScreenPosition(GridPos gridPos) { m_FieldPosition = gridPos; };
+	void SetBazierID(int BazierID) { m_BazierID = BazierID; };
+
+
 private:
 
+	glm::vec2 CheckAndSetNextBazierPoint();
 	dae::GameObject& nm_ParentRef;
 	SpriteComponent* nm_SpriteManager = nullptr; // sprite
 	RenderComponent* nm_pRenderComp = nullptr;
 	ActorComponent* nm_ActorComp = nullptr; // for moveCommands
 	HitBoxComponent* nm_pHitbox = nullptr; // hitbox
-	BezierMoveComponent* nm_pBazierMove = nullptr; // for movementPattern
+
+	EnemySpawner* nm_pEnemySpawner = nullptr;
+	int m_CurrentBazierPoint = 0;
+	int m_BazierID = 0;
+	
 	
 	Subject* m_BeeSubject = nullptr;
 
