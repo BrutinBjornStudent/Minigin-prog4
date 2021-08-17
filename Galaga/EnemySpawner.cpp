@@ -83,6 +83,9 @@ void EnemySpawner::Update(const float DeltaTime)
 		//if not finished spawning enemys of the current wave
 		if (m_HasSpawnedCount < m_ToSpawn)
 		{
+
+
+			
 			m_ELapsedSpawnDelay += DeltaTime; // add delay to to spawn;
 			if (m_ELapsedSpawnDelay > m_SpawnDelay) // treshhold reached
 			{
@@ -91,6 +94,8 @@ void EnemySpawner::Update(const float DeltaTime)
 				auto &pos = m_Waves[m_CurrentWave][m_HasSpawnedCount];
 				m_ELapsedSpawnDelay -= m_SpawnDelay;
 
+
+				
 				std::shared_ptr<dae::GameObject> newOb;
 				
 				if (pos.arrayPos.y == -2)

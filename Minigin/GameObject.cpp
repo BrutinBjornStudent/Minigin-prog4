@@ -49,5 +49,7 @@ void dae::GameObject::Render() const
 
 void dae::GameObject::AddComponent(BaseComponent* myComponent)
 {
+
+	
 	m_pComponents.push_back(myComponent);
 }

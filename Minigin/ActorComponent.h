@@ -3,7 +3,7 @@
 #include "HitBoxComponent.h"
 #include "Subject.h"
 
-
+// kan be bind to Render And Hitbox
 class ActorComponent final :
     public BaseComponent
 {
@@ -23,6 +23,8 @@ public:
 	void Fire() const;
 	void Duck() const;
 	void Fart() const;
+
+
 	
 	void MoveTo(float x, float y);
 	void Translate(float x, float y);

@@ -19,9 +19,7 @@ void ActorComponent::Update(float delta)
 {
 	glm::vec2 position = m_transform.GetPosition();
 	//std::cout << position.x << ":" << position.y << ":actor pos" << std::endl;
-
-	
-	if (glm::length(m_velocity) > 0)
+	if (glm::length(m_velocity) > 0.f)
 	{
 		glm::vec2 normalVec = glm::normalize(m_velocity);
 		position += m_speed * normalVec * delta;

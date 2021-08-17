@@ -54,6 +54,9 @@
     <ClCompile Include="BezierMoveComponent.cpp">
       <Filter>game files\Engine\Components</Filter>
     </ClCompile>
+    <ClCompile Include="GunComponent.cpp">
+      <Filter>game files\Engine\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GalagaEngine.h">
@@ -75,6 +78,12 @@
       <Filter>game files\Engine\Components</Filter>
     </ClInclude>
     <ClInclude Include="BezierMoveComponent.h">
+      <Filter>game files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GalagaCommand.h">
+      <Filter>game files\Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GunComponent.h">
       <Filter>game files\Engine\Components</Filter>
     </ClInclude>
   </ItemGroup>

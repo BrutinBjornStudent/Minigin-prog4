@@ -7,6 +7,7 @@
 #include "AllComponents.h"
 #include "CellComponent.h"
 #include "EnemySpawner.h"
+#include "GalagaCommand.h"
 #include "GalagaConstructor.h"
 #include "ObjectConstructors.h"
 
@@ -47,15 +48,14 @@ void GalagaEngine::LoadGame()
 
 	
 	//player character
-	playerCharacter = objectConstructors::BasicActor(3);// qbert is 16 on 16 big on sprite sheet
-	playerCharacter->GetComponent<RenderComponent>()->SetTexture("Galaga/Player1_default.png");
-	playerCharacter->GetComponent<RenderComponent>()->SetSize(30, 30);
-	playerCharacter->GetComponent<RenderComponent>()->SetOffset(-15, -15);
-	scene->Add(playerCharacter);
-	
+	playerCharacter = objectConstructors::GalagaPlayer("Galaga/Player1_default.png",glm::ivec2(30,30),3);// qbert is 16 on 16 big on sprite sheet
 	auto PlayerActor = playerCharacter->GetComponent<ActorComponent>();
+
 	PlayerActor->Translate(float(size.x / 3), float(size.y) - 40 );
 	PlayerActor->BindRenderComponent(playerCharacter->GetComponent<RenderComponent>());
+	
+	scene->Add(playerCharacter);
+
 
 	
 	
@@ -73,10 +73,10 @@ void GalagaEngine::LoadGame()
 
 	//
 
-	// testProjectile
-	auto TestProjectile = objectConstructors::PlayerProjectile("Galaga/PlayerProjectile.png",
-		glm::ivec2(float(size.x / 3) + 10, float(size.y) - 40));
-	scene->Add(TestProjectile);
+	//// testProjectile
+	//auto TestProjectile = objectConstructors::Projectile("Galaga/PlayerProjectile.png",
+	//	glm::ivec2(float(size.x / 3) + 10, float(size.y) - 40));
+	//scene->Add(TestProjectile);
 
 
 	
@@ -101,7 +101,8 @@ void GalagaEngine::LoadInputs() const
 
 	Action ShootAction = Action();
 
-	ShootAction.pCommand = new FireCommand(PlayerActor);
+	
+	ShootAction.pCommand = new ShootCommand(playerCharacter->GetComponent<GunComponent>());
 	ShootAction.type = InputType::IsPressed;
 	ShootAction.key = SDL_SCANCODE_Z;
 	inputManager.AddAction(ShootAction);
@@ -117,6 +118,8 @@ void GalagaEngine::LoadInputs() const
 	MoveLeft.type = InputType::IsPressed;
 	MoveLeft.key = SDL_SCANCODE_LEFT;
 	inputManager.AddAction(MoveLeft);
+
+	
 }
 
 

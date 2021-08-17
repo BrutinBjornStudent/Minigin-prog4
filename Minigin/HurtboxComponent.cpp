@@ -9,8 +9,10 @@
 #include "Renderer.h"
 
 
-HurtboxComponent::HurtboxComponent(glm::ivec2 pos, glm::ivec2 size)
+HurtboxComponent::HurtboxComponent(glm::ivec2 pos, glm::ivec2 size,int CollisionID)
 	:m_rect(pos.x,pos.y,size.x,size.y)
+	,m_size(size)
+	,m_ColisionID(CollisionID)
 {
 	
 }
@@ -45,7 +47,7 @@ void HurtboxComponent::Update(const float )
 	auto &vectorRef = dae::HitBoxManager::GetInstance().GetAllHitBoxes();
 	for (int i = 0; i < vectorRef.size(); i++)
 	{
-		if (vectorRef[i]->IsSquareInThisHitBox(m_rect))
+		if (vectorRef[i]->IsSquareInThisHitBox(m_rect,m_ColisionID))
 		{
 			std::cout << "hurtbox is overlapping hitbox" << std::endl;
 			m_hasHit = true;
@@ -85,7 +87,7 @@ void HurtboxComponent::SetPosition(glm::vec3 pos)
 bool HurtboxComponent::IsOverlappingHitbox(HitBoxComponent* hitbox)
 {
 
-	bool hit = hitbox->IsSquareInThisHitBox(m_rect);
+	bool hit = hitbox->IsSquareInThisHitBox(m_rect,m_ColisionID);
 	if (hit)
 		m_hasHit = true;
 	return hit;

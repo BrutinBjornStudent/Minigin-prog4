@@ -9,8 +9,9 @@
 #include "Renderer.h"
 #include "structs.h"
 
-HitBoxComponent::HitBoxComponent(glm::ivec2 pos, glm::ivec2 size)
+HitBoxComponent::HitBoxComponent(glm::ivec2 pos, glm::ivec2 size,int CollisionID)
 	:m_rect(pos.x, pos.y, size.x, size.y)
+	,m_CollisionID(CollisionID)
 {
 	//m_offset.x = m_rect.size.x / 2;
 	//m_offset.y = m_rect.size.y / 2;
@@ -74,9 +75,19 @@ bool HitBoxComponent::IsPointInThisHitbox(glm::ivec2 point)
 	
 }
 
-bool HitBoxComponent::IsSquareInThisHitBox(Rect rect)
+bool HitBoxComponent::IsSquareInThisHitBox(Rect rect,int CollisionID)
 {
-
+	if (m_gotHit)
+	{
+		return false;
+	}
+	
+	if (CollisionID != m_CollisionID)
+	{
+		m_gotHit = false;
+		return false;
+	}
+	
 	glm::ivec2 Cube1TL = m_rect.pos;
 	glm::ivec2 Cube1BR = m_rect.pos + m_rect.size;
 

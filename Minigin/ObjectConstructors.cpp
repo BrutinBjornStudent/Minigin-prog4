@@ -48,6 +48,8 @@ std::shared_ptr<dae::GameObject> objectConstructors::LivesBar(const std::string&
 	return newObject;
 }
 
+
+//creates HealthComp, ActorComp,RenderComp, and binds render to actor.
 std::shared_ptr<dae::GameObject> objectConstructors::BasicActor(int lives)
 {
 	auto newObject = std::make_shared<dae::GameObject>();
@@ -61,11 +63,11 @@ std::shared_ptr<dae::GameObject> objectConstructors::BasicActor(int lives)
 	newObject->AddComponent(qbertcomp);
 	// end qbert
 
-
-	
 	//render
 	RenderComponent* renderComp = new RenderComponent();
 	newObject->AddComponent(renderComp);
+	
+	qbertcomp->BindRenderComponent(renderComp);
 	// end render
 	return newObject;
 	

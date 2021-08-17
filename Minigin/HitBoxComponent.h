@@ -10,7 +10,7 @@ class HitBoxComponent :
 {
 public:
 	// creates the hitboxs and centers it.
-	HitBoxComponent(glm::ivec2 pos, glm::ivec2 size);
+	HitBoxComponent(glm::ivec2 pos, glm::ivec2 size, int CollisionID = -1);
 	
 	void Render() const override;
 	void Update(const float ) override;
@@ -29,7 +29,7 @@ public:
 	const Rect& GetRectangle() const { return m_rect; };
 
 	bool IsPointInThisHitbox(glm::ivec2 point);
-	bool IsSquareInThisHitBox(Rect rectangle);
+	bool IsSquareInThisHitBox(Rect rectangle, int CollisionID);
 
 private:
 	Rect m_rect;
@@ -37,6 +37,8 @@ private:
 	glm::ivec2 m_size;
 	dae::Transform m_transform;
 
+	int m_CollisionID = -1;
+	
 	bool m_NeedsUpdate = true;
 	bool m_gotHit = false;
 };

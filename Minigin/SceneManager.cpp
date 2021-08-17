@@ -22,5 +22,15 @@ std::shared_ptr<dae::Scene> dae::SceneManager::CreateScene(const std::string& na
 {
 	const auto scene = std::shared_ptr<Scene>(new Scene(name));
 	m_Scenes.push_back(scene);
+	m_ActiveScene = scene;
 	return (scene);
 }
+
+
+// returns last added Scene;
+std::shared_ptr<dae::Scene> dae::SceneManager::GetActiveScene() const
+{
+	return m_ActiveScene;
+}
+
+

@@ -10,7 +10,7 @@ class HurtboxComponent :
 public BaseComponent
 {
 public:
-	HurtboxComponent(glm::ivec2 pos, glm::ivec2 size);
+	HurtboxComponent(glm::ivec2 pos, glm::ivec2 size, int CollisionID = -1);
 	
 	void Render() const override;
 	void Update(const float deltatime) override;
@@ -30,6 +30,7 @@ private:
 	glm::ivec2 m_size;
 	dae::Transform m_transform;
 
+	int m_ColisionID = -1;
 	bool m_NeedsUpdate;
 	bool m_hasHit = false;
 };
