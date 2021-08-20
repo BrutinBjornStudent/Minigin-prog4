@@ -33,9 +33,9 @@ void GalagaEngine::LoadGame()
 	StutusBoardBackground->SetPosition(size.x / 2, 0);
 	StutusBoardBackground->SetSize(size.x / 2, 0);
 	ScoreBoard->AddComponent(StutusBoardBackground);
+	ScoreBoard->SetRenderLayer(2);
 	scene->Add(ScoreBoard);
-
-
+	
 
 	//score
 	auto score = objectConstructors::Score("lingua.otf", 12, "score:", 10, 70);
@@ -46,14 +46,11 @@ void GalagaEngine::LoadGame()
 
 
 
-	
 	//player character
 	playerCharacter = objectConstructors::GalagaPlayer("Galaga/Player1_default.png",glm::ivec2(30,30),3);// qbert is 16 on 16 big on sprite sheet
 	auto PlayerActor = playerCharacter->GetComponent<ActorComponent>();
-
 	PlayerActor->Translate(float(size.x / 3), float(size.y) - 40 );
 	PlayerActor->BindRenderComponent(playerCharacter->GetComponent<RenderComponent>());
-	
 	scene->Add(playerCharacter);
 
 
@@ -95,17 +92,18 @@ void GalagaEngine::LoadInputs() const
 
 	Action MoveRight = Action();
 	MoveRight.pCommand = new MoveUnitCommand(PlayerActor,100.f,0.f );
-	MoveRight.type = InputType::down;
+	MoveRight.type = InputType::IsPressed;
 	MoveRight.key = SDL_SCANCODE_RIGHT;
 	inputManager.AddAction(MoveRight);
 
 	Action MoveLeft = Action();
 	MoveLeft.pCommand = new MoveUnitCommand(PlayerActor, -100.f, 0.f);
-	MoveLeft.type = InputType::down;
+	MoveLeft.type = InputType::IsPressed;
 	MoveLeft.key = SDL_SCANCODE_LEFT;
 	inputManager.AddAction(MoveLeft);
 
-	
+
+		
 }
 
 

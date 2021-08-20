@@ -56,18 +56,15 @@ private:
 	EnemySpawner* nm_pEnemySpawner = nullptr;
 	int m_CurrentBazierPoint = 0;
 	int m_BazierID = 0;
-	
+	float m_NextBazierRange = 2.f;
 	
 	Subject* m_BeeSubject = nullptr;
-
-	//TODO: might not fit here;
-	std::vector<glm::vec2> m_PointsToFollow; // points to follow
 	GridPos m_FieldPosition; // grid position
 	
 	
-	BeeStates  m_BeeState = BeeStates::Spawning; // state
+	BeeStates m_BeeState = BeeStates::Spawning; // state
 	
-	float m_NextSpriteTreshhold = 0.5f;
+	float m_NextSpriteTreshhold = 5.f;
 	float m_SpriteElapsedTime = 0.0f;
 };
 

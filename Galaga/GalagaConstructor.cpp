@@ -23,13 +23,13 @@ std::shared_ptr<dae::GameObject> objectConstructors::Projectile(const std::strin
 	texture->SetTexture(file);
 	texture->SetSize(30, 30);
 	texture->SetOffset(-15, -15);
-	texture->SetPosition(float(position.x),float(position.y),0);
+	texture->SetPosition(static_cast<float>(position.x),static_cast<float>(position.y),0);
 	newObject->AddComponent(texture);
 
 	auto HurtBox = new HurtboxComponent(position,glm::ivec2(10,10),colision);
 	
 	HurtBox->SetOffset(-5, -5);
-	HurtBox->SetPosition(float(position.x),float(position.y),0);
+	HurtBox->SetPosition(static_cast<float>(position.x),static_cast<float>(position.y),0);
 	newObject->AddComponent(HurtBox);
 	
 	BulletComponent* bulletLogic = new BulletComponent(position , dir,texture,HurtBox,*newObject);
@@ -50,6 +50,7 @@ std::shared_ptr<dae::GameObject> objectConstructors::BeeEnemy(const std::string&
 	texture->SetSize(30, 30);
 	texture->SetOffset(-15, -15);
 	texture->SetRotation(180.0);
+	texture->SetPosition(static_cast<float>(position.x),static_cast<float>(position.y));
 	newBee->AddComponent(texture);
 
 
@@ -75,7 +76,7 @@ std::shared_ptr<dae::GameObject> objectConstructors::BeeEnemy(const std::string&
 	newBee->AddComponent(actor);
 	actor->BindRenderComponent(texture);
 	actor->BindHitBoxComponent(hitbox);
-	actor->Translate(float(position.x),float(position.y));
+	actor->Translate(static_cast<float>(position.x),static_cast<float>(position.y));
 	
 	//BeeComponent
 	auto beeComp = new BeeComponent(*newBee);
@@ -100,28 +101,27 @@ std::shared_ptr<dae::GameObject> objectConstructors::BeeEnemy(const std::string&
 // creates Basic actor and adds a GunComponent, HitBoxComponent
 std::shared_ptr<dae::GameObject> objectConstructors::GalagaPlayer(const std::string file, glm::ivec2 size, int lives)
 {
-	auto Galaga = BasicActor(lives);
-	Galaga->GetComponent<RenderComponent>()->SetTexture(file);
-	Galaga->GetComponent<RenderComponent>()->SetSize(size.x,size.y);
-	Galaga->GetComponent<RenderComponent>()->SetOffset(-int(size.x/2), -int(size.y/2));
+	auto galaga = BasicActor(lives);
+	galaga->GetComponent<RenderComponent>()->SetTexture(file);
+	galaga->GetComponent<RenderComponent>()->SetSize(size.x,size.y);
+	galaga->GetComponent<RenderComponent>()->SetOffset(-static_cast<int>(size.x / 2), -static_cast<int>(size.y / 2));
 
 
 	auto gun = new GunComponent();
-	gun->BindToActor(Galaga->GetComponent<ActorComponent>());
-	Galaga->AddComponent(gun);
+	gun->BindToActor(galaga->GetComponent<ActorComponent>());
+	galaga->AddComponent(gun);
 
 
-	
-	auto hitBox = new HitBoxComponent(glm::ivec2(0,0),glm::ivec2(30,30),Player);
-	Galaga->AddComponent(hitBox);
+	const auto hitBox = new HitBoxComponent(glm::ivec2(0,0),glm::ivec2(30,30),Player);
+	galaga->AddComponent(hitBox);
 	dae::HitBoxManager::GetInstance().addHitBox(hitBox);
-	Galaga->GetComponent<ActorComponent>()->BindHitBoxComponent(hitBox);
+	galaga->GetComponent<ActorComponent>()->BindHitBoxComponent(hitBox);
 
 
 	
 	
 	
-	return Galaga;
+	return galaga;
 }
 
 

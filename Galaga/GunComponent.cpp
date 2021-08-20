@@ -12,7 +12,7 @@ void GunComponent::Fire()
 
 		auto scene = dae::SceneManager::GetInstance().GetActiveScene();
 		
-		auto bullet =objectConstructors::Projectile("Galaga/PlayerProjectile.png", glm::vec2(pos.x, pos.y),Enemy,glm::vec2(0,-100));
+		auto bullet =objectConstructors::Projectile("Galaga/PlayerProjectile.png", glm::vec2(pos.x, pos.y),Enemy,glm::vec2(0,-300));
 
 		scene->AddInRun(bullet);
 	}

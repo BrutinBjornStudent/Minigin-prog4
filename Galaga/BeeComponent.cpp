@@ -51,7 +51,7 @@ void BeeComponent::Update(const float deltatime)
 		nm_ActorComp->SetVelocity(dir.x, dir.y);
 
 		nm_pRenderComp->SetRotation(atan2(dir.y, dir.x) * (180 / M_PI) + 90);
-		if (glm::length(target) < 0.5f)
+		if (glm::length(target) < m_NextBazierRange)
 		{
 			m_CurrentBazierPoint++;
 			m_BeeState = BeeStates::Move_Into_Field;
@@ -81,7 +81,7 @@ void BeeComponent::Update(const float deltatime)
 		nm_ActorComp->SetVelocity(dir.x,dir.y);
 
 		nm_pRenderComp->SetRotation(atan2(dir.y, dir.x) * (180 / M_PI) + 90);
-		if (glm::length(target) < 0.5f)
+		if (glm::length(target) < m_NextBazierRange)
 		{
 			m_BeeState = BeeStates::Stay_On_Spot;
 		}
@@ -112,7 +112,7 @@ glm::vec2 BeeComponent::CheckAndSetNextBazierPoint()
 	glm::vec2 target = nm_pEnemySpawner->GetBazierPaths()[m_BazierID][m_CurrentBazierPoint] -
 		glm::vec2(nm_ActorComp->GetPosition().x, nm_ActorComp->GetPosition().y);
 
-	if (glm::length(target) <= 0.5f && (nm_pEnemySpawner->GetBazierPaths()[m_BazierID].size() - 1) > m_CurrentBazierPoint)
+	if (glm::length(target) <= m_NextBazierRange && (nm_pEnemySpawner->GetBazierPaths()[m_BazierID].size() - 1) > m_CurrentBazierPoint)
 	{
 		m_CurrentBazierPoint++;
 		CheckAndSetNextBazierPoint();

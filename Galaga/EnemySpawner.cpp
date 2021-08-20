@@ -116,21 +116,21 @@ void EnemySpawner::Update(const float DeltaTime)
 				auto &pos = m_Waves[m_CurrentWave][m_HasSpawnedCount];
 				m_ELapsedSpawnDelay -= m_SpawnDelay;
 
-
+				auto startPos = m_BazierPaths[m_CurrentWave][0];
 				
 				std::shared_ptr<dae::GameObject> newOb;
 				
 				if (pos.arrayPos.y == -2)
 				{
-					 newOb = objectConstructors::BeeEnemy("Galaga/BossGalaga.png", glm::ivec2(m_GameSize.x / 2, 0));
+					 newOb = objectConstructors::BeeEnemy("Galaga/BossGalaga.png", glm::ivec2(startPos.x,startPos.y));
 				}
 				else if(pos.arrayPos.y <= 0)
 				{
-					newOb = objectConstructors::BeeEnemy("Galaga/butterfly.png", glm::ivec2(m_GameSize.x / 2, 0));		
+					newOb = objectConstructors::BeeEnemy("Galaga/butterfly.png", glm::ivec2(startPos));		
 				}
 				else
 				{
-					newOb = objectConstructors::BeeEnemy("Galaga/bee.png", glm::ivec2(m_GameSize.x / 2, 0));
+					newOb = objectConstructors::BeeEnemy("Galaga/bee.png", glm::ivec2(startPos));
 				}
 				//spawn Enemy
 
@@ -141,6 +141,7 @@ void EnemySpawner::Update(const float DeltaTime)
 				newOb->GetComponent<BeeComponent>()->SetScreenPosition(m_Waves[m_CurrentWave][m_HasSpawnedCount]);
 				newOb->GetComponent<BeeComponent>()->BindEnemySpawnerComp(this);
 				newOb->GetComponent<BeeComponent>()->SetBazierID(m_CurrentWave);
+				nm_pEnemys.push_back(newOb);
 				// Set Position on the grid7
 				m_HasSpawnedCount++;
 			}
@@ -166,7 +167,20 @@ void EnemySpawner::Update(const float DeltaTime)
 		
 	}
 
+	if (!m_RunSpawnLoop)
+	{
+		for(int i = 0; i < nm_pEnemys.size(); i++)
+		{
+			if(nm_pEnemys[i].expired())
+			{
+				nm_pEnemys[i].swap(nm_pEnemys.back());
+				nm_pEnemys.pop_back();
+			}
+		}
 
+		if (nm_pEnemys.empty())
+			SpawnEnemys();
+	}
 	
 }
 
@@ -174,7 +188,8 @@ void EnemySpawner::SpawnEnemys()
 {
 
 	m_RunSpawnLoop = true;
-	m_HasSpawnedCount = 0;	
+	m_HasSpawnedCount = 0;
+	m_CurrentWave = 0;
 }
 
 

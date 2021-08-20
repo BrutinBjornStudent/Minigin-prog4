@@ -44,6 +44,14 @@ void BulletComponent::Update(const float deltatime)
 	{
 		nm_pRenderComp->SetPosition(m_transform.GetPosition());
 	}
+
+
+	if (m_transform.GetPosition().y < 0)
+	{
+		nm_ParentRef.MarkForDeletion();
+	}
+	
+	
 	
 }
 

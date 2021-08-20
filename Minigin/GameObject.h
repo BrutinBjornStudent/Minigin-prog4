@@ -24,16 +24,28 @@ namespace dae
 
 		virtual void Update( const float Deltatime) ;
 		virtual void Render() const;
-
-		bool IsMarkedForDeletion() { return m_MarkForDeletion; };
-		void MarkForDeletion(bool ShouldBeDeleted = true) { m_MarkForDeletion = ShouldBeDeleted; }
 		
+		void SetRenderLayer(int Layer)
+		{
+			m_RenderLayerChanged = true;
+			m_RenderLayer = Layer;
+		};
+		bool isLayerChanged() { return m_RenderLayerChanged; };
+		void SetLayerChanged(bool Changed = false) { m_RenderLayerChanged = Changed; };
+		
+		void MarkForDeletion(bool ShouldBeDeleted = true) { m_MarkForDeletion = ShouldBeDeleted; }
+		bool IsMarkedForDeletion() { return m_MarkForDeletion; };
+		
+		int getRenderLayer() { return m_RenderLayer; };
 		template <typename T>
 		T* GetComponent();
 		void AddComponent(BaseComponent * myComponent);
 	protected:
 
 		std::vector<BaseComponent*> m_pComponents;
+
+		int m_RenderLayer = 0;
+		bool m_RenderLayerChanged = false;
 		bool m_MarkForDeletion = false;
 		
 	};

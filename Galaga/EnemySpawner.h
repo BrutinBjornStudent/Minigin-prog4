@@ -32,7 +32,7 @@ public:
 private:
 	glm::vec2 CalculateBridges(int currentSegment, int MaxSegments);
 	
-	std::vector<dae::GameObject*> nm_pEnemys;
+	std::vector<std::weak_ptr<dae::GameObject>> nm_pEnemys;
 	std::vector<GridPos> m_Gridpositions;
 	
 	std::vector<std::vector<GridPos>> m_Waves;
@@ -60,7 +60,7 @@ private:
 	int m_ToSpawn;
 	int m_CurrentWave = 0;
 	
-	float m_SpawnDelay = 0.5f;
+	float m_SpawnDelay = 0.15f;
 	float m_ELapsedSpawnDelay = 0.f;
 
 	float m_NextWaveDelay = 2.f;

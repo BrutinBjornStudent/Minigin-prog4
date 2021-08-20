@@ -15,8 +15,14 @@ public:
 	void LoadGame() override;
 
 private:
+
+	
 	void LoadInputs() const;
+
+	
 	std::shared_ptr<dae::GameObject> playerCharacter;
 	GalagaEnemyObserver m_EnemyObserver = 0;
+	glm::vec2 m_size;
+	
 };
 

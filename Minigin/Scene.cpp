@@ -23,26 +23,52 @@ void Scene::AddInRun(const std::shared_ptr<GameObject>& object)
 
 void Scene::Update(float deltatime)
 {
+	bool RunCleanup = false;
+	bool RunSort = false;
 	for (int i = 0; i < m_objectsInRun.size(); ++i)
 	{
 		m_Objects.push_back(m_objectsInRun[i]);
+		RunSort = true;
 	}
 	m_objectsInRun.clear();
-	
+
+
 	for(auto& object : m_Objects)
 	{
 		object->Update(deltatime);
-		
-	}
-	for (int i = 0; i < m_Objects.size();++i)
-	{
-		if(m_Objects[i]->IsMarkedForDeletion())
-		{
-			m_Objects[i].swap(m_Objects.back());
-			m_Objects.pop_back();
-		}
+		if (object->IsMarkedForDeletion())
+			RunCleanup = true;
+		if (object->isLayerChanged())
+			RunSort = true;
+
 	}
 
+	if (RunCleanup)
+	{
+		for (int i = 0; i < m_Objects.size(); ++i)
+		{
+			if(m_Objects[i]->IsMarkedForDeletion())
+			{
+				m_Objects[i].swap(m_Objects.back());
+				m_Objects.pop_back();
+			}
+		}		
+	}
+	
+	if (RunSort)
+	{
+		std::sort(m_Objects.begin(), m_Objects.end(), []
+		(const std::shared_ptr<dae::GameObject>& a, const std::shared_ptr<dae::GameObject>& b)
+			{
+				return a->getRenderLayer() < b->getRenderLayer();
+			});
+		for (auto& object : m_Objects)
+		{
+			object->SetLayerChanged();
+		}
+		
+	}
+	
 	
 	
 }

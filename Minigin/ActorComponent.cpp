@@ -15,7 +15,7 @@ ActorComponent::~ActorComponent()
 }
 
 // example of changing position
-void ActorComponent::Update(float delta)
+void ActorComponent::Update(const float delta)
 {
 	glm::vec2 position = m_transform.GetPosition();
 	//std::cout << position.x << ":" << position.y << ":actor pos" << std::endl;
@@ -39,7 +39,9 @@ void ActorComponent::Update(float delta)
 	}
 
 	//reset volocity
+
 	m_velocity = {0,0};
+	
 }
 
 void ActorComponent::Jump() const
@@ -78,7 +80,6 @@ void ActorComponent::Fart() const
 
 void ActorComponent::SetVelocity(float x, float y)
 {
-	
 	m_velocity.x += x;
 	m_velocity.y += y;
 	

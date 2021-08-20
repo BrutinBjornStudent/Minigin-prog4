@@ -24,7 +24,7 @@ public:
 	void Duck() const;
 	void Fart() const;
 
-
+	void SetSpeed(float newSpeed) { m_speed = newSpeed; };
 	
 	void SetVelocity(float x, float y);
 	void Translate(float x, float y);
@@ -42,8 +42,7 @@ private:
 	dae::Transform m_transform;
 	glm::vec2 m_velocity;
 
-	float m_speed = 100.f;
-	
+	float m_speed = 300.f;
 	
 };
 

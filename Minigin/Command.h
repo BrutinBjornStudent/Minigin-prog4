@@ -46,7 +46,6 @@ public:
 	void Execute() override { m_actor->Fart(); };
 private:
 	ActorComponent* m_actor;
-	
 };
 
 class MoveUnitCommand final : public Command
@@ -57,19 +56,13 @@ public:
 	
 	void Execute() override
 	{
-		m_xBefore = m_actor->GetPosition().x;
-		m_yBefore = m_actor->GetPosition().y;
 		m_actor->SetVelocity(m_x, m_y);
-		
 	};
-	
-	void Undo() { m_actor->SetVelocity(m_xBefore, m_yBefore); };
-	
 
 private:
 	ActorComponent* m_actor;
 	float m_x, m_y;
-	float m_xBefore, m_yBefore;
-	
 };
+
+
 

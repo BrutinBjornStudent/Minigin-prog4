@@ -87,7 +87,7 @@ bool input::InputManager::ProcessInput()
 		}
 		for (std::list<Action>::iterator iter = m_Actions.begin(); iter != m_Actions.end() ;++iter)
 		{
-			if (e.type == SDL_KEYDOWN && iter->type == InputType::IsPressed && e.key.keysym.scancode == iter->key)
+			if (e.type == SDL_KEYDOWN && iter->type == InputType::down && e.key.keysym.scancode == iter->key)
 			{
 				iter->pCommand->Execute();
 			}
@@ -95,7 +95,7 @@ bool input::InputManager::ProcessInput()
 			{
 				iter->pCommand->Execute();
 			}
-			if (keyState[ iter->key])
+			if (keyState[iter->key])
 			{
 				iter->pCommand->Execute();
 			}
