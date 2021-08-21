@@ -42,7 +42,7 @@ namespace dae
 		void AddComponent(BaseComponent * myComponent);
 	protected:
 
-		std::vector<BaseComponent*> m_pComponents;
+		std::vector<BaseComponent*> m_pComponents = std::vector<BaseComponent*>();
 
 		int m_RenderLayer = 0;
 		bool m_RenderLayerChanged = false;

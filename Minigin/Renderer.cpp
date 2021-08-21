@@ -136,6 +136,14 @@ void dae::Renderer::RenderRect(const struct SDL_Rect* rectangle, const SDL_Color
 
 }
 
+void dae::Renderer::RenderFullRect(const struct SDL_Rect* rect, const SDL_Color color) const
+{
+	SDL_SetRenderDrawColor(m_Renderer, color.r, color.g, color.b, color.a);
+	SDL_RenderFillRect(m_Renderer, rect);
+	SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
+
+}
+
 
 
 glm::ivec2 dae::Renderer::GetWindowSize() const

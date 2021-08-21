@@ -1,7 +1,9 @@
 #pragma once
-#include "BeeComponent.h"
+
 #include "Observer.h"
 
+
+class PlayerComponent;
 
 enum class GalagaEvent
 {
@@ -25,35 +27,25 @@ enum class GalagaEvent
 class GalagaEnemyObserver: public Observer
 {
 public:
-	GalagaEnemyObserver(ScoreComponent* Score): nm_pScoreComp(Score)
-	{
-	};
+	GalagaEnemyObserver(ScoreComponent* Score):
+	nm_pScoreComp(Score) {};
 
-	void onNotify(const BaseComponent* event) const override
-	{
-		if (dynamic_cast<const BeeComponent*>(event))
-		{
-			std::cout << "Observer recieved BeeComp" << std::endl;
-
-			auto beeVal = dynamic_cast<const BeeComponent*>(event);
-			
-			BeeStates state = beeVal->GetState();
-			if (state == BeeStates::dying)
-			{
-
-				nm_pScoreComp->AddScore(50);
-				std::cout << "recieved beeComp witchs is dying" << std::endl;
-				
-			}
-			
-		}
-		else
-		{
-			std::cout << "wrong component linked";
-		}
-			
-	};
+	void OnNotify(const BaseComponent* event) const override;
+	//};
 
 private:
 	ScoreComponent* nm_pScoreComp;
+};
+
+class GalagaPlayerObserver: public  Observer
+{
+public:
+	GalagaPlayerObserver(HealthComponent* health)
+		:nm_pHealthComp(health)
+	{};
+
+	void OnNotify(const BaseComponent* event) const override;
+private:
+	HealthComponent* nm_pHealthComp;
+	
 };

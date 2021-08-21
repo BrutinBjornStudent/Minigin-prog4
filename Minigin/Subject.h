@@ -28,7 +28,7 @@ public:
 	{
 		for (int i = 0; i < m_numberObservers; i++)
 		{
-			m_observers[i]->onNotify(event);
+			m_observers[i]->OnNotify(event);
 		}
 	}
 

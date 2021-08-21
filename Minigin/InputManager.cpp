@@ -76,12 +76,13 @@ void input::InputManager::Update()
 bool input::InputManager::ProcessInput()
 {
 
-
 	const Uint8* keyState = SDL_GetKeyboardState(NULL);
+	
 	SDL_Event e;
 
 	while (SDL_PollEvent(&e) && keyState)
 	{
+		
 		if (e.type == SDL_QUIT) {
 			return false;
 		}
@@ -95,10 +96,11 @@ bool input::InputManager::ProcessInput()
 			{
 				iter->pCommand->Execute();
 			}
-			if (keyState[iter->key])
+			if (keyState[iter->key] && iter->type == InputType::IsPressed)
 			{
 				iter->pCommand->Execute();
 			}
+
 
 		}
 	}

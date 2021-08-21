@@ -3,6 +3,7 @@
 
 #include "Component.h"
 #include "GameObject.h"
+#include "GalagaObservers.h"
 
 namespace dae {
 	class Scene;
@@ -20,20 +21,24 @@ class EnemySpawner final:
 {
 public:
 	
-	EnemySpawner(glm::vec2 startCenterPos, glm::vec2 SizeOfEnemy, glm::vec2 WindowSize, const std::string& file);
+	EnemySpawner(glm::vec2 startCenterPos, glm::vec2 SizeOfEnemy, glm::vec2 WindowSize, const GalagaEnemyObserver ObForEnemys,const std::string& file);
 
 	void Update(const float ) override;
 	void Render() const override {};
 
 	void SpawnEnemys();
 	const std::vector<std::vector<glm::vec2>>& GetBazierPaths() { return m_BazierPaths; };
-	//void TestSpawn();
+
 
 private:
 	glm::vec2 CalculateBridges(int currentSegment, int MaxSegments);
 	
 	std::vector<std::weak_ptr<dae::GameObject>> nm_pEnemys;
+	float m_TriggerEnemyAttack = 2.f;
+	float m_ElapsedTriggerAttack = 0.f;
+	
 	std::vector<GridPos> m_Gridpositions;
+	GalagaEnemyObserver m_EnemyObserver;
 	
 	std::vector<std::vector<GridPos>> m_Waves;
 	// keeps the Baziers to be used by the enemys.
@@ -55,6 +60,7 @@ private:
 
 	
 	
+	
 	bool m_RunSpawnLoop;
 	int m_HasSpawnedCount;
 	int m_ToSpawn;
@@ -63,7 +69,7 @@ private:
 	float m_SpawnDelay = 0.15f;
 	float m_ELapsedSpawnDelay = 0.f;
 
-	float m_NextWaveDelay = 2.f;
+	float m_NextWaveDelay = 1.f;
 	float m_ElapsedNextWave = 0.f;
 	
 };

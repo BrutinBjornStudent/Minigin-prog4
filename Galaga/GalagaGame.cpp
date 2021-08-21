@@ -19,7 +19,7 @@ int main()
 
 {
 	GalagaEngine engine;
-    std::cout << "Hello qbert!\n";
+
 	engine.Run();
 	
 }

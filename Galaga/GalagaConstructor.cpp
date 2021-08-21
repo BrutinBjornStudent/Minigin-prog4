@@ -4,7 +4,7 @@
 
 #include "ActorComponent.h"
 #include "AllComponents.h"
-#include "BeeComponent.h"
+#include "EnemyComponent.h"
 #include "BezierMoveComponent.h"
 #include "BulletComponent.h"
 #include "GunComponent.h"
@@ -40,7 +40,7 @@ std::shared_ptr<dae::GameObject> objectConstructors::Projectile(const std::strin
 	
 }
 
-std::shared_ptr<dae::GameObject> objectConstructors::BeeEnemy(const std::string& file, glm::ivec2 position)
+std::shared_ptr<dae::GameObject> objectConstructors::Enemy(const std::string& file, glm::ivec2 position, EnemyType type)
 {
 	auto newBee = std::make_shared<dae::GameObject>();
 
@@ -59,16 +59,21 @@ std::shared_ptr<dae::GameObject> objectConstructors::BeeEnemy(const std::string&
 	source.y = 0;
 	source.h = 16;
 	source.w = 16; //SpriteManager
-	auto sprite = new SpriteComponent(texture, source, 2,1);
+	auto sprite = new SpriteComponent(texture, source, 2,2);
 	newBee->AddComponent(sprite);
 
 
 	//Hitbox 
-	auto hitbox = new HitBoxComponent(position,glm::ivec2(30,30),Enemy);
+	auto hitbox = new HitBoxComponent(position,glm::ivec2(30,30),Collision_Id_Enemy);
 	hitbox->SetSize(glm::vec2(30, 30));
 	hitbox->SetOffset(-15, -15);
 	dae::HitBoxManager::GetInstance().addHitBox(hitbox);
 	newBee->AddComponent(hitbox);
+
+	auto hurtBox = new HurtboxComponent(position, glm::ivec2(20,20), Collision_Id_Player);
+	hurtBox->SetOffset(-10, -10);
+	newBee->AddComponent(hurtBox);
+	
 
 	
 	//ActorComponent
@@ -76,10 +81,11 @@ std::shared_ptr<dae::GameObject> objectConstructors::BeeEnemy(const std::string&
 	newBee->AddComponent(actor);
 	actor->BindRenderComponent(texture);
 	actor->BindHitBoxComponent(hitbox);
+	actor->BindHurtBoxComponent(hurtBox);
 	actor->Translate(static_cast<float>(position.x),static_cast<float>(position.y));
 	
 	//BeeComponent
-	auto beeComp = new BeeComponent(*newBee);
+	auto beeComp = new EnemyComponent(*newBee,type);
 	newBee->AddComponent(beeComp);
 	beeComp->BindActorComp(actor);
 	beeComp->BindSpriteComp(sprite);
@@ -112,7 +118,7 @@ std::shared_ptr<dae::GameObject> objectConstructors::GalagaPlayer(const std::str
 	galaga->AddComponent(gun);
 
 
-	const auto hitBox = new HitBoxComponent(glm::ivec2(0,0),glm::ivec2(30,30),Player);
+	const auto hitBox = new HitBoxComponent(glm::ivec2(0,0),glm::ivec2(30,30),Collision_Id_Player);
 	galaga->AddComponent(hitBox);
 	dae::HitBoxManager::GetInstance().addHitBox(hitBox);
 	galaga->GetComponent<ActorComponent>()->BindHitBoxComponent(hitBox);

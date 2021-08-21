@@ -52,6 +52,8 @@ void dae::Minigin::Initialize()
 	}
 
 
+	std::srand(unsigned int (std::time(nullptr)));
+	
 	Renderer::GetInstance().Init(m_pWindow);
 	m_pTimer = new FPSTimer();
 	m_pTimer->start();
@@ -69,8 +71,7 @@ void dae::Minigin::LoadGame()
 
 
 	//Locator::RegisterSoundSystem(new SDLSoundSystem());
-
-
+	
 	//auto& t1 = Locator::GetSoundSystem();
 
 
@@ -81,6 +82,7 @@ void dae::Minigin::LoadGame()
 	//t1.play(2, 1, "level Music 2.mp3");
 
 
+	
 	auto background = objectConstructors::RenderObject("background.jpg");
 	scene->Add(background);
 	

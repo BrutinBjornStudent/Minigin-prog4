@@ -24,6 +24,7 @@ public:
 	void SetSize(glm::ivec2 size) { m_size = size;  m_NeedsUpdate = true;};
 
 	bool IsHit() { return m_gotHit; };
+	void ResetHit(bool HitState = false) { m_gotHit = HitState; };
 	
 	const glm::ivec2 GetCenter() const { return m_rect.pos + m_offset; };
 	const Rect& GetRectangle() const { return m_rect; };

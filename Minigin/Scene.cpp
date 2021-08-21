@@ -25,6 +25,7 @@ void Scene::Update(float deltatime)
 {
 	bool RunCleanup = false;
 	bool RunSort = false;
+	
 	for (int i = 0; i < m_objectsInRun.size(); ++i)
 	{
 		m_Objects.push_back(m_objectsInRun[i]);
@@ -43,6 +44,8 @@ void Scene::Update(float deltatime)
 
 	}
 
+	
+
 	if (RunCleanup)
 	{
 		for (int i = 0; i < m_Objects.size(); ++i)
@@ -52,7 +55,8 @@ void Scene::Update(float deltatime)
 				m_Objects[i].swap(m_Objects.back());
 				m_Objects.pop_back();
 			}
-		}		
+		}
+		RunSort = true;
 	}
 	
 	if (RunSort)

@@ -1,13 +1,13 @@
-#include "BeeComponent.h"
+#include "EnemyComponent.h"
 
 #include <iostream>
 #include <glm/detail/func_geometric.inl>
 
-
+#include "math.h"
 #include "BezierMoveComponent.h"
 
 
-void BeeComponent::Update(const float deltatime)
+void EnemyComponent::Update(const float deltatime)
 {
 	if (nm_SpriteManager) // updates sprite
 	{		
@@ -18,33 +18,36 @@ void BeeComponent::Update(const float deltatime)
 			std::cout << "next sprite triggered" << std::endl;
 			nm_SpriteManager->NextSpriteX();
 		}
+		//nm_SpriteManager->setYSprite(m_lives);
+		
 	}
 	if (nm_pHitbox)
 	{
 		
 		if (nm_pHitbox->IsHit())
 		{
-			m_BeeState = BeeStates::dying;
-			nm_ParentRef.MarkForDeletion();
+			m_lives--;
+			if (m_lives >= 0)
+			{
+				m_BeeState = EnemyStates::dying;
+				nm_ParentRef.MarkForDeletion();				
+			}
+			else
+			{
+				nm_pHitbox->ResetHit();
+			}
 		}	
 	}
 
 	glm::vec2 target;
 	glm::vec2 dir;
-	
+
+	float rand;
+	glm::vec2 randoAangle;
 	switch (m_BeeState)
 	{
-	case BeeStates::Spawning:
+	case EnemyStates::Spawning:
 
-		// if spawning move onto screen
-		//nm_pBazierMove->SetRun(true);
-		//auto target = nm_pBazierMove->GetPoint(); // get current pos on the brazier
-		//nm_ActorComp->SetVelocity(0,1.f); // set Actor There,
-		//
-		//if (nm_ActorComp->GetPosition().y >= 30)
-		//{
-		//	m_BeeState = BeeStates::Move_to_ArraySpot;
-		//}
 		target = nm_pEnemySpawner->GetBazierPaths()[m_BazierID][0] - 
 			glm::vec2(nm_ActorComp->GetPosition().x, nm_ActorComp->GetPosition().y);
 		dir = glm::normalize(target);
@@ -54,11 +57,12 @@ void BeeComponent::Update(const float deltatime)
 		if (glm::length(target) < m_NextBazierRange)
 		{
 			m_CurrentBazierPoint++;
-			m_BeeState = BeeStates::Move_Into_Field;
+			m_BeeState = EnemyStates::Move_Into_Field;
 		}
 		break;
+
 		
-	case BeeStates::Move_Into_Field: // Follow Bazier points
+	case EnemyStates::Move_Into_Field: // Follow Bazier points
 
 
 		target = CheckAndSetNextBazierPoint();
@@ -69,32 +73,49 @@ void BeeComponent::Update(const float deltatime)
 		
 		if (m_CurrentBazierPoint == nm_pEnemySpawner->GetBazierPaths()[m_BazierID].size() - 1)
 		{
-			m_BeeState = BeeStates::Move_to_ArraySpot;
+			m_BeeState = EnemyStates::Move_to_ArraySpot;
 		}		
 		break;
 		
-	case BeeStates::Move_to_ArraySpot :
+	case EnemyStates::Move_to_ArraySpot :
 
 		target = m_FieldPosition.screenPos - glm::vec2(nm_ActorComp->GetPosition().x, nm_ActorComp->GetPosition().y);
-
 		dir = glm::normalize(target);
 		nm_ActorComp->SetVelocity(dir.x,dir.y);
 
 		nm_pRenderComp->SetRotation(atan2(dir.y, dir.x) * (180 / M_PI) + 90);
 		if (glm::length(target) < m_NextBazierRange)
 		{
-			m_BeeState = BeeStates::Stay_On_Spot;
+			m_BeeState = EnemyStates::Stay_On_Spot;
 		}
 		break;
 
-	case BeeStates::Stay_On_Spot:
+	case EnemyStates::Stay_On_Spot:
 
 		nm_ActorComp->SetVelocity(0, 0);
 		nm_pRenderComp->SetRotation(0);
 
 		break;
+
+	case EnemyStates::Dive_Bomb:
+
+		rand = static_cast <float> (std::rand()) / static_cast <float> (RAND_MAX) * 2 - 1.f;
+
+		//randoAangle = glm::vec2(cos(rand), sin(rand));
+
 		
-	case BeeStates::dying:
+		nm_ActorComp->SetVelocity(m_BombDirection.x,m_BombDirection.y);
+	
+		
+		nm_pRenderComp->SetRotation(atan2(m_BombDirection.y, m_BombDirection.x) * (180 / M_PI) + 90);
+		if (nm_ActorComp->GetPosition().y > m_GameSize.y)
+		{
+			nm_ActorComp->Translate(nm_ActorComp->GetPosition().x,-10);
+		}
+		break;
+		
+		
+	case EnemyStates::dying:
 
 		m_BeeSubject->Notify(this);
 		break;
@@ -107,7 +128,7 @@ void BeeComponent::Update(const float deltatime)
 	
 }
 
-glm::vec2 BeeComponent::CheckAndSetNextBazierPoint()
+glm::vec2 EnemyComponent::CheckAndSetNextBazierPoint()
 {
 	glm::vec2 target = nm_pEnemySpawner->GetBazierPaths()[m_BazierID][m_CurrentBazierPoint] -
 		glm::vec2(nm_ActorComp->GetPosition().x, nm_ActorComp->GetPosition().y);

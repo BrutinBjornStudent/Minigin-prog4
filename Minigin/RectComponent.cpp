@@ -26,5 +26,5 @@ void RectComponent::SetColor(SDL_Color color)
 
 void RectComponent::Render() const
 {	
-	dae::Renderer::GetInstance().RenderRect(&m_Rectangle,m_color);
+	dae::Renderer::GetInstance().RenderFullRect(&m_Rectangle,m_color);
 }

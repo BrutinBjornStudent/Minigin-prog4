@@ -28,6 +28,8 @@ namespace dae
 		void RenderRect(const SDL_Rect* rectangle) const;
 		void RenderRect(const SDL_Rect* rectangle, const SDL_Color color) const;
 
+		void RenderFullRect(const SDL_Rect* rect, const SDL_Color color) const;
+		
 		glm::ivec2 GetWindowSize() const;
 		SDL_Renderer* GetSDLRenderer() const { return m_Renderer; }
 	private:

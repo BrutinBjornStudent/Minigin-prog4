@@ -30,20 +30,22 @@ void GalagaEngine::LoadGame()
 	auto ScoreBoard = std::make_shared<dae::GameObject>();
 	auto* StutusBoardBackground = new RectComponent();
 	
-	StutusBoardBackground->SetPosition(size.x / 2, 0);
-	StutusBoardBackground->SetSize(size.x / 2, 0);
+	StutusBoardBackground->SetPosition(size.x / 3 * 2, 0);
+	StutusBoardBackground->SetSize(size.x / 3, size.y);
+	StutusBoardBackground->SetColor(SDL_Color{50,50,50,255});
+
 	ScoreBoard->AddComponent(StutusBoardBackground);
 	ScoreBoard->SetRenderLayer(2);
 	scene->Add(ScoreBoard);
 	
 
+	
 	//score
-	auto score = objectConstructors::Score("lingua.otf", 12, "score:", 10, 70);
+	auto score = objectConstructors::Score("lingua.otf", 12, "score:",float(size.x /4 * 3),float(size.y / 2));
 	scene->Add(score);
-
 	auto scoreComp = score->GetComponent<ScoreComponent>();
+	score->SetRenderLayer(3);
 	m_EnemyObserver = GalagaEnemyObserver(scoreComp);
-
 
 
 	//player character
@@ -52,23 +54,25 @@ void GalagaEngine::LoadGame()
 	PlayerActor->Translate(float(size.x / 3), float(size.y) - 40 );
 	PlayerActor->BindRenderComponent(playerCharacter->GetComponent<RenderComponent>());
 	scene->Add(playerCharacter);
-
+	
 
 	
 	
 	auto Healthbar = objectConstructors::LivesBar("Galaga/Player1_default.png", float(size.x/3 * 2 +20.f), float(size.y / 2 + 20.f), playerCharacter->GetComponent<HealthComponent>());
-	Healthbar->GetComponent<HealthBarComponent>()->SetSize({ 20,20 });
-	Healthbar->GetComponent<HealthBarComponent>()->SetPosition(float(size.x / 3 * 2), float(size.y) + 40);
+	Healthbar->GetComponent<HealthBarComponent>()->SetSize({ 30,30 });
+	Healthbar->GetComponent<HealthBarComponent>()->SetPosition(float(size.x / 3 * 2), float(size.y/2) + 40);
+	Healthbar->SetRenderLayer(3);
 	scene->Add(Healthbar);
+	
 
 
 	
 	auto EnemyManager = std::make_shared<dae::GameObject>();
 	EnemyManager->AddComponent(new EnemySpawner(glm::vec2(size.x / 3, 90), glm::vec2(30, 30),
-	                                            glm::vec2(size.x / 3 * 2, size.y), "Galaga/waves.json"));
+	                                            glm::vec2(size.x / 3 * 2, size.y), m_EnemyObserver, "Galaga/waves.json"));
 
-	scene->Add(EnemyManager);
 	
+	scene->Add(EnemyManager);
 	EnemyManager->GetComponent<EnemySpawner>()->SpawnEnemys();
 	
 	LoadInputs();
@@ -101,6 +105,25 @@ void GalagaEngine::LoadInputs() const
 	MoveLeft.type = InputType::IsPressed;
 	MoveLeft.key = SDL_SCANCODE_LEFT;
 	inputManager.AddAction(MoveLeft);
+
+
+	Action ShootActionController = Action();
+	ShootActionController.pCommand = new ShootCommand(playerCharacter->GetComponent<GunComponent>());
+	ShootActionController.XButton = input::XBoxController::ControllerButton::ButtonX;
+	ShootActionController.type = InputType::IsPressed;
+	inputManager.AddAction(ShootActionController);
+
+	Action MoveRightController = Action();
+	MoveRightController.pCommand = new MoveUnitCommand(PlayerActor, 100.f, 0.f);
+	MoveRightController.XButton = input::XBoxController::ControllerButton::ButtonRight;
+	MoveRightController.type = InputType::IsPressed;
+	inputManager.AddAction(MoveRightController);
+
+	Action MoveLeftController = Action();
+	MoveLeftController.pCommand = new MoveUnitCommand(PlayerActor, -100.f, 0.f);
+	MoveLeftController.XButton = input::XBoxController::ControllerButton::ButtonLeft;
+	MoveLeftController.type = InputType::IsPressed;
+	inputManager.AddAction(MoveLeftController);
 
 
 		

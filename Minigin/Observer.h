@@ -8,7 +8,7 @@
 class Observer
 {
 public:
-	virtual void onNotify(const BaseComponent* event) const = 0;
+	virtual void OnNotify(const BaseComponent* event) const = 0;
 };
 
 class QbertObserver: public Observer
@@ -16,7 +16,7 @@ class QbertObserver: public Observer
 public:
 
 	QbertObserver(HealthComponent* health):nm_pHealth(health) {};
-	void onNotify(const BaseComponent*)const override {} ;
+	void OnNotify(const BaseComponent*)const override {} ;
 
 
 private:
@@ -33,7 +33,7 @@ class ScoreObserver : public Observer
 public:
 	ScoreObserver(ScoreComponent* scoreComp):nm_pScore(scoreComp){};
 
-	void onNotify( const BaseComponent* ) const override
+	void OnNotify( const BaseComponent* ) const override
 	{
 		//switch (event)
 		//{

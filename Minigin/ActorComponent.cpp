@@ -1,5 +1,7 @@
 #include "MiniginPCH.h"
 #include "ActorComponent.h"
+
+#include "HurtboxComponent.h"
 #include "glm/geometric.hpp"
 
 ActorComponent::ActorComponent()
@@ -37,6 +39,8 @@ void ActorComponent::Update(const float delta)
 	{
 		nm_pHitboxComp->SetPosition(m_transform.GetPosition());
 	}
+	if (nm_pHurtBoxComp != nullptr)
+		nm_pHurtBoxComp->SetPosition(m_transform.GetPosition());
 
 	//reset volocity
 

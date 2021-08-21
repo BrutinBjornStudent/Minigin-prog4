@@ -5,26 +5,20 @@
 
 
 #include "ActorComponent.h"
-#include "BeeComponent.h"
+#include "EnemyComponent.h"
 #include "BezierMoveComponent.h"
 #include "GalagaConstructor.h"
 #include "JsonManager.h"
 #include "Scene.h"
 
 
-namespace  ns
-{
-	struct wave
-	{
-		int id;
-		int cells[8];
-	};
-}
 
 
-EnemySpawner::EnemySpawner(glm::vec2 startCenterPos, glm::vec2 SizeOfEnemy, glm::vec2 WindowSize, const std::string& file)
+
+EnemySpawner::EnemySpawner(glm::vec2 startCenterPos, glm::vec2 SizeOfEnemy, glm::vec2 WindowSize, const GalagaEnemyObserver ObForEnemys, const std::string& file)
 	: m_SizeOfEnemy(SizeOfEnemy)
 	, m_GameSize(WindowSize)
+	, m_EnemyObserver(ObForEnemys)
 	, m_RunSpawnLoop(false)
 	, m_HasSpawnedCount(0)
 	, m_ToSpawn(8)
@@ -122,25 +116,29 @@ void EnemySpawner::Update(const float DeltaTime)
 				
 				if (pos.arrayPos.y == -2)
 				{
-					 newOb = objectConstructors::BeeEnemy("Galaga/BossGalaga.png", glm::ivec2(startPos.x,startPos.y));
+					 newOb = objectConstructors::Enemy("Galaga/BossGalaga.png", glm::ivec2(startPos.x,startPos.y),EnemyType::Boss);
 				}
 				else if(pos.arrayPos.y <= 0)
 				{
-					newOb = objectConstructors::BeeEnemy("Galaga/butterfly.png", glm::ivec2(startPos));		
+					newOb = objectConstructors::Enemy("Galaga/butterfly.png", glm::ivec2(startPos),EnemyType::butterfly);		
 				}
 				else
 				{
-					newOb = objectConstructors::BeeEnemy("Galaga/bee.png", glm::ivec2(startPos));
+					newOb = objectConstructors::Enemy("Galaga/bee.png", glm::ivec2(startPos),EnemyType::bee);
 				}
 				//spawn Enemy
 
 				auto scene = dae::SceneManager::GetInstance().GetActiveScene();
 
 				scene->AddInRun(newOb);
-			
-				newOb->GetComponent<BeeComponent>()->SetScreenPosition(m_Waves[m_CurrentWave][m_HasSpawnedCount]);
-				newOb->GetComponent<BeeComponent>()->BindEnemySpawnerComp(this);
-				newOb->GetComponent<BeeComponent>()->SetBazierID(m_CurrentWave);
+				auto ob = newOb->GetComponent<EnemyComponent>();
+				ob->SetScreenPosition(m_Waves[m_CurrentWave][m_HasSpawnedCount]);
+				ob->BindEnemySpawnerComp(this);
+				ob->SetBazierID(m_CurrentWave);
+				ob->SetGameSize(m_GameSize);
+				
+	
+				ob->GetSubject()->AddObserver(&m_EnemyObserver);
 				nm_pEnemys.push_back(newOb);
 				// Set Position on the grid7
 				m_HasSpawnedCount++;
@@ -178,10 +176,45 @@ void EnemySpawner::Update(const float DeltaTime)
 			}
 		}
 
+		m_ElapsedTriggerAttack += DeltaTime;
+		if (m_ElapsedTriggerAttack > m_TriggerEnemyAttack)
+		{
+			m_ElapsedTriggerAttack -= m_TriggerEnemyAttack;
+
+
+			if (nm_pEnemys.size() > 0)
+			{
+				bool HasTriggeredAttack =false;
+				while (!HasTriggeredAttack)
+				{
+					int size = int(nm_pEnemys.size() - 1);
+
+					int enemyToAttack =  rand() % size;
+					auto val = nm_pEnemys[enemyToAttack].lock();
+					if (val)
+					{
+						
+						auto t = val->GetComponent<EnemyComponent>();
+						if (t)
+						{
+							t->SetState(EnemyStates::Dive_Bomb);
+							HasTriggeredAttack = true;
+						}
+					}
+				}
+			}
+			
+		}
+		
 		if (nm_pEnemys.empty())
 			SpawnEnemys();
+
+
+		
 	}
-	
+
+
+
 }
 
 void EnemySpawner::SpawnEnemys()
@@ -190,6 +223,7 @@ void EnemySpawner::SpawnEnemys()
 	m_RunSpawnLoop = true;
 	m_HasSpawnedCount = 0;
 	m_CurrentWave = 0;
+	m_ElapsedTriggerAttack = 0.f;
 }
 
 

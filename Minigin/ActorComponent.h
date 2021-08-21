@@ -3,6 +3,8 @@
 #include "HitBoxComponent.h"
 #include "Subject.h"
 
+class HurtboxComponent;
+
 // kan be bind to Render And Hitbox
 class ActorComponent final :
     public BaseComponent
@@ -31,6 +33,7 @@ public:
 	
 	void BindRenderComponent(RenderComponent* toBind) { nm_pBoundRenderComp = toBind; }
 	void BindHitBoxComponent(HitBoxComponent* toBind) { nm_pHitboxComp = toBind; }
+	void BindHurtBoxComponent(HurtboxComponent* toBind) { nm_pHurtBoxComp = toBind; }
 	
 	glm::vec3 GetPosition() const { return m_transform.GetPosition(); };
 
@@ -38,6 +41,7 @@ private:
 	Subject* m_actorChanged = nullptr;
 	RenderComponent* nm_pBoundRenderComp = nullptr;
 	HitBoxComponent* nm_pHitboxComp = nullptr;
+	HurtboxComponent* nm_pHurtBoxComp = nullptr;
 
 	dae::Transform m_transform;
 	glm::vec2 m_velocity;
