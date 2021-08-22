@@ -41,7 +41,7 @@ private:
 	std::vector<std::weak_ptr<dae::GameObject>> nm_pEnemys;
 
 	bool m_IsTriggeringAttack = true;
-	float m_TriggerEnemyAttack = 2.f;
+	float m_TriggerEnemyAttack = 1.f;
 	float m_ElapsedTriggerAttack = 0.f;
 
 	

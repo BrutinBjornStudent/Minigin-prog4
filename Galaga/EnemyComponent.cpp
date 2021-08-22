@@ -3,7 +3,7 @@
 #include <iostream>
 #include <glm/detail/func_geometric.inl>
 
-#include "math.h"
+
 #include "BezierMoveComponent.h"
 
 

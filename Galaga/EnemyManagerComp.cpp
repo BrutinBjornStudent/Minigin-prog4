@@ -187,7 +187,7 @@ void EnemyManagerComp::Update(const float DeltaTime)
 			{
 				int trys = 0;
 				bool HasTriggeredAttack =false;
-				while (!HasTriggeredAttack && trys > 0)
+				while (!HasTriggeredAttack && trys < 5)
 				{
 					int size = int(nm_pEnemys.size());
 					trys++;

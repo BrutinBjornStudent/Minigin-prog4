@@ -53,7 +53,7 @@ void GalagaEngine::LoadGame()
 	scene->Add(ScoreBoard);
 	
 	//score
-	auto score = objectConstructors::Score("lingua.otf", 12, "score:",float(size.x /4 * 3),float(size.y / 2));
+	auto score = objectConstructors::Score("lingua.otf", 20, "score:",float(size.x /4 * 3),float(size.y / 2));
 	scene->Add(score);
 	
 	auto scoreComp = score->GetComponent<ScoreComponent>();
