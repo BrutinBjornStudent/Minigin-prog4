@@ -64,7 +64,7 @@ void EnemyComponent::Update(const float deltatime)
 
 		nm_pRenderComp->SetRotation(atan2(dir.y, dir.x) * (180 / M_PI) + 90);
 		
-		if (m_CurrentBazierPoint == m_BazierPattern.size() - 1)
+		if (m_CurrentBazierPoint == int(m_BazierPattern.size() - 1))
 		{
 			m_BeeState = EnemyStates::Move_to_ArraySpot;
 		}		
@@ -100,7 +100,7 @@ void EnemyComponent::Update(const float deltatime)
 
 	case EnemyStates::Diving:
 
-		if (m_CurrentBazierPoint < m_BazierPattern.size() - 1)
+		if (m_CurrentBazierPoint < int(m_BazierPattern.size() - 1))
 		{
 			target = CheckAndSetNextBazierPoint();
 			dir = glm::normalize(target);
@@ -143,7 +143,7 @@ glm::vec2 EnemyComponent::CheckAndSetNextBazierPoint()
 	glm::vec2 target = m_BazierPattern[m_CurrentBazierPoint] -
 		glm::vec2(nm_ActorComp->GetPosition().x, nm_ActorComp->GetPosition().y);
 
-	if (glm::length(target) <= m_NextBazierRange && (m_BazierPattern.size() - 1) > m_CurrentBazierPoint)
+	if (glm::length(target) <= m_NextBazierRange && int(m_BazierPattern.size() - 1) > m_CurrentBazierPoint)
 	{
 		m_CurrentBazierPoint++;
 		CheckAndSetNextBazierPoint();

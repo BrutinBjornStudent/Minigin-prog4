@@ -73,12 +73,12 @@ EnemyManagerComp::EnemyManagerComp(glm::vec2 startCenterPos, glm::vec2 SizeOfEne
 		}
 
 		std::vector<GridPos> GridWave;
-		for (int i = 0; i < integerWave.size(); i++)
+		for (int i = 0; i < int(integerWave.size()); i++)
 			GridWave.push_back(m_Gridpositions[integerWave[i]]);
 		m_Waves.push_back(GridWave);	
 	}
 
-	for (int Baziers = 0; Baziers < m_BaziersPoints.size(); Baziers++)
+	for (int Baziers = 0; Baziers < int(m_BaziersPoints.size()); Baziers++)
 	{
 		std::vector<glm::vec2> newPath;
 		for (int segments = 0; segments <= 20; segments++)
@@ -148,7 +148,7 @@ void EnemyManagerComp::Update(const float DeltaTime)
 		} 
 		else // spawned all of wave
 		{
-			if (m_CurrentWave == m_Waves.size() - 1) // if al waves spawend: stop
+			if (m_CurrentWave == int(m_Waves.size() - 1)) // if al waves spawend: stop
 			{
 				m_RunSpawnLoop = false;
 			}
@@ -168,7 +168,7 @@ void EnemyManagerComp::Update(const float DeltaTime)
 
 	if (!m_RunSpawnLoop)
 	{
-		for(int i = 0; i < nm_pEnemys.size(); i++)
+		for(int i = 0; i < int(nm_pEnemys.size()); i++)
 		{
 			if(nm_pEnemys[i].expired())
 			{
@@ -215,7 +215,7 @@ void EnemyManagerComp::Update(const float DeltaTime)
 		if (!m_IsTriggeringAttack)
 		{
 			bool EnemysInPosition = true;
-			for (int i = 0; i < nm_pEnemys.size(); i++)
+			for (int i = 0; i <int( nm_pEnemys.size()); i++)
 			{
 				auto val = nm_pEnemys[i].lock();
 				if (val->GetComponent<EnemyComponent>()->GetState() != EnemyStates::Stay_On_Spot)
@@ -267,7 +267,7 @@ glm::vec2 EnemyManagerComp::CalculateBridges(int currentSegment, int MaxSegments
 	}
 	else
 	{
-		for (int i = 0; i < m_CurrentBridges.size() - 1; i++)
+		for (int i = 0; i < int(m_CurrentBridges.size() - 1); i++)
 		{
 			m_NewBridges.push_back((1 - devision) * m_CurrentBridges[i] + devision * m_CurrentBridges[i + 1]);
 		}

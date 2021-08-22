@@ -80,7 +80,7 @@ void BezierMoveComponent::CalculateBridges()
 	}
 	else
 	{
-		for (int i = 0; i < m_CurrentBridges.size() - 1;i++)
+		for (int i = 0; i < int(m_CurrentBridges.size() - 1);i++)
 		{
 			m_NewBridges.push_back((1- m_Devision)* m_CurrentBridges[i] + m_Devision * m_CurrentBridges[i+1]);
 		}

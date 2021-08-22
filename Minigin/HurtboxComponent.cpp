@@ -45,7 +45,7 @@ void HurtboxComponent::Update(const float )
 	m_hasHit = false;
 
 	auto &vectorRef = dae::HitBoxManager::GetInstance().GetAllHitBoxes();
-	for (int i = 0; i < vectorRef.size(); i++)
+	for (int i = 0; i < int(vectorRef.size()); i++)
 	{
 		if (vectorRef[i]->IsSquareInThisHitBox(m_rect,m_ColisionID))
 		{
