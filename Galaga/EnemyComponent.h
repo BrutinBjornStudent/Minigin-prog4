@@ -14,6 +14,7 @@ enum class EnemyStates
 	Move_to_ArraySpot = 2,
 	Stay_On_Spot = 3,
 	Dive_Bomb = 4,
+	Diving = 5,
 	dying = 10
 };
 
@@ -33,7 +34,8 @@ class EnemyComponent :
 public:
 	EnemyComponent(dae::GameObject& gameRef,EnemyType type)
 	:nm_ParentRef(gameRef),
-	m_BeeSubject(new Subject)
+	m_BeeSubject(new Subject),
+	m_EnemyType(type)
 	{
 		if (type == EnemyType::Boss)
 		{
@@ -47,14 +49,17 @@ public:
 	
 	void Render() const override{};
 	void Update(const float deltatime) override ;
+
 	EnemyStates GetState() const { return  m_BeeState; };
+	EnemyType GetEnemyType() const { return m_EnemyType; }
 	
 	void BindSpriteComp(SpriteComponent* SpriteManager) { nm_SpriteManager = SpriteManager; }
 	void BindActorComp(ActorComponent* actorToLink) { nm_ActorComp = actorToLink; }
-	void BindHitBoxComponent(HitBoxComponent* HitBoxToLink) { nm_pHitbox = HitBoxToLink; };
+	void BindHitBoxComponent(HitBoxComponent* HitBoxToLink) { nm_pHitbox = HitBoxToLink; }
 	void BindEnemySpawnerComp(EnemySpawner* SpawnerToLink) { nm_pEnemySpawner = SpawnerToLink; }
-	void BindSpriteComp(RenderComponent* RenderToLink) { nm_pRenderComp = RenderToLink; };
+	void BindSpriteComp(RenderComponent* RenderToLink) { nm_pRenderComp = RenderToLink; }
 	void SetState(EnemyStates state) { m_BeeState = state; }
+	void SetBazierPattern(std::vector<glm::vec2> BazierPattern) { m_BazierPattern = BazierPattern; };
 	void SetGameSize(glm::vec2 size) { m_GameSize = size; }
 	void SetScreenPosition(GridPos gridPos) { m_FieldPosition = gridPos; };
 	void SetBazierID(int BazierID) { m_BazierID = BazierID; };
@@ -70,6 +75,8 @@ private:
 	HitBoxComponent* nm_pHitbox = nullptr; // hitbox
 	
 	glm::vec2 m_BombDirection = glm::vec2(0.f, 1.f);
+	std::vector<glm::vec2> m_BazierPattern;
+	
 	
 	EnemySpawner* nm_pEnemySpawner = nullptr;
 	int m_CurrentBazierPoint = 0;
@@ -83,6 +90,7 @@ private:
 	glm::vec2 m_GameSize = glm::vec2();
 	
 	EnemyStates m_BeeState = EnemyStates::Spawning; // state
+	EnemyType m_EnemyType;
 	
 	float m_NextSpriteTreshhold = 5.f;
 	float m_SpriteElapsedTime = 0.0f;

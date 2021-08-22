@@ -45,6 +45,7 @@ public:
 	{};
 
 	void OnNotify(const BaseComponent* event) const override;
+
 private:
 	HealthComponent* nm_pHealthComp;
 	

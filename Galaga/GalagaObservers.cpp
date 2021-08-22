@@ -12,14 +12,43 @@ void GalagaEnemyObserver::OnNotify(const BaseComponent* event) const
 		auto beeVal = dynamic_cast<const EnemyComponent*>(event);
 
 		EnemyStates state = beeVal->GetState();
-		if (state == EnemyStates::dying)
+		auto type = beeVal->GetEnemyType();
+
+		if (state == EnemyStates::Dive_Bomb)
 		{
-
-			nm_pScoreComp->AddScore(50);
-			std::cout << "recieved beeComp witchs is dying" << std::endl;
-
+			switch (type)
+			{
+			case EnemyType::butterfly: 
+				nm_pScoreComp->AddScore(160);
+				break;
+			case EnemyType::bee: 
+				nm_pScoreComp->AddScore(100);
+				break;
+			case EnemyType::Boss: 
+				nm_pScoreComp->AddScore(400);
+				break;
+			default: 
+				break;
+			}
 		}
-
+		else
+		{
+			switch (type)
+			{
+			case EnemyType::butterfly:
+				nm_pScoreComp->AddScore(80);
+				break;
+			case EnemyType::bee:
+				nm_pScoreComp->AddScore(50);
+				break;
+			case EnemyType::Boss:
+				nm_pScoreComp->AddScore(150);
+				break;
+			default:
+				break;
+			}
+		}
+		
 	}
 	else
 	{

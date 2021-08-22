@@ -177,7 +177,7 @@ void EnemySpawner::Update(const float DeltaTime)
 		}
 
 		m_ElapsedTriggerAttack += DeltaTime;
-		if (m_ElapsedTriggerAttack > m_TriggerEnemyAttack)
+		if (m_ElapsedTriggerAttack > m_TriggerEnemyAttack) // declare a attack;
 		{
 			m_ElapsedTriggerAttack -= m_TriggerEnemyAttack;
 
@@ -254,5 +254,33 @@ glm::vec2 EnemySpawner::CalculateBridges(int currentSegment, int MaxSegments)
 		
 		return CalculateBridges(currentSegment,MaxSegments);
 	}
+	
+}
+
+std::vector<glm::vec2> EnemySpawner::CreateAttackPattern(glm::vec2 StartPos)
+{
+	std::vector<glm::vec2> AttackPoints;
+
+	AttackPoints.push_back(StartPos);
+
+	float startheight = StartPos.y;
+	float height = m_GameSize.y - StartPos.y;
+	float interval = height / 4;
+	for (int i = 0; i <= 5; i++)
+	{
+		int xPos = std::rand() % int(m_GameSize.x);
+
+		AttackPoints.push_back(glm::vec2(xPos, startheight + interval * i ));
+	}
+
+
+	std::vector<glm::vec2> newPath;
+	for (int segments = 0; segments <= 10; segments++)
+	{
+		m_CurrentBridges = AttackPoints;
+		glm::vec2 newpoint = CalculateBridges(segments, 10);
+		newPath.push_back(newpoint);
+	}
+	return newPath;
 	
 }

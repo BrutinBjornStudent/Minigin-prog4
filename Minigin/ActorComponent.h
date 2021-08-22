@@ -29,6 +29,7 @@ public:
 	void SetSpeed(float newSpeed) { m_speed = newSpeed; };
 	
 	void SetVelocity(float x, float y);
+	const glm::vec2 GetVelocity() const { return m_velocity; }
 	void Translate(float x, float y);
 	
 	void BindRenderComponent(RenderComponent* toBind) { nm_pBoundRenderComp = toBind; }

@@ -29,6 +29,7 @@ public:
 	void SpawnEnemys();
 	const std::vector<std::vector<glm::vec2>>& GetBazierPaths() { return m_BazierPaths; };
 
+	std::vector<glm::vec2> CreateAttackPattern(glm::vec2 StartPos);
 
 private:
 	glm::vec2 CalculateBridges(int currentSegment, int MaxSegments);
