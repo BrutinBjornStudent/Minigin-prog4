@@ -16,7 +16,7 @@ namespace objectConstructors
 
 	std::shared_ptr<dae::GameObject> Enemy(const std::string& file, glm::ivec2 position, EnemyType type);
 
-	std::shared_ptr<dae::GameObject> GalagaPlayer(const std::string file, glm::ivec2 size, int lives);
+	std::shared_ptr<dae::GameObject> GalagaPlayer(const std::string file, glm::ivec2 size);
 	
 }
 

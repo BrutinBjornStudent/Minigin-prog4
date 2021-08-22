@@ -24,7 +24,7 @@ public:
 
 	}
 
-	void Notify(const BaseComponent* event)
+	void Notify( BaseComponent* event)
 	{
 		for (int i = 0; i < m_numberObservers; i++)
 		{

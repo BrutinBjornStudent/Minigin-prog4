@@ -4,6 +4,7 @@
 #include <Windows.h>
 
 #include <Minigin.h>
+
 #include "GalagaObservers.h"
 
 
@@ -20,8 +21,9 @@ private:
 	void LoadInputs() const;
 
 	
-	std::shared_ptr<dae::GameObject> playerCharacter;
-	GalagaEnemyObserver m_EnemyObserver = 0;
+	std::shared_ptr<dae::GameObject> m_PlayerCharacter;
+	GalagaEnemyObserver m_EnemyObserver = nullptr;
+	GalagaPlayerObserver m_PlayerObserver = GalagaPlayerObserver();
 	glm::vec2 m_size;
 	
 };

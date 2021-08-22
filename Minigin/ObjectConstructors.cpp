@@ -36,28 +36,27 @@ std::shared_ptr<dae::GameObject> objectConstructors::RenderObject(const std::str
 
 
 std::shared_ptr<dae::GameObject> objectConstructors::LivesBar(const std::string& TexturePath,
-	float Xpos, float Ypos, HealthComponent* healthComp)
+	float Xpos, float Ypos,int lives)
 {
-	auto newObject = std::make_shared<dae::GameObject>();
 
-	HealthBarComponent* healthBar = new HealthBarComponent(healthComp);
+	auto newObject = std::make_shared<dae::GameObject>();
+	HealthComponent* health = new HealthComponent(lives);
+	newObject->AddComponent(health);
+	
+	HealthBarComponent* healthBar = new HealthBarComponent(health);
 	healthBar->SetTexture(TexturePath);
 	healthBar->SetPosition(Xpos, Ypos);
-
-	newObject->AddComponent(healthBar);	
+	newObject->AddComponent(healthBar);
+	
 	return newObject;
 }
 
 
 //creates HealthComp, ActorComp,RenderComp, and binds render to actor.
-std::shared_ptr<dae::GameObject> objectConstructors::BasicActor(int lives)
+std::shared_ptr<dae::GameObject> objectConstructors::BasicActor()
 {
 	auto newObject = std::make_shared<dae::GameObject>();
 
-	//healthComponent
-	HealthComponent* livesComp = new HealthComponent(lives);
-	newObject->AddComponent(livesComp);
-	
 	// new qbert
 	ActorComponent* qbertcomp = new ActorComponent();
 	newObject->AddComponent(qbertcomp);

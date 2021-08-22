@@ -19,18 +19,24 @@ dae::GameObject::~GameObject()
 
 void dae::GameObject::Update(const float deltatime)
 {
-	for (uint32_t i = 0; i < m_pComponents.size(); i++)
+	if (m_IsActive)
 	{
-		m_pComponents[i]->Update(deltatime);
+		for (uint32_t i = 0; i < m_pComponents.size(); i++)
+		{
+			m_pComponents[i]->Update(deltatime);
+		}		
 	}
 }
 
 
 void dae::GameObject::Render() const
 {
-	for (uint32_t i = 0; i < m_pComponents.size(); i++)
+	if (m_IsActive)
 	{
-		m_pComponents[i]->Render();
+		for (uint32_t i = 0; i < m_pComponents.size(); i++)
+		{
+			m_pComponents[i]->Render();
+		}		
 	}
 }
 

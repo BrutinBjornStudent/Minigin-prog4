@@ -11,8 +11,7 @@
 #include "HitBoxComponent.h"
 #include "HitBoxManager.h"
 #include "HurtboxComponent.h"
-
-
+#include "PlayerComponent.h"
 
 
 std::shared_ptr<dae::GameObject> objectConstructors::Projectile(const std::string& file,glm::ivec2 position, CollisionID colision, glm::vec2 dir)
@@ -70,12 +69,12 @@ std::shared_ptr<dae::GameObject> objectConstructors::Enemy(const std::string& fi
 	dae::HitBoxManager::GetInstance().addHitBox(hitbox);
 	newBee->AddComponent(hitbox);
 
+	//hurtBox
 	auto hurtBox = new HurtboxComponent(position, glm::ivec2(20,20), Collision_Id_Player);
 	hurtBox->SetOffset(-10, -10);
 	newBee->AddComponent(hurtBox);
 	
 
-	
 	//ActorComponent
 	auto actor = new ActorComponent();
 	newBee->AddComponent(actor);
@@ -96,36 +95,39 @@ std::shared_ptr<dae::GameObject> objectConstructors::Enemy(const std::string& fi
 	//auto Bazier = new BezierMoveComponent;
 	
 	//newBee->AddComponent(Bazier);
-
-
-	
 	return newBee;
 	
 }
 
 
 // creates Basic actor and adds a GunComponent, HitBoxComponent
-std::shared_ptr<dae::GameObject> objectConstructors::GalagaPlayer(const std::string file, glm::ivec2 size, int lives)
+std::shared_ptr<dae::GameObject> objectConstructors::GalagaPlayer(const std::string file, glm::ivec2 size)
 {
-	auto galaga = BasicActor(lives);
+	
+	auto galaga = BasicActor();
+	
+	//renderComp
 	galaga->GetComponent<RenderComponent>()->SetTexture(file);
 	galaga->GetComponent<RenderComponent>()->SetSize(size.x,size.y);
 	galaga->GetComponent<RenderComponent>()->SetOffset(-static_cast<int>(size.x / 2), -static_cast<int>(size.y / 2));
 
-
+	
+	//gun
 	auto gun = new GunComponent();
 	gun->BindToActor(galaga->GetComponent<ActorComponent>());
 	galaga->AddComponent(gun);
 
 
+	//hitbox
 	const auto hitBox = new HitBoxComponent(glm::ivec2(0,0),glm::ivec2(30,30),Collision_Id_Player);
 	galaga->AddComponent(hitBox);
 	dae::HitBoxManager::GetInstance().addHitBox(hitBox);
 	galaga->GetComponent<ActorComponent>()->BindHitBoxComponent(hitBox);
 
 
-	
-	
+	//playerLogic
+	auto playerLogic = new PlayerComponent(galaga, hitBox);
+	galaga->AddComponent(playerLogic);
 	
 	return galaga;
 }

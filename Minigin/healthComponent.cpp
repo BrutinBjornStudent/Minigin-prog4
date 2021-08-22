@@ -12,7 +12,7 @@ int HealthComponent::GetHealth() const noexcept
 	return m_health;
 }
 
-void HealthComponent::loseHealth(int damage)
+void HealthComponent::loseHealth(int damage) 
 {
 	m_health -= damage;
 	std::cout << "health lost" << std::endl;

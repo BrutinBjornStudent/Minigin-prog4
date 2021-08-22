@@ -30,24 +30,32 @@ namespace dae
 			m_RenderLayerChanged = true;
 			m_RenderLayer = Layer;
 		};
+
+		//IsActive
+		void SetActive(bool active) { m_IsActive = active; }
+		
+		//layer
 		bool isLayerChanged() { return m_RenderLayerChanged; };
 		void SetLayerChanged(bool Changed = false) { m_RenderLayerChanged = Changed; };
-		
+
+		//deletion
 		void MarkForDeletion(bool ShouldBeDeleted = true) { m_MarkForDeletion = ShouldBeDeleted; }
 		bool IsMarkedForDeletion() { return m_MarkForDeletion; };
-		
+
 		int getRenderLayer() { return m_RenderLayer; };
 		template <typename T>
 		T* GetComponent();
 		void AddComponent(BaseComponent * myComponent);
 	protected:
 
+		
 		std::vector<BaseComponent*> m_pComponents = std::vector<BaseComponent*>();
 
 		int m_RenderLayer = 0;
 		bool m_RenderLayerChanged = false;
 		bool m_MarkForDeletion = false;
 		
+		bool m_IsActive = true;
 	};
 
 

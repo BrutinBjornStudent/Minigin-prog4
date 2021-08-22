@@ -1,8 +1,11 @@
 #include "GalagaObservers.h"
 
 #include "EnemyComponent.h"
+#include "PlayerComponent.h"
+#include "EnemyManagerComp.h"
+#include "SceneManager.h"
 
-void GalagaEnemyObserver::OnNotify(const BaseComponent* event) const
+void GalagaEnemyObserver::OnNotify( BaseComponent* event) const
 
 {
 	if (dynamic_cast<const EnemyComponent*>(event))
@@ -55,4 +58,29 @@ void GalagaEnemyObserver::OnNotify(const BaseComponent* event) const
 		std::cout << "wrong component linked";
 	}
 
+}
+
+
+void GalagaPlayerObserver::OnNotify( BaseComponent* component) const
+{
+	if (dynamic_cast<const PlayerComponent*>(component))
+	{
+		nm_pHealthComp->loseHealth(1);
+		nm_pManagerComp->IsAttacking(false);
+		if (nm_pHealthComp->GetHealth() <= 0)
+		{
+			std::cout << "game over." << std::endl;
+			nm_GameOverScreen->SetActive(true);
+
+		}
+	}
+	if (dynamic_cast<const EnemyManagerComp*>(component) && nm_pHealthComp->GetHealth() > 0)
+	{
+		nm_pPlayer->GetComponent<HitBoxComponent>()->ResetHit();
+		nm_pPlayer->SetActive(true);
+		nm_pPlayer->GetComponent<ActorComponent>()->Translate(float(m_GameSize.x / 3), float(m_GameSize.y) - 40);
+
+		
+	}
+	
 };

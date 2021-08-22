@@ -172,7 +172,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x86\*.dll" "$(OutputPath)" /R
     <ClCompile Include="EnemyComponent.cpp" />
     <ClCompile Include="BezierMoveComponent.cpp" />
     <ClCompile Include="BulletComponent.cpp" />
-    <ClCompile Include="EnemySpawner.cpp" />
+    <ClCompile Include="EnemyManagerComp.cpp" />
     <ClCompile Include="GalagaConstructor.cpp" />
     <ClCompile Include="GalagaEngine.cpp" />
     <ClCompile Include="GalagaGame.cpp" />
@@ -189,7 +189,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer-2.0.4\lib\x86\*.dll" "$(OutputPath)" /R
     <ClInclude Include="EnemyComponent.h" />
     <ClInclude Include="BezierMoveComponent.h" />
     <ClInclude Include="BulletComponent.h" />
-    <ClInclude Include="EnemySpawner.h" />
+    <ClInclude Include="EnemyManagerComp.h" />
     <ClInclude Include="GalagaCommand.h" />
     <ClInclude Include="GalagaConstructor.h" />
     <ClInclude Include="GalagaEngine.h" />

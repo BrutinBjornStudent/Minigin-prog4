@@ -4,6 +4,7 @@
 #include "Component.h"
 #include "GameObject.h"
 #include "GalagaObservers.h"
+#include "Subject.h"
 
 namespace dae {
 	class Scene;
@@ -16,30 +17,37 @@ struct GridPos
 	glm::vec2 screenPos;
 };
 
-class EnemySpawner final:
+class EnemyManagerComp final:
     public BaseComponent
 {
 public:
 	
-	EnemySpawner(glm::vec2 startCenterPos, glm::vec2 SizeOfEnemy, glm::vec2 WindowSize, const GalagaEnemyObserver ObForEnemys,const std::string& file);
-
+	EnemyManagerComp(glm::vec2 startCenterPos, glm::vec2 SizeOfEnemy, glm::vec2 WindowSize, const GalagaEnemyObserver ObForEnemys,const std::string& file);
+	virtual ~EnemyManagerComp() { delete m_subject; }
+	
 	void Update(const float ) override;
 	void Render() const override {};
-
+	void IsAttacking(bool attack) { m_IsTriggeringAttack = attack; }
+	
 	void SpawnEnemys();
 	const std::vector<std::vector<glm::vec2>>& GetBazierPaths() { return m_BazierPaths; };
-
+	Subject* GetSubject() { return m_subject; };
+	
 	std::vector<glm::vec2> CreateAttackPattern(glm::vec2 StartPos);
 
 private:
 	glm::vec2 CalculateBridges(int currentSegment, int MaxSegments);
 	
 	std::vector<std::weak_ptr<dae::GameObject>> nm_pEnemys;
+
+	bool m_IsTriggeringAttack = true;
 	float m_TriggerEnemyAttack = 2.f;
 	float m_ElapsedTriggerAttack = 0.f;
+
 	
 	std::vector<GridPos> m_Gridpositions;
 	GalagaEnemyObserver m_EnemyObserver;
+	Subject* m_subject;
 	
 	std::vector<std::vector<GridPos>> m_Waves;
 	// keeps the Baziers to be used by the enemys.

@@ -49,7 +49,7 @@ void HurtboxComponent::Update(const float )
 	{
 		if (vectorRef[i]->IsSquareInThisHitBox(m_rect,m_ColisionID))
 		{
-			std::cout << "hurtbox is overlapping hitbox" << std::endl;
+			//std::cout << "hurtbox is overlapping hitbox" << std::endl;
 			m_hasHit = true;
 
 

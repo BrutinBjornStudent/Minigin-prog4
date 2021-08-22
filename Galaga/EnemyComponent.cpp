@@ -15,10 +15,10 @@ void EnemyComponent::Update(const float deltatime)
 		if (m_SpriteElapsedTime >= m_NextSpriteTreshhold)
 		{
 			m_SpriteElapsedTime -= m_NextSpriteTreshhold;
-			std::cout << "next sprite triggered" << std::endl;
+			//std::cout << "next sprite triggered" << std::endl;
 			nm_SpriteManager->NextSpriteX();
 		}
-		//nm_SpriteManager->setYSprite(m_lives);
+		nm_SpriteManager->setYSprite(m_lives-1 );
 		
 	}
 	if (nm_pHitbox)
@@ -27,7 +27,7 @@ void EnemyComponent::Update(const float deltatime)
 		if (nm_pHitbox->IsHit())
 		{
 			m_lives--;
-			if (m_lives >= 0)
+			if (m_lives <= 0)
 			{
 				//m_BeeState = EnemyStates::dying;
 				m_BeeSubject->Notify(this);
@@ -48,20 +48,10 @@ void EnemyComponent::Update(const float deltatime)
 	switch (m_BeeState)
 	{
 	case EnemyStates::Spawning:
+		
 		m_BazierPattern = nm_pEnemySpawner->GetBazierPaths()[m_BazierID];
-
-
-		//target = nm_pEnemySpawner->GetBazierPaths()[m_BazierID][0] - 
-		//	glm::vec2(nm_ActorComp->GetPosition().x, nm_ActorComp->GetPosition().y);
-		//dir = glm::normalize(target);
-		//nm_ActorComp->SetVelocity(dir.x, dir.y);
-
-		//nm_pRenderComp->SetRotation(atan2(dir.y, dir.x) * (180 / M_PI) + 90);
-		//if (glm::length(target) < m_NextBazierRange)
-		//{
 		m_CurrentBazierPoint++;
 		m_BeeState = EnemyStates::Move_Into_Field;
-		//}
 		break;
 
 		
@@ -121,10 +111,16 @@ void EnemyComponent::Update(const float deltatime)
 		{
 			if (m_EnemyType == EnemyType::bee)
 				m_BeeState = EnemyStates::Move_to_ArraySpot;
-			if(m_EnemyType == EnemyType::butterfly)
+			else
 			{
 				nm_ActorComp->SetVelocity(m_BombDirection.x,m_BombDirection.y);
 				nm_pRenderComp->SetRotation(atan2(dir.y, dir.x)* (180 / M_PI) + 90);
+
+				if (nm_ActorComp->GetPosition().y > m_GameSize.y + 20)
+				{
+					nm_ActorComp->Translate(nm_ActorComp->GetPosition().x, -10);
+					m_BeeState = EnemyStates::Move_to_ArraySpot;
+				}
 			}
 		}		
 		break;

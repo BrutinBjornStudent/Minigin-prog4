@@ -3,7 +3,7 @@
 #include "Observer.h"
 
 
-class PlayerComponent;
+class EnemyManagerComp;
 
 enum class GalagaEvent
 {
@@ -30,23 +30,35 @@ public:
 	GalagaEnemyObserver(ScoreComponent* Score):
 	nm_pScoreComp(Score) {};
 
-	void OnNotify(const BaseComponent* event) const override;
+	void OnNotify( BaseComponent* event) const override;
 	//};
 
 private:
 	ScoreComponent* nm_pScoreComp;
 };
 
-class GalagaPlayerObserver: public  Observer
+
+class GalagaPlayerObserver: public Observer
 {
 public:
-	GalagaPlayerObserver(HealthComponent* health)
-		:nm_pHealthComp(health)
-	{};
+	GalagaPlayerObserver(
+		HealthComponent* health,EnemyManagerComp* manager, std::shared_ptr<dae::GameObject> player,
+		glm::vec2 gameSize,std::shared_ptr<dae::GameObject> gameOver):
+		nm_pHealthComp(health),
+		nm_pManagerComp(manager),
+		nm_pPlayer(player),
+		nm_GameOverScreen(gameOver),
+		m_GameSize(gameSize) {};
 
-	void OnNotify(const BaseComponent* event) const override;
+	GalagaPlayerObserver() = default;
+	
+	void OnNotify( BaseComponent* event) const override;
 
 private:
-	HealthComponent* nm_pHealthComp;
-	
+	glm::vec2 m_GameSize;
+	HealthComponent* nm_pHealthComp = nullptr;
+	EnemyManagerComp* nm_pManagerComp = nullptr;
+	std::shared_ptr<dae::GameObject> nm_GameOverScreen = nullptr;
+	std::shared_ptr<dae::GameObject> nm_pPlayer = nullptr;
+	bool m_GameEnded = false;
 };

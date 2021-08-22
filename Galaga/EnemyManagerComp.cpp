@@ -1,4 +1,4 @@
-#include "EnemySpawner.h"
+#include "EnemyManagerComp.h"
 
 #include <nlohmann/json.hpp>
 
@@ -15,10 +15,11 @@
 
 
 
-EnemySpawner::EnemySpawner(glm::vec2 startCenterPos, glm::vec2 SizeOfEnemy, glm::vec2 WindowSize, const GalagaEnemyObserver ObForEnemys, const std::string& file)
+EnemyManagerComp::EnemyManagerComp(glm::vec2 startCenterPos, glm::vec2 SizeOfEnemy, glm::vec2 WindowSize, const GalagaEnemyObserver ObForEnemys, const std::string& file)
 	: m_SizeOfEnemy(SizeOfEnemy)
 	, m_GameSize(WindowSize)
 	, m_EnemyObserver(ObForEnemys)
+	, m_subject(new Subject)
 	, m_RunSpawnLoop(false)
 	, m_HasSpawnedCount(0)
 	, m_ToSpawn(8)
@@ -94,7 +95,7 @@ EnemySpawner::EnemySpawner(glm::vec2 startCenterPos, glm::vec2 SizeOfEnemy, glm:
 	
 }
 
-void EnemySpawner::Update(const float DeltaTime)
+void EnemyManagerComp::Update(const float DeltaTime)
 {
 
 	if (m_RunSpawnLoop) // if is spawning
@@ -175,8 +176,8 @@ void EnemySpawner::Update(const float DeltaTime)
 				nm_pEnemys.pop_back();
 			}
 		}
-
-		m_ElapsedTriggerAttack += DeltaTime;
+		if (m_IsTriggeringAttack)
+			m_ElapsedTriggerAttack += DeltaTime;
 		if (m_ElapsedTriggerAttack > m_TriggerEnemyAttack) // declare a attack;
 		{
 			m_ElapsedTriggerAttack -= m_TriggerEnemyAttack;
@@ -184,12 +185,14 @@ void EnemySpawner::Update(const float DeltaTime)
 
 			if (nm_pEnemys.size() > 0)
 			{
+				int trys = 0;
 				bool HasTriggeredAttack =false;
-				while (!HasTriggeredAttack)
+				while (!HasTriggeredAttack && trys > 0)
 				{
-					int size = int(nm_pEnemys.size() - 1);
+					int size = int(nm_pEnemys.size());
+					trys++;
 
-					int enemyToAttack =  rand() % size;
+					int enemyToAttack = rand() % size;
 					auto val = nm_pEnemys[enemyToAttack].lock();
 					if (val)
 					{
@@ -208,7 +211,26 @@ void EnemySpawner::Update(const float DeltaTime)
 		
 		if (nm_pEnemys.empty())
 			SpawnEnemys();
+		
+		if (!m_IsTriggeringAttack)
+		{
+			bool EnemysInPosition = true;
+			for (int i = 0; i < nm_pEnemys.size(); i++)
+			{
+				auto val = nm_pEnemys[i].lock();
+				if (val->GetComponent<EnemyComponent>()->GetState() != EnemyStates::Stay_On_Spot)
+					EnemysInPosition = false;
+			}
 
+			if (EnemysInPosition)
+			{
+				m_subject->Notify(this);
+				m_IsTriggeringAttack = true;
+			}
+
+			
+		}
+			
 
 		
 	}
@@ -217,7 +239,7 @@ void EnemySpawner::Update(const float DeltaTime)
 
 }
 
-void EnemySpawner::SpawnEnemys()
+void EnemyManagerComp::SpawnEnemys()
 {
 
 	m_RunSpawnLoop = true;
@@ -227,7 +249,7 @@ void EnemySpawner::SpawnEnemys()
 }
 
 
-glm::vec2 EnemySpawner::CalculateBridges(int currentSegment, int MaxSegments)
+glm::vec2 EnemyManagerComp::CalculateBridges(int currentSegment, int MaxSegments)
 {
 	if (currentSegment > MaxSegments)
 	{
@@ -257,7 +279,7 @@ glm::vec2 EnemySpawner::CalculateBridges(int currentSegment, int MaxSegments)
 	
 }
 
-std::vector<glm::vec2> EnemySpawner::CreateAttackPattern(glm::vec2 StartPos)
+std::vector<glm::vec2> EnemyManagerComp::CreateAttackPattern(glm::vec2 StartPos)
 {
 	std::vector<glm::vec2> AttackPoints;
 

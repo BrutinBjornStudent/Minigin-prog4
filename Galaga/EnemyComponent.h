@@ -2,7 +2,7 @@
 #include "ActorComponent.h"
 #include "Component.h"
 #include "AllComponents.h"
-#include "EnemySpawner.h"
+#include "EnemyManagerComp.h"
 
 
 class BezierMoveComponent;
@@ -56,7 +56,7 @@ public:
 	void BindSpriteComp(SpriteComponent* SpriteManager) { nm_SpriteManager = SpriteManager; }
 	void BindActorComp(ActorComponent* actorToLink) { nm_ActorComp = actorToLink; }
 	void BindHitBoxComponent(HitBoxComponent* HitBoxToLink) { nm_pHitbox = HitBoxToLink; }
-	void BindEnemySpawnerComp(EnemySpawner* SpawnerToLink) { nm_pEnemySpawner = SpawnerToLink; }
+	void BindEnemySpawnerComp(EnemyManagerComp* SpawnerToLink) { nm_pEnemySpawner = SpawnerToLink; }
 	void BindSpriteComp(RenderComponent* RenderToLink) { nm_pRenderComp = RenderToLink; }
 	void SetState(EnemyStates state) { m_BeeState = state; }
 	void SetBazierPattern(std::vector<glm::vec2> BazierPattern) { m_BazierPattern = BazierPattern; };
@@ -78,7 +78,7 @@ private:
 	std::vector<glm::vec2> m_BazierPattern;
 	
 	
-	EnemySpawner* nm_pEnemySpawner = nullptr;
+	EnemyManagerComp* nm_pEnemySpawner = nullptr;
 	int m_CurrentBazierPoint = 0;
 	int m_BazierID = 0;
 	float m_NextBazierRange = 2.f;

@@ -14,9 +14,9 @@ namespace objectConstructors
 	, float Xpos = 0,  float Ypos = 0);
 
 	std::shared_ptr<dae::GameObject> LivesBar(const std::string& TexturePath,
-		float Xpos, float Ypos, HealthComponent* healthComp);
+		float Xpos, float Ypos, int lives);
 	
-	std::shared_ptr<dae::GameObject> BasicActor(int lives);
+	std::shared_ptr<dae::GameObject> BasicActor();
 
 	std::shared_ptr<dae::GameObject> Score(const std::string& file, unsigned int size,
 		const std::string& text, float Xpos, float Ypos);
